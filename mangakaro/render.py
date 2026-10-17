@@ -1,33 +1,18 @@
-"""Phase 3 prototype: erase the original lettering in plain white bubbles and typeset the English translation.
-
-Reads the final per-page JSON written by staged.py (boxes + translations), the matching page image and the font picks
-from pick_fonts.py, and writes
-  output/rendered/<variant>/<page>.png          translated page
-  output/rendered/<variant>/<page>.compare.jpg  original | translated, side by side
-  output/rendered/<variant>/report.json         per text block: rendered / overflow / skipped, and why
+"""Erase the original lettering in plain bubbles and typeset the English translation.
 
 Models: comic_text_detector gives a pixel mask of the lettering, so only the glyphs are erased (inside the translated
 boxes, then inpainted); bubbles_yolov8 gives each bubble's boundary, so text is placed inside the bubble that holds it, and
-boxes in the same bubble are typeset as one block. Easy case only: a box counts as a plain white bubble if, ignoring the
-lettering and dark pixels, its inside is mostly paper-white. Anything else is left untouched and reported.
-
-Usage:
-  .venv/bin/python scripts/render.py daiboken-volume-2 --variant S7 --pages 20 21
+boxes in the same bubble are typeset as one block. Easy case only: a box counts as a plain bubble if, ignoring the
+lettering and dark pixels, its inside is mostly white paper (or, near the book's spine, light and flat). Anything else is
+left untouched and reported.
 """
-import argparse
-import json
-from pathlib import Path
-
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw
 
-from compare_detectors import BubblesYolo, ComicTextDetector
-from lettering import font_of
-from translate_pages import load_pages, shrink
+from .detect import BubblesYolo, ComicTextDetector
+from .fonts import DEFAULT_FONT, font_of
 
-ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_FONT = {"name": "Comic Sans MS Bold", "path": "/System/Library/Fonts/Supplemental/Comic Sans MS Bold.ttf", "index": 0}
 INK = 150          # gray below this is dark (lettering, outlines, black backgrounds), not background
 WHITE = 215            # gray above this is white paper (photographed pages: paper is about 225-240). White paper is the main case.
 MIN_PAPER = 0.8        # share of a box's background pixels that must be white for it to count as a plain white bubble
@@ -127,12 +112,17 @@ def is_loud(region):
 
 
 class Renderer:
-    def __init__(self, fonts):
-        self.text, self.bubbles = ComicTextDetector(), BubblesYolo()
+    def __init__(self, fonts=None, text_detector=None, bubble_detector=None):
+        """fonts: {primary, secondary} font specs (see fonts.pick_fonts). Detectors are created if not given."""
+        fonts = fonts or {}
+        self.text = text_detector or ComicTextDetector()
+        self.bubbles = bubble_detector or BubblesYolo()
         self.primary = fonts.get("primary", DEFAULT_FONT)
         self.secondary = fonts.get("secondary", DEFAULT_FONT)
 
     def page(self, page, final):
+        """Translate one page. `final` is the page's result JSON (boxes + regions with translations).
+        Returns (translated BGR image, report: one entry per text block saying rendered / overflow / skipped and why)."""
         gray = cv2.cvtColor(page, cv2.COLOR_BGR2GRAY)
         mask = self.text.mask(page)
         bubbles = [b["bbox"] for b in self.bubbles(page)]
@@ -209,41 +199,3 @@ class Renderer:
             for k, line in enumerate(lines):
                 d.text(((x0 + x1) / 2, top + k * lh), line, font=font, fill=(0, 0, 0), anchor="ma")
         return cv2.cvtColor(np.array(pil), cv2.COLOR_RGB2BGR), report
-
-
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("folder")
-    ap.add_argument("--variant", required=True, help="staged.py variant to read, e.g. S7")
-    ap.add_argument("--pages", nargs="*", help="image numbers, e.g. 20 21")
-    ap.add_argument("--fonts", help="font picks JSON (default data/fonts/<folder>.json if it exists)")
-    a = ap.parse_args()
-
-    fonts_path = Path(a.fonts) if a.fonts else ROOT / "data/fonts" / f"{Path(a.folder).name}.json"
-    fonts = json.loads(fonts_path.read_text()) if fonts_path.exists() else {}
-    print(f"fonts: primary {fonts.get('primary', DEFAULT_FONT)['name']}, secondary {fonts.get('secondary', DEFAULT_FONT)['name']}")
-    renderer = Renderer(fonts)
-
-    src = ROOT / "data/intermediate/staged" / a.variant
-    out = ROOT / "output/rendered" / a.variant
-    out.mkdir(parents=True, exist_ok=True)
-    full = {}
-    for name, page in load_pages(a.folder, a.pages):
-        f = src / f"{name}.json"
-        if not f.exists():
-            continue
-        page = shrink(page)
-        rendered, report = renderer.page(page, json.loads(f.read_text()))
-        cv2.imwrite(str(out / f"{name}.png"), rendered)
-        both = cv2.hconcat([page, rendered])
-        s = 1100 / both.shape[0]
-        cv2.imwrite(str(out / f"{name}.compare.jpg"), cv2.resize(both, None, fx=s, fy=s, interpolation=cv2.INTER_AREA))
-        full[name] = report
-        print(f"{name}: {sum(g['status'].startswith('rendered') for g in report)} blocks rendered, "
-              f"{sum(g['status'].startswith('skipped') for g in report)} skipped, "
-              f"{sum(g['status'].startswith('overflow') for g in report)} overflow")
-    (out / "report.json").write_text(json.dumps(full, ensure_ascii=False, indent=1))
-
-
-if __name__ == "__main__":
-    main()

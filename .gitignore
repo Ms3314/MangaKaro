@@ -16,3 +16,10 @@ output/**/*.png
 output/**/*.jpg
 data/intermediate/**/*.jpg
 data/intermediate/**/*.png
+
+# CLI runs: per-run work directories and test inputs/outputs
+*.work/
+output/cli_test/
+
+# build artifacts
+*.egg-info/

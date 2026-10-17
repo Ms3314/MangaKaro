@@ -5,7 +5,7 @@ the font size underneath. Skipped boxes are included as cards too (the Japanese 
 reporting the card numbers that look wrong gives a rough error rate, and a fixed seed keeps the sample the same between runs.
 
 Usage:
-  .venv/bin/python scripts/review_sheets.py daiboken-volume-2 --variant S7 --rendered 20 --skipped 4
+  .venv/bin/python -m experiments.review_sheets daiboken-volume-2 --variant S7 --rendered 20 --skipped 4
 Writes output/review/<variant>/sheet-1.png, sheet-2.png, ... and index.json (number -> page, ids, text, status).
 """
 import argparse
@@ -16,9 +16,9 @@ from pathlib import Path
 import cv2
 from PIL import Image, ImageDraw, ImageFont
 
-from translate_pages import load_pages, shrink
+from mangakaro.pages import load_pages
+from mangakaro.paths import ROOT
 
-ROOT = Path(__file__).resolve().parent.parent
 JP_FONT = "/System/Library/Fonts/Supplemental/Arial Unicode.ttf"
 CROP_H, PAD, CARD_W, PER_SHEET, COLS = 260, 45, 760, 8, 2
 
@@ -110,9 +110,9 @@ def main():
         rnd.shuffle(picks)
 
     pages = {}
-    for name, img in load_pages(a.folder, None):
-        if name in report:
-            pages[name] = shrink(img)
+    for pg in load_pages(a.folder):
+        if pg.name in report:
+            pages[pg.name] = pg.image
     cards, index = [], {}
     for n, info in enumerate(picks, 1):
         before = pages[info["page"]]

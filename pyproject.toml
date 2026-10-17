@@ -1,0 +1,26 @@
+[project]
+name = "mangakaro"
+version = "0.1.0"
+description = "Translate manga (Japanese to English) with local models. PDF in, PDF out."
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "opencv-python-headless",
+    "pillow",
+    "pypdfium2",
+    "ultralytics",
+    "torch",
+    "safetensors",
+    "onnxruntime",
+    "manga-ocr",
+]
+
+[project.scripts]
+mangakaro = "mangakaro.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["mangakaro"]

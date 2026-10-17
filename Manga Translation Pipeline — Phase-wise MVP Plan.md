@@ -1,5 +1,22 @@
 # Manga Translation Pipeline: Phase-wise MVP Plan
 
+> **Status, 2026-10-17.** The plan below is the original. What happened to each phase: see `docs/PROGRESS.md` for the log and
+> `docs/ARCHITECTURE.md` for the design that came out of it.
+>
+> | Phase | Status |
+> | --- | --- |
+> | 0 Setup and test data | Mostly done (JJK, Daiboken and digital demo pages). No manhwa page, no sound-effect-heavy page, no reference translations yet |
+> | 1 Detection | Done. `panels_text` for boxes and panels; `comic_text_detector` (lettering mask) and `bubbles_yolov8` (bubble boxes) later added for rendering |
+> | 2 Read, emotion, translate | Working, not scored. **Changed from the plan:** OCR (manga-ocr) reads the text, because a 4B vision model invented text. A vision model tags emotion; a text model (`gemma4:e4b-mlx`) translates |
+> | 3 Erase and render | Working for plain white bubbles. Sound effects and text over art are left untouched |
+> | 4 Automation | Done in basic form: `mangakaro translate book.pdf`, resumable, per-page logging, cached results |
+> | 5 Evaluation | Not started; needs reference translations. Variants A to D were not run |
+> | 6 Improvements | Not started |
+>
+> The "no OCR in the MVP" decision was reversed on evidence (experiment S1 vs S4). The Open Questions are answered below.
+> Which model to prototype with: Gemma. Sound effects: left as they are for now. Test data: Daiboken vol. 2, Jujutsu Kaisen
+> and five digital pages.
+
 Goal: pass in a manga/manhwa chapter and get back translated pages automatically, using only open-source models, with no manual steps. MVP = multimodal-only reading (no OCR). OCR comes back later as a judge-triggered fallback.
 
 Purpose: a learning and portfolio project. The distinctive part is reading manga with a local vision-language model and measuring whether emotion context improves the translation (Phase 5), so scope stays at the MVP and the OCR fallback and fine-tuning are future work.
