@@ -1,0 +1,82 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "scene": "A group of characters are interacting in a forest setting.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "white-haired woman",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.2",
+   "speaker": "person with dark hair",
+   "emotion": "determined",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "young girl",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.2",
+   "speaker": "person in dark cloak",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.3",
+   "speaker": "young girl",
+   "emotion": "other",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.4",
+   "speaker": "young girl",
+   "emotion": "other",
+   "intensity": 0.1,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 34.9
+}

@@ -1,0 +1,28 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "この結果的にいる限り外の者がここに辿り着くことはない"
+  },
+  {
+   "id": "2.1",
+   "source_text": "リッカ…"
+  },
+  {
+   "id": "2.2",
+   "source_text": "これから１年この川より向こうへ行ってはいけないわかったな"
+  },
+  {
+   "id": "2.3",
+   "source_text": "うん！"
+  },
+  {
+   "id": "3.1",
+   "source_text": "そして、約束するというのは、"
+  }
+ ],
+ "raw": null,
+ "seconds": 68.9
+}

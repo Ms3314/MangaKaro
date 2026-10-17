@@ -76,14 +76,26 @@ class ComicTextDetector:
         self.s = ort.InferenceSession(str(W / "comictextdetector.pt.onnx"), providers=["CPUExecutionProvider"])
         self.conf, self.iou = conf, iou
 
-    def __call__(self, img):
+    def _run(self, img):
+        """Letterbox the page to SIZE x SIZE and run the model. Returns (outputs, scale, resized height, resized width)."""
         h, w = img.shape[:2]
         r = self.SIZE / max(h, w)
         nh, nw = round(h * r), round(w * r)
         canvas = np.full((self.SIZE, self.SIZE, 3), 114, np.uint8)
         canvas[:nh, :nw] = cv2.resize(img, (nw, nh))
         x = canvas[:, :, ::-1].transpose(2, 0, 1)[None].astype(np.float32) / 255
-        outs = self.s.run(None, {self.s.get_inputs()[0].name: x})
+        return self.s.run(None, {self.s.get_inputs()[0].name: x}), r, nh, nw
+
+    def mask(self, img, thresh=0.3):
+        """Pixel mask (bool, page size) of the lettering itself: the model's `seg` output, cut back out of the letterbox."""
+        h, w = img.shape[:2]
+        outs, _, nh, nw = self._run(img)
+        seg = next(o for o in outs if o.ndim == 4 and o.shape[1] == 1)[0, 0]
+        return cv2.resize(seg[:nh, :nw], (w, h), interpolation=cv2.INTER_LINEAR) > thresh
+
+    def __call__(self, img):
+        h, w = img.shape[:2]
+        outs, r, nh, nw = self._run(img)
         blk = next(o for o in outs if o.ndim == 3)[0]  # [N, 5+nc]: cx,cy,w,h,obj,cls...
         cls_scores = blk[:, 5:]
         score = blk[:, 4] * cls_scores.max(1)

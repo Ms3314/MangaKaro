@@ -1,0 +1,70 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "scene": "A scene involving several characters in a forest-like setting.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "character with horns",
+   "emotion": "determined",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "character",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.2",
+   "speaker": "character",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.3",
+   "speaker": "small character",
+   "emotion": "excited",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "character",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 25.7
+}

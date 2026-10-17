@@ -1,0 +1,39 @@
+{
+ "page": "download",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 12.5,
+  "emotion": 18.7,
+  "translate": 2.8
+ },
+ "ids_ok": true,
+ "scene": "A character is being attacked by a large hand while another character watches.",
+ "boxes": {
+  "3.1": [
+   79,
+   449,
+   193,
+   635
+  ]
+ },
+ "regions": [
+  {
+   "id": "3.1",
+   "source_text": "しかし、",
+   "emotion": "other",
+   "intensity": 0.2,
+   "translation": "But,",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

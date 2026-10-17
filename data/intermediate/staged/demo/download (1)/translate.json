@@ -1,0 +1,39 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Wha—?!",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "What is this...?!",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "Damn it! I was attacked by a monster...! This isn't normal...",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "It must be a Soul Eater.",
+   "flag": "null"
+  },
+  {
+   "id": "2.3",
+   "translation": "It was true... People who venture deep into the forest are just prey.",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "What the hell is this...",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 5.3
+}

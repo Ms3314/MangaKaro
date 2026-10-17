@@ -1,0 +1,132 @@
+{
+ "manga": "manga-demo",
+ "measured": {
+  "boxes": 17,
+  "median": 0.15577091932936826,
+  "p90": 0.1820149620934013
+ },
+ "primary": {
+  "name": "Comic Sans MS Regular",
+  "path": "/System/Library/Fonts/Supplemental/Comic Sans MS.ttf",
+  "index": 0
+ },
+ "secondary": {
+  "name": "Avenir Next Condensed Demi Bold",
+  "path": "/System/Library/Fonts/Avenir Next Condensed.ttc",
+  "index": 2
+ },
+ "candidates": [
+  {
+   "name": "Helvetica Neue UltraLight",
+   "weight": 0.036
+  },
+  {
+   "name": "Avenir Next Condensed Ultra Light",
+   "weight": 0.039
+  },
+  {
+   "name": "Helvetica Neue Thin",
+   "weight": 0.067
+  },
+  {
+   "name": "Helvetica Neue Light",
+   "weight": 0.101
+  },
+  {
+   "name": "Noteworthy Light",
+   "weight": 0.105
+  },
+  {
+   "name": "Avenir Next Condensed Regular",
+   "weight": 0.114
+  },
+  {
+   "name": "Optima Regular",
+   "weight": 0.124
+  },
+  {
+   "name": "Avenir Next Condensed Medium",
+   "weight": 0.142
+  },
+  {
+   "name": "Helvetica Neue Regular",
+   "weight": 0.144
+  },
+  {
+   "name": "Comic Sans MS Regular",
+   "weight": 0.165
+  },
+  {
+   "name": "Chalkboard SE Light",
+   "weight": 0.166
+  },
+  {
+   "name": "Noteworthy Bold",
+   "weight": 0.173
+  },
+  {
+   "name": "Helvetica Neue Medium",
+   "weight": 0.178
+  },
+  {
+   "name": "Avenir Next Condensed Demi Bold",
+   "weight": 0.182
+  },
+  {
+   "name": "Marker Felt Thin",
+   "weight": 0.184
+  },
+  {
+   "name": "Chalkboard SE Regular",
+   "weight": 0.188
+  },
+  {
+   "name": "Optima Bold",
+   "weight": 0.19
+  },
+  {
+   "name": "Arial Rounded MT Bold Regular",
+   "weight": 0.2
+  },
+  {
+   "name": "Marker Felt Wide",
+   "weight": 0.203
+  },
+  {
+   "name": "Helvetica Neue Condensed Bold",
+   "weight": 0.203
+  },
+  {
+   "name": "Helvetica Neue Bold",
+   "weight": 0.214
+  },
+  {
+   "name": "Chalkboard SE Bold",
+   "weight": 0.221
+  },
+  {
+   "name": "Comic Sans MS Bold",
+   "weight": 0.228
+  },
+  {
+   "name": "Avenir Next Condensed Bold",
+   "weight": 0.23
+  },
+  {
+   "name": "Impact Regular",
+   "weight": 0.233
+  },
+  {
+   "name": "Helvetica Neue Condensed Black",
+   "weight": 0.243
+  },
+  {
+   "name": "Optima ExtraBlack",
+   "weight": 0.245
+  },
+  {
+   "name": "Avenir Next Condensed Heavy",
+   "weight": 0.285
+  }
+ ]
+}

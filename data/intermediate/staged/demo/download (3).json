@@ -1,0 +1,39 @@
+{
+ "page": "download (3)",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 19.2,
+  "emotion": 21.6,
+  "translate": 3.1
+ },
+ "ids_ok": true,
+ "scene": "A surprised girl and another character are shown in a scene with a large background image.",
+ "boxes": {
+  "2.1": [
+   181,
+   562,
+   439,
+   1003
+  ]
+ },
+ "regions": [
+  {
+   "id": "2.1",
+   "source_text": "おっ温泉！？",
+   "emotion": "surprised",
+   "intensity": 0.8,
+   "translation": "A hot spring?!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

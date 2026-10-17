@@ -1,0 +1,12 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "2.1",
+   "source_text": "おっ温泉！？"
+  }
+ ],
+ "raw": null,
+ "seconds": 19.2
+}

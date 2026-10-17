@@ -1,0 +1,12 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "3.1",
+   "source_text": "しかし、"
+  }
+ ],
+ "raw": null,
+ "seconds": 12.5
+}

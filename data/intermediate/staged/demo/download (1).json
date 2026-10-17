@@ -1,0 +1,139 @@
+{
+ "page": "download (1)",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 5.2,
+  "emotion": 41.4,
+  "translate": 5.3
+ },
+ "ids_ok": true,
+ "scene": "A character is in distress while another character reacts to the situation.",
+ "boxes": {
+  "1.1": [
+   856,
+   24,
+   988,
+   361
+  ],
+  "1.2": [
+   62,
+   138,
+   228,
+   520
+  ],
+  "2.1": [
+   729,
+   569,
+   1009,
+   955
+  ],
+  "2.2": [
+   403,
+   584,
+   549,
+   823
+  ],
+  "2.3": [
+   61,
+   710,
+   304,
+   1041
+  ],
+  "3.1": [
+   830,
+   1138,
+   1001,
+   1456
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "なっ…！",
+   "emotion": "surprised",
+   "intensity": 0.8,
+   "translation": "Wha—?!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "これは…！？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "What is this...?!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "…クソ！魔物にやられたんだ…！こんなの普通じゃない…",
+   "emotion": "angry",
+   "intensity": 0.9,
+   "translation": "Damn it! I was attacked by a monster...! This isn't normal...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "きっと魂喰いだ",
+   "emotion": "fearful",
+   "intensity": 0.7,
+   "translation": "It must be a Soul Eater.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.3",
+   "source_text": "本当だったんだ…森の奥に入った人間は餌にされちまうってのは",
+   "emotion": "fearful",
+   "intensity": 0.8,
+   "translation": "It was true... People who venture deep into the forest are just prey.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "なんだよこれ…",
+   "emotion": "disgusted",
+   "intensity": 0.7,
+   "translation": "What the hell is this...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

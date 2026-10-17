@@ -1,0 +1,14 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "3.1",
+   "translation": "But,",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 2.8
+}

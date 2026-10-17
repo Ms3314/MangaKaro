@@ -1,0 +1,22 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "scene": "A surprised girl and another character are shown in a scene with a large background image.",
+ "regions": [
+  {
+   "id": "2.1",
+   "speaker": "girl",
+   "emotion": "surprised",
+   "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 21.6
+}

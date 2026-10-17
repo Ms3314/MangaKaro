@@ -1,0 +1,39 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "But if that's the case...?",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "I was hoping to do something exciting for lunch... Do you know a good spot?",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "You're not supposed to go into the border river, are you?",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "Then follow me.",
+   "flag": "null"
+  },
+  {
+   "id": "2.3",
+   "translation": "Oh. I didn't tell you.",
+   "flag": "null"
+  },
+  {
+   "id": "2.4",
+   "translation": "?",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 7.3
+}

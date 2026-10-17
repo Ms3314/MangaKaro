@@ -1,0 +1,22 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "scene": "A character is being attacked by a large hand while another character watches.",
+ "regions": [
+  {
+   "id": "3.1",
+   "speaker": "character in cloak",
+   "emotion": "other",
+   "intensity": 0.2,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 18.7
+}

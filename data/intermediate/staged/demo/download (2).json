@@ -1,0 +1,139 @@
+{
+ "page": "download (2)",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 39.5,
+  "emotion": 34.9,
+  "translate": 7.3
+ },
+ "ids_ok": true,
+ "scene": "A group of characters are interacting in a forest setting.",
+ "boxes": {
+  "1.1": [
+   756,
+   328,
+   930,
+   595
+  ],
+  "1.2": [
+   107,
+   159,
+   464,
+   714
+  ],
+  "2.1": [
+   862,
+   808,
+   1066,
+   1116
+  ],
+  "2.2": [
+   355,
+   812,
+   517,
+   1086
+  ],
+  "2.3": [
+   536,
+   967,
+   738,
+   1289
+  ],
+  "2.4": [
+   120,
+   1231,
+   196,
+   1362
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "あっでもそれだと……",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "But if that's the case...?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "お昼食っていうか大活躍がしたいな〜と思ってるんだけど…いい場所知っててる？",
+   "emotion": "determined",
+   "intensity": 0.5,
+   "translation": "I was hoping to do something exciting for lunch... Do you know a good spot?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "境目の川は入っちゃダメなんだよね？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "You're not supposed to go into the border river, are you?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "それなら付いてこい",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "Then follow me.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.3",
+   "source_text": "ああ。教えていなかったか",
+   "emotion": "other",
+   "intensity": 0.4,
+   "translation": "Oh. I didn't tell you.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.4",
+   "source_text": "？",
+   "emotion": "other",
+   "intensity": 0.1,
+   "translation": "?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

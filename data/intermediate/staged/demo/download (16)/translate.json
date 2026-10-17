@@ -1,0 +1,34 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "As long as we remain here, no outsider will find this place.",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "Rikka...",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "You understand, you must not go past this river for a year from now.",
+   "flag": "null"
+  },
+  {
+   "id": "2.3",
+   "translation": "Yeah!",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "And I promise that,",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 5.0
+}

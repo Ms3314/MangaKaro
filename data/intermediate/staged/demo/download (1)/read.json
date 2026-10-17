@@ -1,0 +1,32 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "なっ…！"
+  },
+  {
+   "id": "1.2",
+   "source_text": "これは…！？"
+  },
+  {
+   "id": "2.1",
+   "source_text": "…クソ！魔物にやられたんだ…！こんなの普通じゃない…"
+  },
+  {
+   "id": "2.2",
+   "source_text": "きっと魂喰いだ"
+  },
+  {
+   "id": "2.3",
+   "source_text": "本当だったんだ…森の奥に入った人間は餌にされちまうってのは"
+  },
+  {
+   "id": "3.1",
+   "source_text": "なんだよこれ…"
+  }
+ ],
+ "raw": null,
+ "seconds": 5.2
+}
