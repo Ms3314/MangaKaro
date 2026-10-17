@@ -5,7 +5,7 @@
  "regions": [
   {
    "id": "1.1",
-   "translation": "Hm?",
+   "translation": "Huh?",
    "flag": "null"
   },
   {
@@ -20,17 +20,17 @@
   },
   {
    "id": "3.2",
-   "translation": "Wha...?",
+   "translation": "Eh...!",
    "flag": "null"
   },
   {
    "id": "4.1",
-   "translation": "That... that person?",
+   "translation": "No way... that guy.",
    "flag": "null"
   },
   {
    "id": "4.2",
-   "translation": "To save someone like me...!?",
+   "translation": "To come and save me...!?",
    "flag": "null"
   },
   {
@@ -50,5 +50,5 @@
   }
  ],
  "raw": null,
- "seconds": 9.5
+ "seconds": 4.8
 }

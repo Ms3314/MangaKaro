@@ -14,6 +14,7 @@ Usage:
 """
 import argparse
 import json
+import re
 import time
 import urllib.error
 import urllib.request
@@ -157,20 +158,34 @@ def stage_read_ocr(page, texts, pad=4):
     for g in texts:
         x0, y0, x1, y1 = g["bbox"]
         crop = page[max(0, y0 - pad):min(H, y1 + pad), max(0, x0 - pad):min(W, x1 + pad)]
-        regions.append({"id": g["label"], "source_text": _MOCR(Image.fromarray(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)))})
+        text = _MOCR(Image.fromarray(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)))
+        # manga-ocr writes ellipses as runs of full-width dots (．．．); turn each run into … (one per three dots)
+        text = re.sub(r"[．.・]{2,}", lambda m: "…" * max(1, len(m.group()) // 3), text)
+        regions.append({"id": g["label"], "source_text": text})
     return {"model": "manga-ocr", "ids_ok": True, "regions": regions, "raw": None}
 
 
 def stage_emotion(model, annotated, texts, read):
     by_id = {r["id"]: r["source_text"] for r in read["regions"]}
     listing = "\n".join(f"- {g['label']}: {by_id.get(g['label'], '')!r}" for g in texts)
-    raw = chat(model, EMOTION_PROMPT.format(regions=listing, emotions=", ".join(EMOTIONS)), EMOTION_SCHEMA, [annotated])
-    try:
-        d = json.loads(raw)
-        ok = {r.get("id") for r in d["regions"]} == {g["label"] for g in texts}
-        return {"model": model, "ids_ok": ok, "scene": d["scene"], "regions": d["regions"], "raw": None}
-    except (json.JSONDecodeError, KeyError):
-        return {"model": model, "ids_ok": False, "scene": "", "regions": None, "raw": raw}
+    prompt = EMOTION_PROMPT.format(regions=listing, emotions=", ".join(EMOTIONS))
+    ids = [g["label"] for g in texts]
+    got, scene, raw, retries = {}, "", None, 0
+    while True:
+        extra = "" if not got else (f"\n\nYour previous answer skipped some lines. Return entries ONLY for these ids: "
+                                    f"{', '.join(i for i in ids if i not in got)}. Use the exact ids as listed.")
+        raw = chat(model, prompt + extra, EMOTION_SCHEMA, [annotated])
+        try:
+            d = json.loads(raw)
+            scene = scene or d["scene"]
+            got.update({r["id"]: r for r in d["regions"] if r.get("id") in ids and r["id"] not in got})  # mangled ids are ignored
+        except (json.JSONDecodeError, KeyError):
+            pass
+        if len(got) == len(ids) or retries >= MAX_RETRIES:
+            break
+        retries += 1
+    return {"model": model, "ids_ok": len(got) == len(ids), "retries": retries, "scene": scene,
+            "regions": [got[i] for i in ids if i in got] or None, "raw": None if got else raw}
 
 
 def stage_translate(model, texts, read, emo):

@@ -6,12 +6,12 @@
   "translate": "gemma4:e4b-mlx"
  },
  "seconds": {
-  "read": 1.0,
-  "emotion": 33.0,
-  "translate": 9.5
+  "read": 1.1,
+  "emotion": 27.6,
+  "translate": 4.8
  },
- "ids_ok": false,
- "scene": "A chaotic battle scene unfolds with various characters reacting to each other.",
+ "ids_ok": true,
+ "scene": "A chaotic battle scene unfolds with various characters engaged in conflict.",
  "boxes": {
   "1.1": [
    726,
@@ -72,19 +72,29 @@
   {
    "id": "1.1",
    "source_text": "ん？",
-   "emotion": null,
-   "intensity": null,
-   "translation": "Hm?",
-   "style": null,
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Huh?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
    "flag": "null"
   },
   {
    "id": "2.1",
    "source_text": "覚悟しろ～～っ！",
-   "emotion": null,
-   "intensity": null,
+   "emotion": "angry",
+   "intensity": 0.9,
    "translation": "Prepare yourself~~!",
-   "style": null,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
    "flag": "null"
   },
   {
@@ -103,19 +113,24 @@
   },
   {
    "id": "3.2",
-   "source_text": "え．．．．．！",
-   "emotion": null,
-   "intensity": null,
-   "translation": "Wha...?",
-   "style": null,
+   "source_text": "え…！",
+   "emotion": "surprised",
+   "intensity": 0.5,
+   "translation": "Eh...!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
    "flag": "null"
   },
   {
    "id": "4.1",
-   "source_text": "そんな．．．．．、あいつ。",
+   "source_text": "そんな…、あいつ。",
    "emotion": "surprised",
    "intensity": 0.6,
-   "translation": "That... that person?",
+   "translation": "No way... that guy.",
    "style": {
     "weight": "normal",
     "slant": "upright",
@@ -126,10 +141,10 @@
   },
   {
    "id": "4.2",
-   "source_text": "こんなおれっちを助けに．．．！？",
+   "source_text": "こんなおれっちを助けに…！？",
    "emotion": "surprised",
    "intensity": 0.7,
-   "translation": "To save someone like me...!?",
+   "translation": "To come and save me...!?",
    "style": {
     "weight": "normal",
     "slant": "upright",
@@ -168,7 +183,7 @@
   },
   {
    "id": "7.1",
-   "source_text": "でも．．．",
+   "source_text": "でも…",
    "emotion": "pained",
    "intensity": 0.5,
    "translation": "But...",

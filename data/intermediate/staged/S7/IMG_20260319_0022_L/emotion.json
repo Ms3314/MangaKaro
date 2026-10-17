@@ -1,6 +1,7 @@
 {
  "model": "gemma4:e4b-mlx",
- "ids_ok": false,
+ "ids_ok": true,
+ "retries": 1,
  "scene": "A sequence of action and reaction unfolds across the page.",
  "regions": [
   {
@@ -18,7 +19,7 @@
   {
    "id": "1.2",
    "speaker": "character",
-   "emotion": "sarcastic",
+   "emotion": "excited",
    "intensity": 0.7,
    "style": {
     "weight": "normal",
@@ -28,10 +29,10 @@
    }
   },
   {
-   "id": "3.2",
+   "id": "2.1",
    "speaker": "character",
-   "emotion": "fearful",
-   "intensity": 0.5,
+   "emotion": "surprised",
+   "intensity": 0.7,
    "style": {
     "weight": "normal",
     "slant": "upright",
@@ -42,8 +43,20 @@
   {
    "id": "3.1",
    "speaker": "character",
-   "emotion": "disgusted",
+   "emotion": "pained",
    "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.2",
+   "speaker": "character",
+   "emotion": "disgusted",
+   "intensity": 0.5,
    "style": {
     "weight": "normal",
     "slant": "upright",
@@ -55,11 +68,11 @@
    "id": "4.1",
    "speaker": "character",
    "emotion": "other",
-   "intensity": 0.4,
+   "intensity": 0.3,
    "style": {
     "weight": "normal",
     "slant": "upright",
-    "size": "medium",
+    "size": "small",
     "shape": "normal"
    }
   },
@@ -77,5 +90,5 @@
   }
  ],
  "raw": null,
- "seconds": 28.6
+ "seconds": 23.2
 }

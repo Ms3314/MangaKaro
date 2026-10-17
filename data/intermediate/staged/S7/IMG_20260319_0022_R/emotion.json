@@ -1,7 +1,8 @@
 {
  "model": "gemma4:e4b-mlx",
- "ids_ok": false,
- "scene": "A chaotic scene unfolds with various characters in different panels.",
+ "ids_ok": true,
+ "retries": 0,
+ "scene": "A chaotic scene unfolds with characters in various states of action and emotion.",
  "regions": [
   {
    "id": "1.1",
@@ -64,10 +65,22 @@
    }
   },
   {
-   "id": "5.2",
-   "speaker": "character",
-   "emotion": "excited",
+   "id": "5.1",
+   "speaker": "sound effect",
+   "emotion": "other",
    "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.2",
+   "speaker": "character with goggles",
+   "emotion": "excited",
+   "intensity": 0.7,
    "style": {
     "weight": "normal",
     "slant": "upright",
@@ -77,8 +90,8 @@
   },
   {
    "id": "6.1",
-   "speaker": "character",
-   "emotion": "determined",
+   "speaker": "character with goggles",
+   "emotion": "excited",
    "intensity": 0.7,
    "style": {
     "weight": "normal",
@@ -91,7 +104,7 @@
    "id": "6.2",
    "speaker": "character",
    "emotion": "other",
-   "intensity": 0.5,
+   "intensity": 0.4,
    "style": {
     "weight": "normal",
     "slant": "upright",
@@ -101,5 +114,5 @@
   }
  ],
  "raw": null,
- "seconds": 28.6
+ "seconds": 21.6
 }

@@ -10,7 +10,7 @@
   },
   {
    "id": "2.1",
-   "translation": "That's your problem, isn't it?",
+   "translation": "Well, that's your problem to deal with.",
    "flag": "null"
   },
   {
@@ -25,7 +25,7 @@
   },
   {
    "id": "4.1",
-   "translation": "Tch... you're such an idiot, Crash.",
+   "translation": "Ugh... you're such an idiot, Crash.",
    "flag": "null"
   },
   {
@@ -40,7 +40,7 @@
   },
   {
    "id": "6.1",
-   "translation": "With this, I'll tease you a little!",
+   "translation": "Now, let's mess with him a little!",
    "flag": "null"
   },
   {
@@ -50,5 +50,5 @@
   }
  ],
  "raw": null,
- "seconds": 9.2
+ "seconds": 4.9
 }

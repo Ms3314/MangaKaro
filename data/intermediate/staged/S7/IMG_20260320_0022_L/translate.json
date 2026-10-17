@@ -20,7 +20,7 @@
   },
   {
    "id": "3.1",
-   "translation": "Is this it? Is this all there is?",
+   "translation": "Is this all there is?",
    "flag": "null"
   },
   {
@@ -30,7 +30,7 @@
   },
   {
    "id": "5.1",
-   "translation": "Damn it, dodging it all.",
+   "translation": "Damn it, dodging like that.",
    "flag": "null"
   },
   {
@@ -40,5 +40,5 @@
   }
  ],
  "raw": null,
- "seconds": 7.6
+ "seconds": 3.5
 }

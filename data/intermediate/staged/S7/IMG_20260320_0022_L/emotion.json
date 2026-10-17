@@ -1,7 +1,8 @@
 {
  "model": "gemma4:e4b-mlx",
  "ids_ok": true,
- "scene": "A chaotic scene unfolds with various characters reacting to events.",
+ "retries": 0,
+ "scene": "A chaotic battle scene unfolds with various characters reacting to the action.",
  "regions": [
   {
    "id": "T.1",
@@ -89,5 +90,5 @@
   }
  ],
  "raw": null,
- "seconds": 24.9
+ "seconds": 15.0
 }

@@ -1,15 +1,28 @@
 {
  "model": "gemma4:e4b-mlx",
- "ids_ok": false,
- "scene": "A chaotic battle scene unfolds with various characters reacting to each other.",
+ "ids_ok": true,
+ "retries": 1,
+ "scene": "A chaotic battle scene unfolds with various characters engaged in conflict.",
  "regions": [
   {
-   "id": "3.2.3.1",
-   "speaker": "character with large mouth",
+   "id": "1.1",
+   "speaker": "character with question mark",
    "emotion": "surprised",
-   "intensity": 0.7,
+   "intensity": 0.6,
    "style": {
     "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "character with spiky hair",
+   "emotion": "angry",
+   "intensity": 0.9,
+   "style": {
+    "weight": "bold",
     "slant": "upright",
     "size": "medium",
     "shape": "normal"
@@ -17,7 +30,7 @@
   },
   {
    "id": "3.1",
-   "speaker": "character with large mouth",
+   "speaker": "character with horns",
    "emotion": "angry",
    "intensity": 0.8,
    "style": {
@@ -28,14 +41,14 @@
    }
   },
   {
-   "id": "2.1.1.1",
+   "id": "3.2",
    "speaker": "character with spiky hair",
-   "emotion": "angry",
-   "intensity": 0.9,
+   "emotion": "surprised",
+   "intensity": 0.5,
    "style": {
-    "weight": "bold",
+    "weight": "normal",
     "slant": "upright",
-    "size": "large",
+    "size": "small",
     "shape": "normal"
    }
   },
@@ -76,18 +89,6 @@
    }
   },
   {
-   "id": "7.1",
-   "speaker": "character with horns",
-   "emotion": "pained",
-   "intensity": 0.5,
-   "style": {
-    "weight": "normal",
-    "slant": "upright",
-    "size": "medium",
-    "shape": "normal"
-   }
-  },
-  {
    "id": "6.1",
    "speaker": "character with horns",
    "emotion": "angry",
@@ -98,8 +99,20 @@
     "size": "medium",
     "shape": "normal"
    }
+  },
+  {
+   "id": "7.1",
+   "speaker": "character",
+   "emotion": "pained",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
   }
  ],
  "raw": null,
- "seconds": 33.0
+ "seconds": 27.6
 }
