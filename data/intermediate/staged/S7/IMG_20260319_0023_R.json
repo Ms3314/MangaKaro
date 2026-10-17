@@ -1,0 +1,179 @@
+{
+ "page": "IMG_20260319_0023_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 1.4,
+  "emotion": 37.7,
+  "translate": 9.3
+ },
+ "ids_ok": true,
+ "scene": "A sequence of dramatic and comedic moments unfolds across the page.",
+ "boxes": {
+  "1.1": [
+   790,
+   66,
+   944,
+   313
+  ],
+  "1.2": [
+   517,
+   140,
+   581,
+   295
+  ],
+  "2.1": [
+   311,
+   77,
+   456,
+   266
+  ],
+  "2.2": [
+   29,
+   39,
+   118,
+   340
+  ],
+  "3.1": [
+   729,
+   457,
+   876,
+   740
+  ],
+  "3.2": [
+   33,
+   516,
+   126,
+   942
+  ],
+  "4.1": [
+   795,
+   1091,
+   939,
+   1260
+  ],
+  "5.1": [
+   292,
+   1089,
+   385,
+   1332
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "やっぱり．．．ただの石じゃなかったんだ！",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "So... it wasn't just a regular stone after all!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "．．．！！",
+   "emotion": "surprised",
+   "intensity": 0.8,
+   "translation": "......!!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "．．．お、ちがうぞ、クラッシュ。",
+   "emotion": "disgusted",
+   "intensity": 0.6,
+   "translation": "Uh... no, Crash. That's not it.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "パワーストーンが変わったんじゃない．．．",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "The power stone changed...?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "おぬしが小さくなったんじゃ．．．。",
+   "emotion": "disgusted",
+   "intensity": 0.7,
+   "translation": "Maybe *you* got smaller...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "source_text": "ええ～っ！？",
+   "emotion": "surprised",
+   "intensity": 0.8,
+   "translation": "Whaaat!?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "がっはっは、大成功～～。",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "translation": "Hahahaha, a huge success~~.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "どーだ、小さくなった気分は？",
+   "emotion": "other",
+   "intensity": 0.6,
+   "translation": "So, how's the feeling of being small?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

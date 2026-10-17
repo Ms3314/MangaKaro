@@ -1,0 +1,59 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "!?!",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "It's a monkey's voice!",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "Is it over here!?",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "What is that!?",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "Hm? What is this?",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "This place is mine from today! Ha!",
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "translation": "Hmph... As you wish...",
+   "flag": "null"
+  },
+  {
+   "id": "5.3",
+   "translation": "...",
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "translation": "I like it. I'll take this too.",
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "translation": "P-please, go ahead...",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 13.6
+}

@@ -1,0 +1,44 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "ん？"
+  },
+  {
+   "id": "2.1",
+   "source_text": "覚悟しろ～～っ！"
+  },
+  {
+   "id": "3.1",
+   "source_text": "なんだ、おまえの仲間か？"
+  },
+  {
+   "id": "3.2",
+   "source_text": "え．．．．．！"
+  },
+  {
+   "id": "4.1",
+   "source_text": "そんな．．．．．、あいつ。"
+  },
+  {
+   "id": "4.2",
+   "source_text": "こんなおれっちを助けに．．．！？"
+  },
+  {
+   "id": "5.1",
+   "source_text": "泉をとりもどそうったってむだだぜ。"
+  },
+  {
+   "id": "6.1",
+   "source_text": "出ていきな！"
+  },
+  {
+   "id": "7.1",
+   "source_text": "でも．．．"
+  }
+ ],
+ "raw": null,
+ "seconds": 1.0
+}

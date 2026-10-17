@@ -1,0 +1,199 @@
+{
+ "page": "IMG_20260319_0021_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 5.7,
+  "emotion": 40.0,
+  "translate": 14.2
+ },
+ "ids_ok": true,
+ "scene": "A group of characters are in a somewhat desolate or survival-like setting.",
+ "boxes": {
+  "1.1": [
+   809,
+   70,
+   917,
+   300
+  ],
+  "1.2": [
+   402,
+   71,
+   510,
+   287
+  ],
+  "2.1": [
+   264,
+   141,
+   390,
+   294
+  ],
+  "3.1": [
+   858,
+   479,
+   918,
+   625
+  ],
+  "3.2": [
+   782,
+   550,
+   829,
+   710
+  ],
+  "4.1": [
+   592,
+   479,
+   767,
+   693
+  ],
+  "5.1": [
+   847,
+   1058,
+   923,
+   1257
+  ],
+  "6.1": [
+   495,
+   1058,
+   648,
+   1296
+  ],
+  "6.2": [
+   81,
+   1058,
+   200,
+   1297
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "けっすぎて、雨やどりになんないよ〜〜。",
+   "emotion": "sad",
+   "intensity": 0.6,
+   "translation": "It's too cold, and there's nowhere to take shelter~.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "まあ、ないよりましじゃろ？",
+   "emotion": "sarcastic",
+   "intensity": 0.5,
+   "translation": "Well, it's better than nothing, right?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "なんか、穴ふさぐものないかな～～。",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "I wonder if there's anything we can use to block this hole~.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "おっ！",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "Oh!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "source_text": "あったか？",
+   "emotion": "other",
+   "intensity": 0.4,
+   "translation": "Did you find something?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "見て見て、保存食がいっぱい！",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "translation": "Look, look! There's a ton of rations!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "人んちのもん食いちらかすな！",
+   "emotion": "angry",
+   "intensity": 0.7,
+   "translation": "Don't touch things from other people's houses!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "しかし、いままで見つけたパワーストーンは、まだ二つだけ．．．。",
+   "emotion": "disgusted",
+   "intensity": 0.5,
+   "translation": "But the power stones we've found so far are only two...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "source_text": "これじゃあ、先が思いやられるのう．．．。",
+   "emotion": "fearful",
+   "intensity": 0.6,
+   "translation": "I'm worried about what comes next...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

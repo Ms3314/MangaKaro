@@ -1,0 +1,36 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "うちまずと．．．"
+  },
+  {
+   "id": "2.1",
+   "source_text": "お．．．．．．？"
+  },
+  {
+   "id": "2.2",
+   "source_text": "おおっ！？"
+  },
+  {
+   "id": "3.1",
+   "source_text": "ターゲットをすきな大きさに変えられるのです。"
+  },
+  {
+   "id": "4.1",
+   "source_text": "ほ～．．．．．。"
+  },
+  {
+   "id": "5.1",
+   "source_text": "．．．だが、これはおもしろい！！"
+  },
+  {
+   "id": "6.1",
+   "source_text": "Ｎ・ジン、借りてくぞ！"
+  }
+ ],
+ "raw": null,
+ "seconds": 3.3
+}

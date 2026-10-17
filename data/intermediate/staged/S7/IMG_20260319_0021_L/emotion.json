@@ -1,0 +1,117 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "scene": "A group of characters are in a somewhat desolate or survival-like setting.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "character",
+   "emotion": "sad",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.2",
+   "speaker": "character",
+   "emotion": "sarcastic",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "character",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "character",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.2",
+   "speaker": "character",
+   "emotion": "other",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "character",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "character",
+   "emotion": "angry",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.1",
+   "speaker": "character",
+   "emotion": "disgusted",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.2",
+   "speaker": "character",
+   "emotion": "fearful",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 40.0
+}

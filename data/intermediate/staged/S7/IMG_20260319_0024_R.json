@@ -1,0 +1,119 @@
+{
+ "page": "IMG_20260319_0024_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 0.7,
+  "emotion": 31.5,
+  "translate": 7.5
+ },
+ "ids_ok": true,
+ "scene": "This is a page from a manga with several speech bubbles and action panels.",
+ "boxes": {
+  "1.1": [
+   733,
+   85,
+   840,
+   227
+  ],
+  "1.2": [
+   26,
+   225,
+   119,
+   355
+  ],
+  "4.1": [
+   719,
+   1050,
+   900,
+   1279
+  ],
+  "5.1": [
+   217,
+   1047,
+   306,
+   1250
+  ],
+  "5.2": [
+   35,
+   1057,
+   86,
+   1249
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "へ．．．．．．、へ．．．",
+   "emotion": "neutral",
+   "intensity": 0.2,
+   "translation": "H... H...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "！！",
+   "emotion": "surprised",
+   "intensity": 0.8,
+   "translation": "!!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "．．．あ、ＡＣ用事思い出した。",
+   "emotion": "other",
+   "intensity": 0.5,
+   "translation": "Ah, I remember something for AC.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "ほっとくな、探さんか！",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "Don't worry, I'll find them!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "source_text": "え〜〜、だって。",
+   "emotion": "other",
+   "intensity": 0.4,
+   "translation": "Ehhh, but...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

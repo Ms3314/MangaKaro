@@ -1,0 +1,48 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Wait... what's going on?",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "Crash!",
+   "flag": "null"
+  },
+  {
+   "id": "1.3",
+   "translation": "I finally made it back.",
+   "flag": "null"
+  },
+  {
+   "id": "1.4",
+   "translation": "You've been such a nuisance. You, Cortex...",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "That's right!",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "I'm tired.",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "Mama, yummm...",
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "translation": "Now it's this one...",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 6.2
+}

@@ -1,0 +1,38 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Huh?!",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "Wait... the water source is connected outside!",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "Yes! Banzaa~...",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "Whoa!",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "Is... is everything alright?",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "Umm...",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 4.0
+}

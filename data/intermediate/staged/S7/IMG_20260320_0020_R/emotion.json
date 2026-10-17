@@ -1,0 +1,153 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "scene": "A sequence of action and reaction unfolds across the page.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "monkey",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "monkey",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.2",
+   "speaker": "narration",
+   "emotion": "other",
+   "intensity": 0.3,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "narration",
+   "emotion": "neutral",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.2",
+   "speaker": "monkey",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.3",
+   "speaker": "monkey",
+   "emotion": "angry",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "monkey",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.2",
+   "speaker": "narration",
+   "emotion": "other",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "sound effect",
+   "emotion": "other",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.2",
+   "speaker": "monkey",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.1",
+   "speaker": "monkey",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.2",
+   "speaker": "monkey",
+   "emotion": "surprised",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 34.2
+}

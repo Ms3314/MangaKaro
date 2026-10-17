@@ -1,0 +1,117 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "scene": "A chaotic scene unfolds with several characters reacting to a situation.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "character with large mouth",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.2",
+   "speaker": "character with spiky hair",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "character with small features",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.2",
+   "speaker": "character with small features",
+   "emotion": "neutral",
+   "intensity": 0.2,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "character with spiky hair",
+   "emotion": "disgusted",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "character with small features",
+   "emotion": "pained",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "character with spiky hair",
+   "emotion": "embarrassed",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.2",
+   "speaker": "character with spiky hair",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.3",
+   "speaker": "character with large body",
+   "emotion": "angry",
+   "intensity": 0.9,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 42.1
+}

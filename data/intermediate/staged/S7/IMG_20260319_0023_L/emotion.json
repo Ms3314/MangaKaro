@@ -1,0 +1,93 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "scene": "A chaotic fight scene unfolds across the page with various characters engaged in action.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "character with spiky hair",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.2",
+   "speaker": "character with spiky hair",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "character with spiky hair",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "small character",
+   "emotion": "pained",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "monster-like character",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "character in box",
+   "emotion": "determined",
+   "intensity": 0.9,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.1",
+   "speaker": "sound effect",
+   "emotion": "other",
+   "intensity": 0.7,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "jagged"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 27.8
+}

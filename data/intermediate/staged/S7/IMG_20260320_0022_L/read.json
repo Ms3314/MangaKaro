@@ -1,0 +1,36 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "T.1",
+   "source_text": "クラッシュバンディクーの"
+  },
+  {
+   "id": "1.1",
+   "source_text": "いててっ！"
+  },
+  {
+   "id": "1.2",
+   "source_text": "・"
+  },
+  {
+   "id": "3.1",
+   "source_text": "これでもか、これだもか。"
+  },
+  {
+   "id": "3.2",
+   "source_text": "この人ほんとはすごい人だったんだ。"
+  },
+  {
+   "id": "5.1",
+   "source_text": "くそっ、のらりくらりと。"
+  },
+  {
+   "id": "6.1",
+   "source_text": "パワーストーン．．．．．．！"
+  }
+ ],
+ "raw": null,
+ "seconds": 1.2
+}

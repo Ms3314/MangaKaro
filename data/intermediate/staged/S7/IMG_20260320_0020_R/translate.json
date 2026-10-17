@@ -1,0 +1,69 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "See ya! Bye-bye!",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "W-What kind of mean monkey are you?!",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "It seems he was played for a fool.",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "Even when clearly pursuing, he manages to escape.",
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "translation": "I'll stalk him quietly and wait for the chance.",
+   "flag": "null"
+  },
+  {
+   "id": "3.3",
+   "translation": "Damn it! You watch this!",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "......But to try and reclaim this so desperately...",
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "translation": "He was a strange one, wasn't he~",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "Kyaah!",
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "translation": "What a beautiful stone! ♪",
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "translation": "Well, here goes nothing. I don't care.",
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "translation": "Hm?",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 20.2
+}

@@ -1,0 +1,28 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "へ．．．．．．、へ．．．"
+  },
+  {
+   "id": "1.2",
+   "source_text": "！！"
+  },
+  {
+   "id": "4.1",
+   "source_text": "．．．あ、ＡＣ用事思い出した。"
+  },
+  {
+   "id": "5.1",
+   "source_text": "ほっとくな、探さんか！"
+  },
+  {
+   "id": "5.2",
+   "source_text": "え〜〜、だって。"
+  }
+ ],
+ "raw": null,
+ "seconds": 0.7
+}

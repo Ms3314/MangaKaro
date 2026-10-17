@@ -1,0 +1,54 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "It's too cold, and there's nowhere to take shelter~.",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "Well, it's better than nothing, right?",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "I wonder if there's anything we can use to block this hole~.",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "Oh!",
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "translation": "Did you find something?",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "Look, look! There's a ton of rations!",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "Don't touch things from other people's houses!",
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "translation": "But the power stones we've found so far are only two...",
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "translation": "I'm worried about what comes next...",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 14.2
+}

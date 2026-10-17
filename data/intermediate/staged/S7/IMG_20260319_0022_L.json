@@ -1,0 +1,154 @@
+{
+ "page": "IMG_20260319_0022_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 1.4,
+  "emotion": 28.6,
+  "translate": 11.1
+ },
+ "ids_ok": false,
+ "scene": "A sequence of action and reaction unfolds across the page.",
+ "boxes": {
+  "1.1": [
+   800,
+   148,
+   923,
+   353
+  ],
+  "1.2": [
+   386,
+   113,
+   604,
+   310
+  ],
+  "2.1": [
+   418,
+   458,
+   488,
+   598
+  ],
+  "3.1": [
+   347,
+   460,
+   402,
+   642
+  ],
+  "3.2": [
+   77,
+   455,
+   136,
+   607
+  ],
+  "4.1": [
+   212,
+   783,
+   269,
+   890
+  ],
+  "7.1": [
+   21,
+   1052,
+   146,
+   1343
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "でも、この石ほんとにすごいのかな～～。",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "But, is this stone really amazing?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "もっとこう、常識ばなれした力とかあったら、おもしろいのに〜〜。",
+   "emotion": "sarcastic",
+   "intensity": 0.7,
+   "translation": "It would be more interesting if it had some truly unconventional power~",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "わっ！？",
+   "emotion": null,
+   "intensity": null,
+   "translation": "Whoa!?",
+   "style": null,
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "げほげぼっ。",
+   "emotion": "disgusted",
+   "intensity": 0.6,
+   "translation": "Cough! Cough!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "source_text": "なんだ．．．．．．。",
+   "emotion": "fearful",
+   "intensity": 0.5,
+   "translation": "What is this...?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "パ．．．．．",
+   "emotion": "other",
+   "intensity": 0.4,
+   "translation": "P...p...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "7.1",
+   "source_text": "パワーストーンが、巨大化した～っ！？",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "translation": "The power stone has gotten huge—?!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "model": "qwen3.5:4b",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Eh?!",
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "translation": "...Outside! The water vein connects to the outside!",
+   "flag": null
+  },
+  {
+   "id": "2.2",
+   "translation": "Wow! Banza~...",
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "translation": "Whoosh!",
+   "flag": null
+  },
+  {
+   "id": "4.1",
+   "translation": "...Is it okay?",
+   "flag": null
+  },
+  {
+   "id": "5.1",
+   "translation": "Hmm...",
+   "flag": null
+  }
+ ],
+ "raw": null,
+ "seconds": 20.3
+}

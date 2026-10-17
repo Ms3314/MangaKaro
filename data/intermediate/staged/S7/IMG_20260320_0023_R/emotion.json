@@ -1,0 +1,117 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "scene": "A chaotic action scene unfolds with characters in various states of distress or excitement.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "character with angry face",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "character in action",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.2",
+   "speaker": "character in action",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "character with worried face",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "character with worried face",
+   "emotion": "disgusted",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.2",
+   "speaker": "character with distressed face",
+   "emotion": "pained",
+   "intensity": 0.7,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "character with surprised face",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.1",
+   "speaker": "character with embarrassed face",
+   "emotion": "embarrassed",
+   "intensity": 0.7,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.2",
+   "speaker": "character with pleading face",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 53.2
+}

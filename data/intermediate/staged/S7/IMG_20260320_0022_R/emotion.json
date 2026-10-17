@@ -1,0 +1,105 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": false,
+ "scene": "A chaotic battle scene unfolds with various characters reacting to each other.",
+ "regions": [
+  {
+   "id": "3.2.3.1",
+   "speaker": "character with large mouth",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "character with large mouth",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1.1.1",
+   "speaker": "character with spiky hair",
+   "emotion": "angry",
+   "intensity": 0.9,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "character with long ears",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.2",
+   "speaker": "character with long ears",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "character with horns",
+   "emotion": "disgusted",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "7.1",
+   "speaker": "character with horns",
+   "emotion": "pained",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.1",
+   "speaker": "character with horns",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 33.0
+}

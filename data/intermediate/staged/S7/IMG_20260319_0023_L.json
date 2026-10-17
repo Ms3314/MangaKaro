@@ -1,0 +1,159 @@
+{
+ "page": "IMG_20260319_0023_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 2.6,
+  "emotion": 27.8,
+  "translate": 9.5
+ },
+ "ids_ok": true,
+ "scene": "A chaotic fight scene unfolds across the page with various characters engaged in action.",
+ "boxes": {
+  "1.1": [
+   842,
+   130,
+   894,
+   269
+  ],
+  "1.2": [
+   524,
+   118,
+   651,
+   265
+  ],
+  "2.1": [
+   68,
+   25,
+   176,
+   288
+  ],
+  "3.1": [
+   307,
+   832,
+   409,
+   1063
+  ],
+  "4.1": [
+   173,
+   480,
+   271,
+   623
+  ],
+  "5.1": [
+   779,
+   1130,
+   922,
+   1302
+  ],
+  "6.1": [
+   76,
+   1130,
+   151,
+   1273
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "おまえのしわざか～っ。",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "You're the one who did this, huh?!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "あ～～？聞こえんな～～あ。",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Huh...? I can't hear you~~.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "この～～もどせよ！",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "You, you, give it back!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "むぎゅっ．．．",
+   "emotion": "pained",
+   "intensity": 0.7,
+   "translation": "Mngh...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "はっは、弱いな！",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "Hahaha, you're weak!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "これでもくらえ〜〜！！",
+   "emotion": "determined",
+   "intensity": 0.9,
+   "translation": "Take this too~!!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "わぷ．．．．．。",
+   "emotion": "other",
+   "intensity": 0.7,
+   "translation": "Whoosh...",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "jagged"
+   },
+   "flag": "null"
+  }
+ ]
+}

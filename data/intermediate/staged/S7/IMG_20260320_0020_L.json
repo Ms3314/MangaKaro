@@ -1,0 +1,159 @@
+{
+ "page": "IMG_20260320_0020_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 1.4,
+  "emotion": 30.0,
+  "translate": 9.5
+ },
+ "ids_ok": true,
+ "scene": "A dramatic confrontation is taking place between several characters in a jungle-like setting.",
+ "boxes": {
+  "1.1": [
+   825,
+   136,
+   923,
+   380
+  ],
+  "1.2": [
+   487,
+   247,
+   543,
+   384
+  ],
+  "2.1": [
+   354,
+   38,
+   477,
+   315
+  ],
+  "5.1": [
+   615,
+   418,
+   698,
+   764
+  ],
+  "5.2": [
+   8,
+   957,
+   144,
+   1135
+  ],
+  "6.1": [
+   776,
+   1162,
+   936,
+   1366
+  ],
+  "6.2": [
+   94,
+   1168,
+   199,
+   1362
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "また、おれっちの泉にだれかいる。",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "Someone else is in my spring again?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "よ〜し。",
+   "emotion": "determined",
+   "intensity": 0.5,
+   "translation": "Alright.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "こらーっ！ここはおれっちの．．．。",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "Hey! This is mine...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "んん～～～？",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Mmmph~?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "source_text": "！！",
+   "emotion": "other",
+   "intensity": 0.8,
+   "translation": "!!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "large",
+    "shape": "jagged"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "ここは「おれっち」のなんだ？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "What is this place, 'mine'?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "source_text": "い．．．いえ、その．．．．。",
+   "emotion": "fearful",
+   "intensity": 0.6,
+   "translation": "N-no, I mean...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

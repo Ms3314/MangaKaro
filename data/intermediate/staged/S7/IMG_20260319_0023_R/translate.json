@@ -1,0 +1,49 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "So... it wasn't just a regular stone after all!",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "......!!",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "Uh... no, Crash. That's not it.",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "The power stone changed...?",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "Maybe *you* got smaller...",
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "translation": "Whaaat!?",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "Hahahaha, a huge success~~.",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "So, how's the feeling of being small?",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 9.3
+}

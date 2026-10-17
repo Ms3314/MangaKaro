@@ -1,0 +1,32 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "へ！？"
+  },
+  {
+   "id": "2.1",
+   "source_text": "．．．．．．外じゃ！水脈が外につながっとったんじゃー"
+  },
+  {
+   "id": "2.2",
+   "source_text": "やった！ばんざ～．．．"
+  },
+  {
+   "id": "3.1",
+   "source_text": "い！"
+  },
+  {
+   "id": "4.1",
+   "source_text": "だ．．．、だいじょうぶか。"
+  },
+  {
+   "id": "5.1",
+   "source_text": "う～ん．．．．．．。"
+  }
+ ],
+ "raw": null,
+ "seconds": 1.6
+}

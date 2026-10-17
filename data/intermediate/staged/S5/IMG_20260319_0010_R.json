@@ -1,0 +1,159 @@
+{
+ "page": "IMG_20260319_0010_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "qwen3.5:4b",
+  "translate": "qwen3:8b"
+ },
+ "seconds": {
+  "read": 142.2,
+  "emotion": 41.1,
+  "translate": 15.7
+ },
+ "ids_ok": true,
+ "scene": "A comic page showing a confrontation between two characters about treasure hunting and collecting.",
+ "boxes": {
+  "1.1": [
+   817,
+   137,
+   889,
+   275
+  ],
+  "1.2": [
+   413,
+   139,
+   548,
+   327
+  ],
+  "2.1": [
+   307,
+   139,
+   401,
+   358
+  ],
+  "3.1": [
+   323,
+   511,
+   455,
+   788
+  ],
+  "4.1": [
+   221,
+   535,
+   279,
+   642
+  ],
+  "5.1": [
+   746,
+   829,
+   888,
+   1096
+  ],
+  "6.1": [
+   164,
+   818,
+   256,
+   1092
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "なんだ？",
+   "emotion": "surprised",
+   "intensity": 0.3,
+   "translation": "What?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "source_text": "人があいさつしてんのに～～～",
+   "emotion": "surprised",
+   "intensity": 0.4,
+   "translation": "You're greeting someone? ~~~~~",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "source_text": "いま、お宝探しでいそがしいんでな。",
+   "emotion": "determined",
+   "intensity": 0.5,
+   "translation": "I'm busy treasure hunting right now.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "source_text": "おまえみたいなやつ、どーせ、たいしたお宝探せないんだろ！",
+   "emotion": "sarcastic",
+   "intensity": 0.7,
+   "translation": "You guys like you're nothing but a joke, right? You can't find anything worth collecting!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "4.1",
+   "source_text": "．．．．．。",
+   "emotion": "neutral",
+   "intensity": 0.1,
+   "translation": "",
+   "style": {
+    "weight": "light",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "5.1",
+   "source_text": "コレクションのほんの一部だ！",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "translation": "Just a small part of my collection!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "6.1",
+   "source_text": "アニキは、お宝探しのエキスパートなんだな。",
+   "emotion": "excited",
+   "intensity": 0.9,
+   "translation": "You're an expert at treasure hunting, bro!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  }
+ ]
+}

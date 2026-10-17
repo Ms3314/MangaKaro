@@ -1,0 +1,139 @@
+{
+ "page": "IMG_20260319_0021_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 3.6,
+  "emotion": 21.7,
+  "translate": 6.6
+ },
+ "ids_ok": true,
+ "scene": "A group of characters are gathered in a rustic, somewhat messy house.",
+ "boxes": {
+  "2.1": [
+   647,
+   183,
+   782,
+   394
+  ],
+  "2.2": [
+   43,
+   217,
+   152,
+   406
+  ],
+  "3.1": [
+   772,
+   1113,
+   930,
+   1305
+  ],
+  "4.1": [
+   769,
+   794,
+   865,
+   961
+  ],
+  "5.1": [
+   471,
+   789,
+   578,
+   1023
+  ],
+  "5.2": [
+   23,
+   1293,
+   70,
+   1444
+  ]
+ },
+ "regions": [
+  {
+   "id": "2.1",
+   "source_text": "．．．そのころ、パワーストーンを探すクラッシュたちはーー。",
+   "emotion": "neutral",
+   "intensity": 0.0,
+   "translation": "Around that time, Crash and the gang were searching for power stones... ",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "．．．．．ふう！",
+   "emotion": "neutral",
+   "intensity": 0.0,
+   "translation": "Phew!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "じゃが、いいところに空き家があって、助かったのうクラッシュ！",
+   "emotion": "excited",
+   "intensity": 0.6,
+   "translation": "Well, Crash! We found an empty house, so we're saved!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "なかなかやまんなあ。",
+   "emotion": "neutral",
+   "intensity": 0.0,
+   "translation": "This is quite a mess.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "．．．はんとにそ〜〜思う？",
+   "emotion": "other",
+   "intensity": 0.1,
+   "translation": "Do you really think so?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "source_text": "．．．うっ！",
+   "emotion": "fearful",
+   "intensity": 0.4,
+   "translation": "Ugh!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

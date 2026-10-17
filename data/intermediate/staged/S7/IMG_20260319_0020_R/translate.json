@@ -1,0 +1,54 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Cortex, look at this—!!",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "Hm?",
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "translation": "Look! I've made a new invention!",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "I'm busy right now, so can you do this later?",
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "translation": "Only a free person would look!",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "Let's name it...",
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "translation": "Mass Changer!!",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "What is it?",
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "translation": "First, let's set the size...",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 5.4
+}

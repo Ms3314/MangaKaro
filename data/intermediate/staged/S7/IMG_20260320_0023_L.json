@@ -1,0 +1,199 @@
+{
+ "page": "IMG_20260320_0023_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 4.2,
+  "emotion": 42.1,
+  "translate": 14.2
+ },
+ "ids_ok": true,
+ "scene": "A chaotic scene unfolds with several characters reacting to a situation.",
+ "boxes": {
+  "1.1": [
+   743,
+   37,
+   908,
+   348
+  ],
+  "1.2": [
+   395,
+   88,
+   472,
+   257
+  ],
+  "2.1": [
+   257,
+   138,
+   382,
+   293
+  ],
+  "2.2": [
+   145,
+   142,
+   226,
+   251
+  ],
+  "3.1": [
+   828,
+   384,
+   913,
+   566
+  ],
+  "4.1": [
+   122,
+   398,
+   214,
+   540
+  ],
+  "5.1": [
+   725,
+   673,
+   915,
+   957
+  ],
+  "5.2": [
+   54,
+   682,
+   400,
+   1017
+  ],
+  "5.3": [
+   22,
+   1079,
+   136,
+   1227
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "は〜ははは！いーよ！おいらがアニキだ．．．？",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "translation": "Hahaha! I'm the big brother...?",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "わかっとらんな。",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "Don't mess with me.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "おわびに、おなかの薬を．．．。",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "translation": "Here's some medicine for your stomach...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "おっ。",
+   "emotion": "neutral",
+   "intensity": 0.2,
+   "translation": "Oh.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "気がきくねー。",
+   "emotion": "disgusted",
+   "intensity": 0.5,
+   "translation": "You have no sense of timing.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "．．．うっ。",
+   "emotion": "pained",
+   "intensity": 0.4,
+   "translation": "Ugh...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "す．．．、すんません。それ下剤だったみたいっす．．．．。",
+   "emotion": "embarrassed",
+   "intensity": 0.7,
+   "translation": "S-sorry. It seems it was a laxative...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "source_text": "うあっ、ちょっと待て．．．。またかこら〜〜っ！",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "Whoa, wait a minute... Not again!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.3",
+   "source_text": "もーー、知らん！",
+   "emotion": "angry",
+   "intensity": 0.9,
+   "translation": "Ugh, I don't care!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

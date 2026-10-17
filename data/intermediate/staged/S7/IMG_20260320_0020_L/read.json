@@ -1,0 +1,36 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "また、おれっちの泉にだれかいる。"
+  },
+  {
+   "id": "1.2",
+   "source_text": "よ〜し。"
+  },
+  {
+   "id": "2.1",
+   "source_text": "こらーっ！ここはおれっちの．．．。"
+  },
+  {
+   "id": "5.1",
+   "source_text": "んん～～～？"
+  },
+  {
+   "id": "5.2",
+   "source_text": "！！"
+  },
+  {
+   "id": "6.1",
+   "source_text": "ここは「おれっち」のなんだ？"
+  },
+  {
+   "id": "6.2",
+   "source_text": "い．．．いえ、その．．．．。"
+  }
+ ],
+ "raw": null,
+ "seconds": 1.4
+}

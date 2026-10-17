@@ -1,0 +1,48 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "！？"
+  },
+  {
+   "id": "1.2",
+   "source_text": "おサルの声だ！"
+  },
+  {
+   "id": "2.1",
+   "source_text": "こっちか！？"
+  },
+  {
+   "id": "3.1",
+   "source_text": "あれは！？"
+  },
+  {
+   "id": "4.1",
+   "source_text": "ん？これはなんだ？"
+  },
+  {
+   "id": "5.1",
+   "source_text": "ここの場所は、今日からおれさまのもんだ！いいな！！"
+  },
+  {
+   "id": "5.2",
+   "source_text": "へ．．．、へえ、おっしゃるとーり．．．．。"
+  },
+  {
+   "id": "5.3",
+   "source_text": "．．．"
+  },
+  {
+   "id": "6.1",
+   "source_text": "気に入った、これももらうぞ。"
+  },
+  {
+   "id": "6.2",
+   "source_text": "ど．．．、どーぞ、とーぞー"
+  }
+ ],
+ "raw": null,
+ "seconds": 1.3
+}

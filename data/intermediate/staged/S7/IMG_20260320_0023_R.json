@@ -1,0 +1,199 @@
+{
+ "page": "IMG_20260320_0023_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 1.3,
+  "emotion": 53.2,
+  "translate": 24.0
+ },
+ "ids_ok": true,
+ "scene": "A chaotic action scene unfolds with characters in various states of distress or excitement.",
+ "boxes": {
+  "1.1": [
+   789,
+   141,
+   887,
+   346
+  ],
+  "2.1": [
+   593,
+   40,
+   721,
+   412
+  ],
+  "2.2": [
+   40,
+   44,
+   126,
+   285
+  ],
+  "3.1": [
+   389,
+   686,
+   486,
+   882
+  ],
+  "4.1": [
+   274,
+   686,
+   378,
+   856
+  ],
+  "4.2": [
+   30,
+   657,
+   111,
+   917
+  ],
+  "5.1": [
+   823,
+   993,
+   859,
+   1091
+  ],
+  "6.1": [
+   294,
+   961,
+   415,
+   1210
+  ],
+  "6.2": [
+   57,
+   959,
+   241,
+   1121
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "だめだ～～捨てちゃ～っ！！",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "No way! Throw it away!!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "スライディングキャ〜〜ッチ！",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "translation": "Sliding catch!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "うがあっ！？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "Wha—?!?",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "ふーーっ、よかった！",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Phew, that's a relief!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "そーだ、モンプーのやろーは．．．",
+   "emotion": "disgusted",
+   "intensity": 0.6,
+   "translation": "Yeah, that Mongu's...?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "source_text": "アニキ～～！",
+   "emotion": "pained",
+   "intensity": 0.7,
+   "translation": "Big bro~~!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "アニャ",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Anya?",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "おれっちが．．．．、おれーちがばかでした！",
+   "emotion": "embarrassed",
+   "intensity": 0.7,
+   "translation": "I... I was an idiot!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "source_text": "どーか、アニキと呼ばせてください！",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "Please, let me be called big bro!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

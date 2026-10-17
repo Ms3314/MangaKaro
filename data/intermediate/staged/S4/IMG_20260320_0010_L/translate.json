@@ -1,0 +1,48 @@
+{
+ "model": "qwen3.5:4b",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Wait... what did I do?",
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "translation": "CRASH!",
+   "flag": null
+  },
+  {
+   "id": "1.3",
+   "translation": "I'm finally back home.",
+   "flag": null
+  },
+  {
+   "id": "1.4",
+   "translation": "You've caused so much trouble. Ugh, Cortex...",
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "translation": "That's right!",
+   "flag": null
+  },
+  {
+   "id": "2.2",
+   "translation": "I'm getting tired.",
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "translation": "Mom, I'm doing great...!",
+   "flag": null
+  },
+  {
+   "id": "3.2",
+   "translation": "This time it's him...",
+   "flag": null
+  }
+ ],
+ "raw": null,
+ "seconds": 21.0
+}

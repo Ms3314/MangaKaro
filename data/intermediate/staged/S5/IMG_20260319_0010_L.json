@@ -1,0 +1,239 @@
+{
+ "page": "IMG_20260319_0010_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "qwen3.5:4b",
+  "translate": "qwen3:8b"
+ },
+ "seconds": {
+  "read": 1.5,
+  "emotion": 68.2,
+  "translate": 19.0
+ },
+ "ids_ok": true,
+ "scene": "A fox-like character with a headband confronts another fox character who is being called a 'fool' (shirouto) by an off-screen speaker.",
+ "boxes": {
+  "T.1": [
+   54,
+   78,
+   468,
+   132
+  ],
+  "1.1": [
+   729,
+   143,
+   913,
+   405
+  ],
+  "1.2": [
+   299,
+   143,
+   408,
+   407
+  ],
+  "2.1": [
+   63,
+   145,
+   131,
+   368
+  ],
+  "3.1": [
+   795,
+   652,
+   916,
+   875
+  ],
+  "4.1": [
+   506,
+   650,
+   644,
+   899
+  ],
+  "4.2": [
+   67,
+   661,
+   155,
+   882
+  ],
+  "5.1": [
+   822,
+   1087,
+   917,
+   1310
+  ],
+  "5.2": [
+   425,
+   1085,
+   585,
+   1296
+  ],
+  "6.1": [
+   281,
+   1083,
+   411,
+   1287
+  ],
+  "6.2": [
+   55,
+   1082,
+   129,
+   1197
+  ]
+ },
+ "regions": [
+  {
+   "id": "T.1",
+   "source_text": "クラッシュバンディクー［２",
+   "emotion": "neutral",
+   "intensity": 0.0,
+   "translation": "CLASH BANDICUTT [2",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.1",
+   "source_text": "おれからお宝ハンター！いまも宝を追ってる最中だ。",
+   "emotion": "determined",
+   "intensity": 0.8,
+   "translation": "I'm the treasure hunter! I'm still chasing treasure right now.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "source_text": "素人にかまってるひまはない！",
+   "emotion": "angry",
+   "intensity": 0.9,
+   "translation": "I don't have time to waste on amateurs!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "source_text": "シロート！？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "Shirouto!?",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "source_text": "おいおい、だれがシロートだって？",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Hey, who's the shirouto you're talking about?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "4.1",
+   "source_text": "おいらだって、お宝探ししてんだ。",
+   "emotion": "determined",
+   "intensity": 0.7,
+   "translation": "I'm also searching for treasure.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "4.2",
+   "source_text": "お宝ハンターなんだぜ！",
+   "emotion": "determined",
+   "intensity": 0.8,
+   "translation": "I'm a treasure hunter, you know!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "5.1",
+   "source_text": "なに、って言っとるか！",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "What are you talking about?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "5.2",
+   "source_text": "ーー！！うそなもんか、パワーストーンだって、お宝だろ！",
+   "emotion": "excited",
+   "intensity": 0.9,
+   "translation": "----!!! You're joking, right? Power Stone is treasure too!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "6.1",
+   "source_text": "きみの目は、ふし穴みたいだねぇ〜〜。",
+   "emotion": "disgusted",
+   "intensity": 0.7,
+   "translation": "Your eyes are like a hole in the wall, you know~",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "6.2",
+   "source_text": "なに！？",
+   "emotion": "surprised",
+   "intensity": 0.8,
+   "translation": "What!?",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  }
+ ]
+}

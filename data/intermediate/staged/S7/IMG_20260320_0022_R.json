@@ -1,0 +1,184 @@
+{
+ "page": "IMG_20260320_0022_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 1.0,
+  "emotion": 33.0,
+  "translate": 9.5
+ },
+ "ids_ok": false,
+ "scene": "A chaotic battle scene unfolds with various characters reacting to each other.",
+ "boxes": {
+  "1.1": [
+   726,
+   129,
+   803,
+   255
+  ],
+  "2.1": [
+   624,
+   53,
+   711,
+   478
+  ],
+  "3.1": [
+   112,
+   122,
+   247,
+   296
+  ],
+  "3.2": [
+   31,
+   119,
+   84,
+   269
+  ],
+  "4.1": [
+   772,
+   588,
+   873,
+   743
+  ],
+  "4.2": [
+   496,
+   582,
+   609,
+   838
+  ],
+  "5.1": [
+   316,
+   580,
+   486,
+   788
+  ],
+  "6.1": [
+   830,
+   872,
+   947,
+   1150
+  ],
+  "7.1": [
+   24,
+   867,
+   220,
+   1013
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "ん？",
+   "emotion": null,
+   "intensity": null,
+   "translation": "Hm?",
+   "style": null,
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "覚悟しろ～～っ！",
+   "emotion": null,
+   "intensity": null,
+   "translation": "Prepare yourself~~!",
+   "style": null,
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "なんだ、おまえの仲間か？",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "What, are you one of their allies?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "source_text": "え．．．．．！",
+   "emotion": null,
+   "intensity": null,
+   "translation": "Wha...?",
+   "style": null,
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "そんな．．．．．、あいつ。",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "That... that person?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "source_text": "こんなおれっちを助けに．．．！？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "To save someone like me...!?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "泉をとりもどそうったってむだだぜ。",
+   "emotion": "disgusted",
+   "intensity": 0.7,
+   "translation": "It's useless trying to reclaim the spring.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "出ていきな！",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "Get out of here!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "7.1",
+   "source_text": "でも．．．",
+   "emotion": "pained",
+   "intensity": 0.5,
+   "translation": "But...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Monboo is being held by a gorilla!",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "Should we help?! But we've been knocked down so much...",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "CRASH!",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "Lucky~~!",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "L...l...",
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "translation": "Someone out there managed to grab Monboo and...",
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "translation": "They've recovered the Power Stone!",
+   "flag": "null"
+  },
+  {
+   "id": "6.3",
+   "translation": "Huh!?",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 8.5
+}

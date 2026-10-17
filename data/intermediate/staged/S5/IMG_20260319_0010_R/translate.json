@@ -1,0 +1,43 @@
+{
+ "model": "qwen3:8b",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "What?",
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "translation": "You're greeting someone? ~~~~~",
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "translation": "I'm busy treasure hunting right now.",
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "translation": "You guys like you're nothing but a joke, right? You can't find anything worth collecting!",
+   "flag": null
+  },
+  {
+   "id": "4.1",
+   "translation": "",
+   "flag": null
+  },
+  {
+   "id": "5.1",
+   "translation": "Just a small part of my collection!",
+   "flag": null
+  },
+  {
+   "id": "6.1",
+   "translation": "You're an expert at treasure hunting, bro!",
+   "flag": null
+  }
+ ],
+ "raw": null,
+ "seconds": 15.7
+}

@@ -1,0 +1,159 @@
+{
+ "page": "IMG_20260319_0020_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 3.3,
+  "emotion": 17.9,
+  "translate": 5.6
+ },
+ "ids_ok": true,
+ "scene": "A chaotic action scene unfolds with characters reacting to events.",
+ "boxes": {
+  "1.1": [
+   866,
+   152,
+   922,
+   363
+  ],
+  "2.1": [
+   463,
+   152,
+   523,
+   257
+  ],
+  "2.2": [
+   81,
+   318,
+   157,
+   472
+  ],
+  "3.1": [
+   752,
+   510,
+   923,
+   801
+  ],
+  "4.1": [
+   546,
+   1054,
+   606,
+   1150
+  ],
+  "5.1": [
+   436,
+   1053,
+   531,
+   1285
+  ],
+  "6.1": [
+   148,
+   1054,
+   250,
+   1282
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "うちまずと．．．",
+   "emotion": "other",
+   "intensity": 0.4,
+   "translation": "Wha—?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "お．．．．．．？",
+   "emotion": "surprised",
+   "intensity": 0.5,
+   "translation": "Huh...?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "おおっ！？",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Whoa!?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "ターゲットをすきな大きさに変えられるのです。",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "I can change the target to any size.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "ほ～．．．．．。",
+   "emotion": "other",
+   "intensity": 0.3,
+   "translation": "Ohh...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "．．．だが、これはおもしろい！！",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "translation": "But... this is interesting!!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "Ｎ・ジン、借りてくぞ！",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "N-Jin, I'm taking you!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

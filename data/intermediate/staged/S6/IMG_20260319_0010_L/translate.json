@@ -1,0 +1,64 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 1,
+ "regions": [
+  {
+   "id": "T.1",
+   "translation": "Crash Bandicoot [2] (Title/Narration)",
+   "flag": "null"
+  },
+  {
+   "id": "1.1",
+   "translation": "I'm a Treasure Hunter! I'm still on the hunt for treasure!",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "I don't have time for amateurs!",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "A rookie!?",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "Hey, who called me a rookie?",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "I'm also looking for treasure.",
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "translation": "I'm a Treasure Hunter!",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "What did you say?!",
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "translation": "—!! Power stones are treasure, aren't they?!",
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "translation": "Your eyes are like holes, you know~",
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "translation": "What!?",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 14.6
+}

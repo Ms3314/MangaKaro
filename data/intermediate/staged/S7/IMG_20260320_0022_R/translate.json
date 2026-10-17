@@ -1,0 +1,54 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "retries": 0,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "Hm?",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "Prepare yourself~~!",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "What, are you one of their allies?",
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "translation": "Wha...?",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "That... that person?",
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "translation": "To save someone like me...!?",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "It's useless trying to reclaim the spring.",
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "translation": "Get out of here!",
+   "flag": "null"
+  },
+  {
+   "id": "7.1",
+   "translation": "But...",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 9.5
+}

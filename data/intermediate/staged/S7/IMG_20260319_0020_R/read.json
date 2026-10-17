@@ -1,0 +1,44 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "コルテックスどの〜〜！！"
+  },
+  {
+   "id": "2.1",
+   "source_text": "んーー？"
+  },
+  {
+   "id": "2.2",
+   "source_text": "見てください、新しい発明ができました！"
+  },
+  {
+   "id": "3.1",
+   "source_text": "わしいま、いそがしいからあとにしてくれんか。"
+  },
+  {
+   "id": "3.2",
+   "source_text": "ひま人にしか見えません！"
+  },
+  {
+   "id": "4.1",
+   "source_text": "名づけて．．．"
+  },
+  {
+   "id": "4.2",
+   "source_text": "質量チェンジャー！！"
+  },
+  {
+   "id": "5.1",
+   "source_text": "なんだ？"
+  },
+  {
+   "id": "5.2",
+   "source_text": "まず、大きさを決めて．．．"
+  }
+ ],
+ "raw": null,
+ "seconds": 5.2
+}

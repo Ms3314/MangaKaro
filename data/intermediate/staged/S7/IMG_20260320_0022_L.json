@@ -1,0 +1,159 @@
+{
+ "page": "IMG_20260320_0022_L",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 1.2,
+  "emotion": 24.9,
+  "translate": 7.6
+ },
+ "ids_ok": true,
+ "scene": "A chaotic scene unfolds with various characters reacting to events.",
+ "boxes": {
+  "T.1": [
+   45,
+   80,
+   464,
+   134
+  ],
+  "1.1": [
+   860,
+   156,
+   888,
+   280
+  ],
+  "1.2": [
+   374,
+   174,
+   424,
+   225
+  ],
+  "3.1": [
+   805,
+   477,
+   914,
+   692
+  ],
+  "3.2": [
+   74,
+   712,
+   196,
+   1029
+  ],
+  "5.1": [
+   535,
+   1062,
+   636,
+   1315
+  ],
+  "6.1": [
+   31,
+   1074,
+   148,
+   1308
+  ]
+ },
+ "regions": [
+  {
+   "id": "T.1",
+   "source_text": "クラッシュバンディクーの",
+   "emotion": "neutral",
+   "intensity": 0.0,
+   "translation": "The Crash Bandicoot,",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.1",
+   "source_text": "いててっ！",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Whoa!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "source_text": "・",
+   "emotion": "other",
+   "intensity": 0.0,
+   "translation": "...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "これでもか、これだもか。",
+   "emotion": "disgusted",
+   "intensity": 0.5,
+   "translation": "Is this it? Is this all there is?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "source_text": "この人ほんとはすごい人だったんだ。",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "This person was truly amazing.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "くそっ、のらりくらりと。",
+   "emotion": "angry",
+   "intensity": 0.7,
+   "translation": "Damn it, dodging it all.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "パワーストーン．．．．．．！",
+   "emotion": "determined",
+   "intensity": 0.7,
+   "translation": "Power Stone...!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

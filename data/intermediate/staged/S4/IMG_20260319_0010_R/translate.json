@@ -1,0 +1,43 @@
+{
+ "model": "qwen3.5:4b",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "What?",
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "translation": "Someone's greeting me...!!!",
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "translation": "I'm busy hunting for treasure right now.",
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "translation": "You can't find any real treasure, can you?",
+   "flag": null
+  },
+  {
+   "id": "4.1",
+   "translation": "...",
+   "flag": null
+  },
+  {
+   "id": "5.1",
+   "translation": "It's just a small part of my collection!",
+   "flag": null
+  },
+  {
+   "id": "6.1",
+   "translation": "Aniki is an expert at treasure hunting, after all.",
+   "flag": null
+  }
+ ],
+ "raw": null,
+ "seconds": 9.2
+}

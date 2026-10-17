@@ -1,0 +1,40 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "このありままで見つかると思うか？"
+  },
+  {
+   "id": "1.2",
+   "source_text": "う．．．。"
+  },
+  {
+   "id": "2.1",
+   "source_text": "や．．．、やるしかなかろう！"
+  },
+  {
+   "id": "2.2",
+   "source_text": "ほれ、おぬしもじゃ！"
+  },
+  {
+   "id": "3.1",
+   "source_text": "．．．．．う～ん。"
+  },
+  {
+   "id": "4.1",
+   "source_text": "いててて。"
+  },
+  {
+   "id": "5.1",
+   "source_text": "ん？"
+  },
+  {
+   "id": "6.1",
+   "source_text": "うわあぁああ！！"
+  }
+ ],
+ "raw": null,
+ "seconds": 1.3
+}

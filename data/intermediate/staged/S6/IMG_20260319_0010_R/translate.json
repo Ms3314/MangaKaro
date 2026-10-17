@@ -1,0 +1,43 @@
+{
+ "model": "gemma4:e4b-mlx",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "translation": "What?",
+   "flag": "null"
+  },
+  {
+   "id": "1.2",
+   "translation": "Someone's greeting us, but...",
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "translation": "We're busy treasure hunting right now.",
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "translation": "You wouldn't find any great treasures anyway, would you?!",
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "translation": "...",
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "translation": "This is only a small part of my collection!",
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "translation": "Big brother is a treasure hunting expert.",
+   "flag": "null"
+  }
+ ],
+ "raw": null,
+ "seconds": 10.6
+}

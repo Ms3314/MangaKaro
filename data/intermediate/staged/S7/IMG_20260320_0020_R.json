@@ -1,0 +1,259 @@
+{
+ "page": "IMG_20260320_0020_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 1.9,
+  "emotion": 34.2,
+  "translate": 20.2
+ },
+ "ids_ok": true,
+ "scene": "A sequence of action and reaction unfolds across the page.",
+ "boxes": {
+  "1.1": [
+   800,
+   139,
+   881,
+   369
+  ],
+  "2.1": [
+   418,
+   137,
+   585,
+   370
+  ],
+  "2.2": [
+   34,
+   134,
+   170,
+   298
+  ],
+  "3.1": [
+   715,
+   499,
+   878,
+   713
+  ],
+  "3.2": [
+   421,
+   497,
+   648,
+   636
+  ],
+  "3.3": [
+   34,
+   535,
+   177,
+   708
+  ],
+  "4.1": [
+   386,
+   746,
+   584,
+   996
+  ],
+  "4.2": [
+   32,
+   743,
+   129,
+   959
+  ],
+  "5.1": [
+   819,
+   749,
+   918,
+   913
+  ],
+  "5.2": [
+   613,
+   826,
+   757,
+   1035
+  ],
+  "6.1": [
+   470,
+   1052,
+   578,
+   1309
+  ],
+  "6.2": [
+   30,
+   1047,
+   94,
+   1190
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "じゃ！おだいじに～～。",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "translation": "See ya! Bye-bye!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "な．．．、なんつく意地の悪いおサルだ～～。",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "W-What kind of mean monkey are you?!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "半分遊ばれとったな。",
+   "emotion": "other",
+   "intensity": 0.3,
+   "translation": "It seems he was played for a fool.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "あからさまに追いかけても、にげられる。",
+   "emotion": "neutral",
+   "intensity": 0.4,
+   "translation": "Even when clearly pursuing, he manages to escape.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "source_text": "そっとあとをつけて、機会を待とう。",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "I'll stalk him quietly and wait for the chance.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.3",
+   "source_text": "くっそ〜〜、見てろー",
+   "emotion": "angry",
+   "intensity": 0.7,
+   "translation": "Damn it! You watch this!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "．．．でも、これをあんなにむきになって取り返そうとするなんて、",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "......But to try and reclaim this so desperately...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "source_text": "へんなやつだったな〜〜。",
+   "emotion": "other",
+   "intensity": 0.4,
+   "translation": "He was a strange one, wasn't he~",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "うきゃっ！",
+   "emotion": "other",
+   "intensity": 0.5,
+   "translation": "Kyaah!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "source_text": "きれーな石だな♪",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "translation": "What a beautiful stone! ♪",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.1",
+   "source_text": "ま、いくか、かんけーないや。",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "Well, here goes nothing. I don't care.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "6.2",
+   "source_text": "ん？",
+   "emotion": "surprised",
+   "intensity": 0.4,
+   "translation": "Hm?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}

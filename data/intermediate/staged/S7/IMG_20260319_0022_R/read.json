@@ -1,0 +1,44 @@
+{
+ "model": "manga-ocr",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "おいらは二個あれば十分だけど？"
+  },
+  {
+   "id": "2.1",
+   "source_text": "そ・れ・は、おぬしの都合じゃろ。"
+  },
+  {
+   "id": "2.2",
+   "source_text": "あ〜っ、わかったって。"
+  },
+  {
+   "id": "3.1",
+   "source_text": "ほら、早くしまって！"
+  },
+  {
+   "id": "4.1",
+   "source_text": "．．．まくた、ばかやっとるな、クラッシュ。"
+  },
+  {
+   "id": "5.1",
+   "source_text": "！"
+  },
+  {
+   "id": "5.2",
+   "source_text": "そうだ！"
+  },
+  {
+   "id": "6.1",
+   "source_text": "これで、ちょっとからかってやれ！"
+  },
+  {
+   "id": "6.2",
+   "source_text": "カイナ"
+  }
+ ],
+ "raw": null,
+ "seconds": 4.1
+}

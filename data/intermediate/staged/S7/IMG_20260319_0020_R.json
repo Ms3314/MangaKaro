@@ -1,0 +1,199 @@
+{
+ "page": "IMG_20260319_0020_R",
+ "models": {
+  "read": "manga-ocr",
+  "emotion": "gemma4:e4b-mlx",
+  "translate": "gemma4:e4b-mlx"
+ },
+ "seconds": {
+  "read": 5.2,
+  "emotion": 83.3,
+  "translate": 5.4
+ },
+ "ids_ok": true,
+ "scene": "A character is looking at a large device while others react to a new invention.",
+ "boxes": {
+  "1.1": [
+   43,
+   326,
+   251,
+   613
+  ],
+  "2.1": [
+   823,
+   657,
+   876,
+   781
+  ],
+  "2.2": [
+   29,
+   663,
+   148,
+   871
+  ],
+  "3.1": [
+   776,
+   917,
+   953,
+   1108
+  ],
+  "3.2": [
+   672,
+   917,
+   767,
+   1147
+  ],
+  "4.1": [
+   604,
+   915,
+   659,
+   1086
+  ],
+  "4.2": [
+   215,
+   914,
+   308,
+   1331
+  ],
+  "5.1": [
+   148,
+   916,
+   207,
+   1070
+  ],
+  "5.2": [
+   29,
+   915,
+   111,
+   1144
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "コルテックスどの〜〜！！",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "translation": "Cortex, look at this—!!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.1",
+   "source_text": "んーー？",
+   "emotion": "surprised",
+   "intensity": 0.5,
+   "translation": "Hm?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "2.2",
+   "source_text": "見てください、新しい発明ができました！",
+   "emotion": "excited",
+   "intensity": 0.7,
+   "translation": "Look! I've made a new invention!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.1",
+   "source_text": "わしいま、いそがしいからあとにしてくれんか。",
+   "emotion": "angry",
+   "intensity": 0.6,
+   "translation": "I'm busy right now, so can you do this later?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "3.2",
+   "source_text": "ひま人にしか見えません！",
+   "emotion": "other",
+   "intensity": 0.4,
+   "translation": "Only a free person would look!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.1",
+   "source_text": "名づけて．．．",
+   "emotion": "determined",
+   "intensity": 0.5,
+   "translation": "Let's name it...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "4.2",
+   "source_text": "質量チェンジャー！！",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "translation": "Mass Changer!!",
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.1",
+   "source_text": "なんだ？",
+   "emotion": "surprised",
+   "intensity": 0.5,
+   "translation": "What is it?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  },
+  {
+   "id": "5.2",
+   "source_text": "まず、大きさを決めて．．．",
+   "emotion": "determined",
+   "intensity": 0.6,
+   "translation": "First, let's set the size...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": "null"
+  }
+ ]
+}
