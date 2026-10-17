@@ -1,9 +1,12 @@
 # mangaKaro
 
-Translate manga from Japanese to English with local models. Give it a PDF, get a translated PDF back.
+Translate manga from Japanese to English with local models. Give it a PDF or a set of page images, and get the translated
+pages back as a PDF or as images.
 
 ```
 mangakaro translate chapter.pdf          →  chapter.translated.pdf
+mangakaro translate pages/               →  pages_translated/   (one translated image per page)
+mangakaro translate pages/*.png -o out/  →  out/               (the same, from a list of files)
 ```
 
 Everything runs on your own machine: no cloud services, no API keys. It finds the text on each page, reads it with an OCR
@@ -61,21 +64,30 @@ for are installed. It prints exactly what is missing and how to fix it.
 # a PDF in, a PDF out (written next to the input as book.translated.pdf)
 .venv/bin/mangakaro translate book.pdf
 
-# choose the output, and try the first three pages first
-.venv/bin/mangakaro translate book.pdf -o out/book-en.pdf --pages 1-3
+# a folder of page images in, a folder of translated images out (pages_translated/)
+.venv/bin/mangakaro translate pages/
 
-# a folder of page images works too
+# several image files in (the shell expands the *), images out into a folder of your choice
+.venv/bin/mangakaro translate pages/*.png -o translated/
+
+# any input can produce a PDF instead: end the output name in .pdf
 .venv/bin/mangakaro translate pages/ -o book-en.pdf
+
+# try the first three pages first
+.venv/bin/mangakaro translate book.pdf --pages 1-3
 ```
+
+Image files are put in natural order (`page2` before `page10`). Supported image types: `.png`, `.jpg`, `.jpeg`, `.webp`.
+The page order is the order of the files, so name them so that they sort in reading order.
 
 Pages are processed one at a time with a progress line each. If a run is interrupted, run the same command again: finished
 pages and finished model calls are reused from the work directory.
 
 | Option | What it does |
 | --- | --- |
-| `-o, --output` | output PDF (default `<input>.translated.pdf` next to the input) |
+| `-o, --output` | a path ending in `.pdf` writes one PDF; any other path is a folder that receives the translated page images. Default: `<input>.translated.pdf` for a PDF, `<folder>_translated/` for a folder, `./translated/` for a list of files |
 | `--work-dir` | where page images and cached results go (default `<output>.work`) |
-| `--pages 1-5,8` | only these pages (1-based) |
+| `--pages 1-5,8` | only these pages (1-based position in the PDF, or in the sorted list of images) |
 | `--emotion-model`, `--translate-model` | Ollama models for the emotion and translation steps |
 | `--reader ocr\|vlm` | read text with manga-ocr (default) or with a vision model; `--read-model` sets which |
 | `--max-side 1536` | longest side in pixels of the pages the models see and the output has |
@@ -86,11 +98,12 @@ pages and finished model calls are reused from the work directory.
 
 ### What you get
 
-- The output PDF has one page per input page, translated or not. Two-page spreads become two pages, right page first.
+- One output page per input page, translated or not, as one PDF or as one PNG per page (named after the input file, with `_R`
+  and `_L` added for a split two-page spread). Spreads become two pages, right page first.
 - The work directory keeps everything: `pages/` (what the models saw), `rendered/` (translated pages as images),
   `results/` (the Japanese text, emotion and English for every box), `fonts.json` and `fonts.png` (the fonts chosen and a
   sample sheet), `report.json` (what happened to every text block) and `summary.json`.
-- Output pages are raster images, so the text in the output PDF is not selectable.
+- Output pages are raster images, so the text in an output PDF is not selectable.
 
 ### How long it takes
 
@@ -99,7 +112,7 @@ The vision step is the slowest part. A 20-page chapter takes roughly 10 to 20 mi
 
 ## How it works
 
-1. Pages are rendered from the PDF, two-page spreads are split, and each page is shrunk to at most 1,536 px.
+1. Pages are loaded (rendered from the PDF, or read from the image files), two-page spreads are split, and each page is shrunk to at most 1,536 px.
 2. A detector finds text boxes and panels, and numbers the boxes in reading order (right to left, top to bottom).
 3. manga-ocr reads each box.
 4. A vision model looks at the page and the text and tags each line with speaker, emotion and intensity.

@@ -14,6 +14,10 @@ class OllamaError(RuntimeError):
     pass
 
 
+class OllamaTimeout(OllamaError):
+    """The model did not answer in time (a stalled generation). Callers can retry with a smaller request."""
+
+
 def configure(url=DEFAULT_URL):
     global _url
     _url = url.rstrip("/")
@@ -23,15 +27,17 @@ def b64_jpg(img):
     return base64.b64encode(cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 92])[1].tobytes()).decode()
 
 
-def chat(model, prompt, schema, images=(), think=False, timeout=900):
+def chat(model, prompt, schema, images=(), think=False, timeout=180, max_tokens=2048):
     """One structured-output call. `schema` is a JSON schema the reply must follow. Returns the reply text."""
-    body = {"model": model, "stream": False, "format": schema, "think": think,
-            "options": {"temperature": 0, "num_ctx": 8192},
+    body = {"model": model, "stream": False, "format": schema, "think": think, "keep_alive": "30m",
+            "options": {"temperature": 0, "num_ctx": 8192, "num_predict": max_tokens},  # num_predict stops a looping generation
             "messages": [{"role": "user", "content": prompt, **({"images": [b64_jpg(i) for i in images]} if images else {})}]}
     req = urllib.request.Request(f"{_url}/api/chat", json.dumps(body).encode(), {"Content-Type": "application/json"})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
             return json.load(r)["message"]["content"]
+    except TimeoutError as e:
+        raise OllamaTimeout(f"model {model} did not answer within {timeout}s") from e
     except urllib.error.HTTPError as e:
         raise OllamaError(f"Ollama returned {e.code} for model {model}: {e.read().decode()[:300]}") from e
     except urllib.error.URLError as e:

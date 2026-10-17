@@ -8,12 +8,15 @@ from pathlib import Path
 
 import numpy as np
 
-from mangakaro.detect import assign_ids, reading_order
+from mangakaro.detect import assign_ids, merge_text_boxes, reading_order
 from mangakaro.fonts import DEFAULT_FONT, font_of, weight_ratio
 from mangakaro.ocr import drop_contained, normalize_ellipses
-from mangakaro.pages import load_pages, parse_pages, shrink, split_spread
+from mangakaro.pages import load_pages, natural_key, parse_pages, resolve_source, shrink, split_spread
 from mangakaro.pdfio import images_to_pdf, pdf_page_count
+from mangakaro.pipeline import write_output
 from mangakaro.render import fit, wrap
+from mangakaro import stages
+from mangakaro.llm import OllamaTimeout
 
 
 def box(x0, y0, x1, y1, kind="text"):
@@ -61,6 +64,61 @@ class PdfRoundTrip(unittest.TestCase):
             self.assertEqual([p.name for p in load_pages(d)], ["page_1", "page_2"])  # file-safe names, folder order
 
 
+class ImageInput(unittest.TestCase):
+    def make(self, d, names):
+        import cv2
+        for n in names:
+            if n.endswith(".txt"):
+                (Path(d) / n).write_text("not an image")
+            else:
+                cv2.imwrite(str(Path(d) / n), np.zeros((120, 80, 3), np.uint8))
+
+    def test_natural_order_not_alphabetical(self):
+        names = ["page10.png", "page2.png", "page1.png"]
+        self.assertEqual(sorted(names, key=natural_key), ["page1.png", "page2.png", "page10.png"])
+
+    def test_folder_is_sorted_naturally(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.make(d, ["p10.png", "p2.png", "p1.png", "notes.txt"])
+            kind, files = resolve_source(d)
+            self.assertEqual((kind, [f.name for f in files]), ("images", ["p1.png", "p2.png", "p10.png"]))
+
+    def test_several_files_and_duplicate_names(self):
+        with tempfile.TemporaryDirectory() as d1, tempfile.TemporaryDirectory() as d2:
+            self.make(d1, ["a.png"])
+            self.make(d2, ["a.png", "b.jpg"])
+            files = [Path(d2) / "b.jpg", Path(d1) / "a.png", Path(d2) / "a.png"]
+            kind, got = resolve_source([str(f) for f in files])
+            self.assertEqual(kind, "images")
+            pages = list(load_pages([str(f) for f in files]))
+            self.assertEqual([p.name for p in pages], ["a", "a_2", "b"])  # same file name from two folders gets a suffix
+            self.assertEqual([p.out_name for p in pages], ["a", "a_2", "b"])
+
+    def test_output_keeps_the_input_file_name(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.make(d, ["my page (3).png"])
+            (page,) = load_pages(d)
+            self.assertEqual((page.name, page.out_name), ("my_page_3_", "my page (3)"))  # safe name inside, real name out
+
+    def test_bad_inputs(self):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "notes.txt").write_text("x")
+            with self.assertRaises(ValueError):
+                resolve_source(str(Path(d) / "notes.txt"))
+            with self.assertRaises(ValueError):
+                resolve_source(d)  # a folder with no images
+            with self.assertRaises(FileNotFoundError):
+                resolve_source(str(Path(d) / "missing.png"))
+
+    def test_output_as_folder_or_pdf(self):
+        pages = [("p1", np.full((50, 40, 3), 10, np.uint8)), ("p2", np.full((50, 40, 3), 200, np.uint8))]
+        with tempfile.TemporaryDirectory() as d:
+            write_output(pages, Path(d) / "out")
+            self.assertEqual(sorted(p.name for p in (Path(d) / "out").iterdir()), ["p1.png", "p2.png"])
+            write_output(pages, Path(d) / "out.pdf")
+            self.assertEqual(pdf_page_count(Path(d) / "out.pdf"), 2)
+
+
 class OcrCleanup(unittest.TestCase):
     def test_ellipsis(self):
         self.assertEqual(normalize_ellipses("あれ．．．"), "あれ…")
@@ -71,6 +129,23 @@ class OcrCleanup(unittest.TestCase):
         big, small, other = box(100, 100, 300, 300), box(150, 150, 200, 200), box(400, 100, 500, 200)
         kept = drop_contained([big, small, other])
         self.assertEqual(kept, [big, other])
+
+
+class MergeDetectors(unittest.TestCase):
+    def test_missed_text_is_added_and_covered_text_is_not(self):
+        found = [box(100, 100, 200, 300), box(0, 0, 500, 500, "panel")]
+        extra = [box(110, 120, 190, 280),      # inside a box we already have: not new
+                 box(300, 400, 360, 600),      # missed text: new
+                 box(305, 405, 355, 590),      # overlaps the new one: not new again
+                 box(400, 100, 408, 110)]      # tiny: noise
+        merged = merge_text_boxes(found, extra)
+        added = [g for g in merged if g.get("source") == "comic_text_detector"]
+        self.assertEqual([g["bbox"] for g in added], [[300, 400, 360, 600]])
+        self.assertEqual(added[0]["type"], "text")
+        self.assertEqual(merged[:2], found)  # the first detector's boxes are kept as they were
+
+    def test_nothing_found_by_either(self):
+        self.assertEqual(merge_text_boxes([], []), [])
 
 
 class ReadingOrder(unittest.TestCase):
@@ -108,6 +183,62 @@ class TextFitting(unittest.TestCase):
         self.assertLess(small[0].size, large[0].size)
         impossible = fit("A long line that cannot possibly fit", DEFAULT_FONT, 20, 12)
         self.assertFalse(impossible[3])  # reports that it did not fit instead of pretending
+
+
+class StalledModel(unittest.TestCase):
+    """A whole-page translation that stalls must be retried in small pieces, not lose the page."""
+
+    def run_stage(self, fake_chat):
+        import json
+        texts = [{"label": f"1.{i}"} for i in range(1, 10)]
+        read = {"regions": [{"id": t["label"], "source_text": "あ"} for t in texts]}
+        emo = {"scene": "x", "regions": []}
+        original, stages.chat = stages.chat, fake_chat
+        try:
+            return stages.stage_translate("m", texts, read, emo), json
+        finally:
+            stages.chat = original
+
+    @staticmethod
+    def reply(prompt):
+        import json, re
+        m = re.search(r"ONLY these ids: (.+?)\. The other lines", prompt)
+        ids = m.group(1).split(", ") if m else [f"1.{i}" for i in range(1, 10)]
+        return json.dumps({"regions": [{"id": i, "translation": f"t{i}", "flag": None} for i in ids]})
+
+    def test_full_page_timeout_falls_back_to_chunks(self):
+        calls = []
+        def fake(model, prompt, schema, **kw):
+            calls.append(prompt)
+            if len(calls) == 1:
+                raise OllamaTimeout("stalled")
+            return self.reply(prompt)
+        out, _ = self.run_stage(fake)
+        self.assertTrue(out["ids_ok"])
+        self.assertEqual(len(out["regions"]), 9)
+        self.assertGreater(len(calls), 2)  # one stalled call, then several small ones
+
+    def test_one_bad_line_does_not_take_the_others_down(self):
+        """The model loops on one particular line: every request containing it fails, the rest still get translated."""
+        def fake(model, prompt, schema, **kw):
+            import re
+            m = re.search(r"ONLY these ids: (.+?)\. The other lines", prompt)
+            want = m.group(1).split(", ") if m else [f"1.{i}" for i in range(1, 10)]
+            if "1.5" in want and len(want) > 1:
+                raise OllamaTimeout("looping")
+            if want == ["1.5"]:
+                raise OllamaTimeout("looping")
+            return self.reply(prompt)
+        out, _ = self.run_stage(fake)
+        self.assertFalse(out["ids_ok"])
+        self.assertEqual(sorted(r["id"] for r in out["regions"]), [f"1.{i}" for i in range(1, 10) if i != 5])
+
+    def test_everything_stalls_reports_failure_without_crashing(self):
+        def fake(model, prompt, schema, **kw):
+            raise OllamaTimeout("stalled")
+        out, _ = self.run_stage(fake)
+        self.assertFalse(out["ids_ok"])
+        self.assertIsNone(out["regions"])
 
 
 class WeightMeasure(unittest.TestCase):

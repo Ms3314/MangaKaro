@@ -19,8 +19,12 @@ SPREAD_RATIO = 1.1  # width / height above this counts as a two-page spread
 
 @dataclass
 class Page:
-    name: str            # file-safe, sorts in reading order, e.g. p0003_R
+    name: str            # file-safe, used for the work directory, e.g. p0003_R or download_1_
     image: np.ndarray    # BGR
+    out_name: str = ""   # file name (without extension) for the output image: the input file's own name, e.g. "download (1)"
+
+    def __post_init__(self):
+        self.out_name = self.out_name or self.name
 
 
 def shrink(img, max_side=MAX_SIDE):
@@ -48,33 +52,61 @@ def split_spread(name, img, split=True):
     return [(name, img)]
 
 
+def natural_key(path):
+    """Sort page2 before page10: split the name into text and numbers."""
+    return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", Path(path).name)]
+
+
+def resolve_source(inputs):
+    """What was given on the command line -> ("pdf", Path) or ("images", [Path, ...] in page order).
+
+    One .pdf; or one folder of images; or several image files (shell globs like pages/*.png work)."""
+    paths = [Path(x).expanduser() for x in (inputs if isinstance(inputs, (list, tuple)) else [inputs])]
+    for p in paths:
+        if not p.exists():
+            raise FileNotFoundError(f"{p} does not exist")
+    if len(paths) == 1 and paths[0].is_file() and paths[0].suffix.lower() == ".pdf":
+        return "pdf", paths[0]
+    if len(paths) == 1 and paths[0].is_dir():
+        files = sorted((f for f in paths[0].iterdir() if f.suffix.lower() in IMAGE_SUFFIXES), key=natural_key)
+        if not files:
+            raise ValueError(f"no images ({', '.join(sorted(IMAGE_SUFFIXES))}) in {paths[0]}")
+        return "images", files
+    bad = [p for p in paths if not (p.is_file() and p.suffix.lower() in IMAGE_SUFFIXES)]
+    if bad:
+        raise ValueError("give one PDF, one folder of images, or several image files; not: " + ", ".join(map(str, bad)))
+    return "images", sorted(paths, key=natural_key)
+
+
 def count_pages(source):
-    source = Path(source)
-    if source.suffix.lower() == ".pdf":
-        return pdf_page_count(source)
-    return len([p for p in source.iterdir() if p.suffix.lower() in IMAGE_SUFFIXES])
+    kind, what = resolve_source(source)
+    return pdf_page_count(what) if kind == "pdf" else len(what)
 
 
 def load_pages(source, pages=None, split=True, max_side=MAX_SIDE):
-    """Yield Page objects from a PDF or a folder of images. `pages` is a 1-based range string such as '1-3,7'."""
-    source = Path(source)
-    if source.suffix.lower() == ".pdf":
-        wanted = parse_pages(pages, pdf_page_count(source))
-        for n, img in pdf_pages(source, wanted, height=max_side):
+    """Yield Page objects from a PDF, a folder of images or a list of image files. `pages` is a 1-based range such as '1-3,7'."""
+    kind, what = resolve_source(source)
+    if kind == "pdf":
+        wanted = parse_pages(pages, pdf_page_count(what))
+        for n, img in pdf_pages(what, wanted, height=max_side):
             for name, part in split_spread(f"p{n:04d}", img, split):
                 yield Page(name, shrink(part, max_side))
         return
-    files = sorted(p for p in source.iterdir() if p.suffix.lower() in IMAGE_SUFFIXES)
-    wanted = parse_pages(pages, len(files))
-    for n, f in enumerate(files, 1):
+    wanted = parse_pages(pages, len(what))
+    seen = {}
+    for n, f in enumerate(what, 1):
         if n not in wanted:
             continue
         img = cv2.imread(str(f))
         if img is None:
             raise ValueError(f"cannot read image {f}")
-        stem = re.sub(r"[^A-Za-z0-9._-]+", "_", f.stem)  # file-safe: names become folder and file names later
-        for name, part in split_spread(stem, img, split):
-            yield Page(name, shrink(part, max_side))
+        stem = re.sub(r"[^A-Za-z0-9._-]+", "_", f.stem)  # file-safe: names become folder and file names in the work directory
+        own = f.stem
+        seen[stem] = seen.get(stem, 0) + 1
+        if seen[stem] > 1:  # two files with the same name from different folders
+            stem, own = f"{stem}_{seen[stem]}", f"{own}_{seen[stem]}"
+        for (name, part), (suffix, _) in zip(split_spread(stem, img, split), split_spread("", img, split)):
+            yield Page(name, shrink(part, max_side), own + suffix)
 
 
 def contact_sheet(page, regions, row_h=300, width=1400, pad=0.08):
@@ -104,7 +136,3 @@ def contact_sheet(page, regions, row_h=300, width=1400, pad=0.08):
         row = cv2.hconcat([cv2.copyMakeBorder(t, 0, row_h + 52 - t.shape[0], 0, 0, cv2.BORDER_CONSTANT, value=(255, 255, 255)) for t in r])
         out.append(cv2.copyMakeBorder(row, 0, 0, 0, width - row.shape[1], cv2.BORDER_CONSTANT, value=(255, 255, 255)))
     return cv2.vconcat(out)
-
-
-def b64_jpg(im):
-    return base64.b64encode(cv2.imencode(".jpg", im, [cv2.IMWRITE_JPEG_QUALITY, 92])[1].tobytes()).decode()

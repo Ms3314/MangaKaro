@@ -9,7 +9,7 @@ Each stage reports `ids_ok` (did the model return exactly the boxes it was given
 import json
 import time
 
-from .llm import chat
+from .llm import OllamaTimeout, chat
 from .prompts import (EMOTION_PROMPT, EMOTION_SCHEMA, EMOTIONS, READ_PROMPT, READ_SCHEMA, TRANSLATE_PROMPT, TRANSLATE_SCHEMA)
 
 MAX_RETRIES = 2
@@ -51,18 +51,36 @@ def stage_emotion(model, annotated, texts, read):
     while True:
         extra = "" if not got else (f"\n\nYour previous answer skipped some lines. Return entries ONLY for these ids: "
                                     f"{', '.join(i for i in ids if i not in got)}. Use the exact ids as listed.")
-        raw = chat(model, prompt + extra, EMOTION_SCHEMA, [annotated])
+        try:
+            raw = chat(model, prompt + extra, EMOTION_SCHEMA, [annotated])
+        except OllamaTimeout:  # a stalled call: count it as a try and go round again
+            raw = None
         try:
             d = json.loads(raw)
             scene = scene or d["scene"]
             got.update({r["id"]: r for r in d["regions"] if r.get("id") in ids and r["id"] not in got})  # mangled ids are ignored
-        except (json.JSONDecodeError, KeyError):
+        except (json.JSONDecodeError, KeyError, TypeError):
             pass
         if len(got) == len(ids) or retries >= MAX_RETRIES:
             break
         retries += 1
     return {"model": model, "ids_ok": len(got) == len(ids), "retries": retries, "scene": scene,
             "regions": [got[i] for i in ids if i in got] or None, "raw": None if got else raw}
+
+
+CHUNK = 4  # lines per request when a whole-page translation stalls
+
+
+def _translate_ids(model, prompt, want, all_ids):
+    """Ask for the lines `want` (a subset of all_ids). Returns {id: region}; a timed-out or unparseable call returns {}."""
+    extra = "" if len(want) == len(all_ids) else (
+        f"\n\nTranslate ONLY these ids: {', '.join(want)}. The other lines are context. Return exactly one entry per listed id.")
+    try:
+        raw = chat(model, prompt + extra, TRANSLATE_SCHEMA)
+    except OllamaTimeout:
+        return {}
+    regions, _ = parse(raw, want)
+    return {r["id"]: r for r in regions or [] if r.get("id") in want}
 
 
 def stage_translate(model, texts, read, emo):
@@ -74,19 +92,18 @@ def stage_translate(model, texts, read, emo):
         f"{text.get(g['label'], '')}" for g in texts)
     prompt = TRANSLATE_PROMPT.format(scene=emo["scene"], lines=lines)
     ids = [g["label"] for g in texts]
-    raw = chat(model, prompt, TRANSLATE_SCHEMA)
-    regions, ok = parse(raw, ids)
-    got = {r["id"]: r for r in regions or [] if r.get("id") in ids}
+    got = _translate_ids(model, prompt, ids, ids)
     retries = 0
+    if not got and len(ids) > CHUNK:  # the whole page produced nothing (stalled or looped): try a few lines at a time
+        for i in range(0, len(ids), CHUNK):
+            got.update(_translate_ids(model, prompt, ids[i:i + CHUNK], ids))
     while len(got) < len(ids) and retries < MAX_RETRIES:  # model skipped some ids: ask again for just those
         retries += 1
-        missing = [i for i in ids if i not in got]
-        raw = chat(model, prompt + f"\n\nYour previous answer skipped some lines. Translate ONLY these ids: {', '.join(missing)}. "
-                   "The other lines are context. Return exactly one entry per listed id.", TRANSLATE_SCHEMA)
-        more, _ = parse(raw, missing)
-        got.update({r["id"]: r for r in more or [] if r.get("id") in missing})
+        got.update(_translate_ids(model, prompt, [i for i in ids if i not in got], ids))
+    for i in [i for i in ids if i not in got]:  # last resort: one line per request, so one bad line cannot take the others down
+        got.update(_translate_ids(model, prompt, [i], ids))
     return {"model": model, "ids_ok": len(got) == len(ids), "retries": retries,
-            "regions": [got[i] for i in ids if i in got] or None, "raw": None if got else raw}
+            "regions": [got[i] for i in ids if i in got] or None, "raw": None}
 
 
 def merge(name, texts, read, emo, tr):

@@ -1,10 +1,12 @@
-"""The whole job: a PDF (or a folder of images) in, a translated PDF out.
+"""The whole job: a PDF, a folder of images or a list of image files in; a translated PDF or a folder of translated images out.
 
-Phases, each resumable because every result is cached in the work directory:
-  A understand  per page: find text boxes -> read (OCR) -> emotion/scene -> translate        (cache/<page>/*.json, results/<page>.json)
-  B fonts       once per manga: measure its lettering weight and pick a primary and a secondary English font (fonts.json)
-  C render      per page: erase the original lettering and typeset the English                (rendered/<page>.png, report.json)
-  D pdf         assemble all pages, translated or not, into the output PDF
+Steps, each resumable because every result is cached in the work directory:
+  understand  per page: find text boxes -> read (OCR) -> emotion/scene -> translate        (cache/<page>/*.json, results/<page>.json)
+  fonts       once per manga, after the first FONT_SAMPLE pages with text: measure its lettering weight and pick a primary and
+              a secondary English font (fonts.json)
+  render      per page, as soon as it is understood: erase the original lettering and typeset the English (rendered/<page>.png,
+              and the output folder if the output is a folder)
+  output      at the end: the output PDF, if one was asked for, and report.json / summary.json
 
 Work directory layout:
   pages/<page>.png      the page images exactly as the models saw them
@@ -24,7 +26,7 @@ from pathlib import Path
 import cv2
 
 from . import llm
-from .detect import BubblesYolo, ComicTextDetector, PanelsText, assign_ids, draw
+from .detect import BubblesYolo, ComicTextDetector, PanelsText, assign_ids, draw, merge_text_boxes
 from .fonts import DEFAULT_FONT, candidate_fonts, measure_manga, pick_fonts, write_specimen
 from .ocr import drop_contained, read_boxes
 from .pages import MAX_SIDE, contact_sheet, load_pages
@@ -34,6 +36,8 @@ from .render import Renderer
 from .stages import merge, run_stage, stage_emotion, stage_read, stage_translate
 
 STAGES = ["read", "emotion", "translate"]
+BOXES_VERSION = 2  # bump when the way boxes are found changes: cached boxes (and what was built on them) are then redone
+FONT_SAMPLE = 5  # fonts are chosen from the first this-many pages that have text, so pages can be finished as they go
 
 
 class SetupError(RuntimeError):
@@ -104,12 +108,19 @@ def understand_page(name, page, s, models, work):
     for stage in redo:
         (d / f"{stage}.json").unlink(missing_ok=True)
     boxes_file = d / "boxes.json"
-    if boxes_file.exists():
-        texts = json.loads(boxes_file.read_text())
+    cached = json.loads(boxes_file.read_text()) if boxes_file.exists() else None
+    if isinstance(cached, dict) and cached.get("version") == BOXES_VERSION:
+        texts = cached["boxes"]
     else:
-        regions = assign_ids(drop_contained(models.panels(page)))
+        # panels_text finds most boxes; comic_text_detector often finds ones it missed (a thought bubble, margin text)
+        found = merge_text_boxes(models.panels(page), models.text(page))
+        regions = assign_ids(drop_contained(found))
         texts = [g for g in regions if g["type"] == "text"]
-        _write(boxes_file, texts)
+        old = cached if isinstance(cached, list) else (cached or {}).get("boxes")
+        if old is not None and [g["bbox"] for g in old] != [g["bbox"] for g in texts]:
+            for stage in STAGES:  # the boxes changed, so what was read and translated from the old ones no longer fits
+                (d / f"{stage}.json").unlink(missing_ok=True)
+        _write(boxes_file, {"version": BOXES_VERSION, "boxes": texts})
     if not texts:
         return None
     annotated = draw(page, texts)
@@ -148,20 +159,66 @@ def choose_fonts(s, work, models, results, log):
     return saved
 
 
+def write_output(out_images, output):
+    """output ending in .pdf: one PDF with every page. Anything else: a folder of PNG images named after the input pages."""
+    output = Path(output)
+    if output.suffix.lower() == ".pdf":
+        images_to_pdf([im for _, im in out_images], output)
+        return
+    output.mkdir(parents=True, exist_ok=True)
+    for name, im in out_images:
+        cv2.imwrite(str(output / f"{name}.png"), im)
+
+
 def run(source, output, work, s, log=print):
-    """Translate `source` (PDF or folder of images) into the PDF `output`. Returns a summary dict (also saved as summary.json)."""
+    """Translate `source` (a PDF, a folder of images, or a list of image files) into `output`: a .pdf path for one PDF, or a
+    folder path for translated page images. Returns a summary dict (also saved as summary.json).
+
+    Pages are finished one at a time: as soon as a page is translated it is typeset and saved to <work>/rendered/<page>.png
+    (and into the output folder, if the output is a folder), so results can be looked at while the rest still runs. The fonts
+    are chosen once, from the first FONT_SAMPLE pages that have text. The output PDF, if asked for, is assembled at the end."""
     problems = check_setup(s)
     if problems:
         raise SetupError("\n\n".join(problems))
     started = time.perf_counter()
     for sub in ("pages", "cache", "results", "rendered"):
         (work / sub).mkdir(parents=True, exist_ok=True)
+    output = Path(output)
+    to_folder = output.suffix.lower() != ".pdf"
+    if to_folder:
+        output.mkdir(parents=True, exist_ok=True)
     models = Models()
 
-    # Phase A: understand every page
-    names, results, failures = [], {}, {}
+    names, out_names, results, failures, report = [], {}, {}, {}, {}  # out_names: page name -> output file name
+    state = {"fonts": None, "renderer": None}
+
+    def finish_page(name):
+        """Typeset (or copy, if it has no text) one page, save it, and say where."""
+        image = cv2.imread(str(work / "pages" / f"{name}.png"))
+        note = "copied unchanged"
+        if name in results:
+            if state["renderer"] is None:
+                state["renderer"] = Renderer(state["fonts"], models.text, models.bubbles)
+            image, rep = state["renderer"].page(image, results[name])
+            report[name] = rep
+            note = (f"{sum(b['status'].startswith('rendered') for b in rep)} blocks typeset, "
+                    f"{sum(b['status'].startswith('skipped') for b in rep)} skipped, {sum(b['status'].startswith('overflow') for b in rep)} overflow")
+        cv2.imwrite(str(work / "rendered" / f"{name}.png"), image)
+        where = work / "rendered" / f"{name}.png"
+        if to_folder:
+            where = output / f"{out_names[name]}.png"
+            cv2.imwrite(str(where), image)
+        log(f"      -> {where}  ({note})")
+
+    def ensure_fonts():
+        if state["fonts"] is None:
+            state["fonts"] = choose_fonts(s, work, models, results, log) if results else {}
+        return state["fonts"]
+
+    waiting = []  # understood pages waiting for the fonts to be chosen
     for page in load_pages(source, s.pages, s.split_spreads, s.max_side):
         names.append(page.name)
+        out_names[page.name] = page.out_name
         cv2.imwrite(str(work / "pages" / f"{page.name}.png"), page.image)
         t = time.perf_counter()
         try:
@@ -171,38 +228,39 @@ def run(source, output, work, s, log=print):
             with open(work / "errors.log", "a") as f:
                 f.write(f"--- {page.name}\n{traceback.format_exc()}\n")
             log(f"[{len(names)}] {page.name}: FAILED ({type(e).__name__}: {e}); page left unchanged, details in errors.log")
+            finish_page(page.name)
             continue
         if final is None:
             log(f"[{len(names)}] {page.name}: no text found")
+            finish_page(page.name)
             continue
         results[page.name] = final
         sec = final["seconds"]
         log(f"[{len(names)}] {page.name}: {len(final['regions'])} text boxes "
             f"(read {sec['read']}s, emotion {sec['emotion']}s, translate {sec['translate']}s)"
             + ("" if final["ids_ok"] else "  WARNING: some boxes were not returned by the model") + f"  [{time.perf_counter() - t:.0f}s]")
+        if state["fonts"] is None and len(results) >= FONT_SAMPLE:
+            ensure_fonts()
+            for n in waiting:
+                finish_page(n)
+            waiting = []
+        if state["fonts"] is None:
+            waiting.append(page.name)
+        else:
+            finish_page(page.name)
     if not names:
         raise SetupError(f"no pages found in {source}")
+    ensure_fonts()  # a book with fewer than FONT_SAMPLE text pages: choose from what there is
+    for n in waiting:
+        finish_page(n)
 
-    # Phase B: fonts
-    fonts = choose_fonts(s, work, models, results, log) if results else {}
-
-    # Phase C + D: render, then assemble
-    renderer = Renderer(fonts, models.text, models.bubbles)
-    report, out_images = {}, []
-    for i, name in enumerate(names, 1):
-        image = cv2.imread(str(work / "pages" / f"{name}.png"))
-        if name in results:
-            image, rep = renderer.page(image, results[name])
-            report[name] = rep
-            cv2.imwrite(str(work / "rendered" / f"{name}.png"), image)
-            log(f"render {i}/{len(names)} {name}: {sum(b['status'].startswith('rendered') for b in rep)} blocks typeset, "
-                f"{sum(b['status'].startswith('skipped') for b in rep)} skipped, {sum(b['status'].startswith('overflow') for b in rep)} overflow")
-        out_images.append(image)
     _write(work / "report.json", report)
-    images_to_pdf(out_images, output)
+    if not to_folder:
+        images_to_pdf((cv2.imread(str(work / "rendered" / f"{n}.png")) for n in names), output)
 
     blocks = [b for rep in report.values() for b in rep]
-    summary = {"input": str(source), "output": str(output), "pages": len(names), "pages_with_text": len(results),
+    fonts = state["fonts"] or {}
+    summary = {"input": str(source) if not isinstance(source, (list, tuple)) else [str(x) for x in source], "output": str(output), "pages": len(names), "pages_with_text": len(results),
                "pages_failed": failures, "text_blocks": len(blocks),
                "typeset": sum(b["status"].startswith("rendered") for b in blocks),
                "overflow": sum(b["status"].startswith("overflow") for b in blocks),

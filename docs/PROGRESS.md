@@ -15,7 +15,7 @@ The original plan is in `Manga Translation Pipeline — Phase-wise MVP Plan.md`.
 | 1 Detection | Done. Three detectors compared, `panels_text` chosen for text boxes and panels |
 | 2 Read, emotion, translate | Working. OCR reads, a vision model tags emotion, a text model translates. Not scored |
 | 3 Erase and render | Working for plain white bubbles. Sound effects and text over art are left untouched |
-| 4 Automation | Done in basic form: `mangakaro translate book.pdf`, resumable, per-page logging and caching |
+| 4 Automation | Done in basic form: `mangakaro translate` takes a PDF, a folder of images or a list of image files, and writes a PDF or a folder of images; resumable, per-page logging and caching |
 | 5 Evaluation | Not started. Needs reference translations |
 | 6 Improvements | Not started |
 

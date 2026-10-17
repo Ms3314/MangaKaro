@@ -98,6 +98,34 @@ class ComicTextDetector:
         return out
 
 
+# ---------------------------------------------------------------- merging detectors
+def merge_text_boxes(primary, extra, max_covered=0.4, min_side=14, min_area=400, pad=4):
+    """Add the boxes from a second detector that the first one missed.
+
+    primary / extra: lists of region dicts with a "bbox". An extra box is kept if less than `max_covered` of it lies inside
+    boxes already found, and it is not tiny. Kept boxes become type "text" with source "comic_text_detector". The text
+    detector marks sound effects too; they are read like everything else and the renderer decides what to do with them."""
+    texts = [g for g in primary if g["type"] != "panel"]
+    if not texts and not extra:
+        return list(primary)
+    H = max([g["bbox"][3] for g in primary + extra] + [1]) + pad
+    W = max([g["bbox"][2] for g in primary + extra] + [1]) + pad
+    covered = np.zeros((H, W), bool)
+    for g in texts:
+        x0, y0, x1, y1 = g["bbox"]
+        covered[max(0, y0 - pad):y1 + pad, max(0, x0 - pad):x1 + pad] = True
+    added = []
+    for g in sorted(extra, key=lambda g: -(g["bbox"][2] - g["bbox"][0]) * (g["bbox"][3] - g["bbox"][1])):
+        x0, y0, x1, y1 = g["bbox"]
+        if x1 - x0 < min_side or y1 - y0 < min_side or (x1 - x0) * (y1 - y0) < min_area:
+            continue
+        if covered[y0:y1, x0:x1].mean() >= max_covered:
+            continue
+        added.append({"type": "text", "bbox": [x0, y0, x1, y1], "conf": g.get("conf", 0.0), "source": "comic_text_detector"})
+        covered[max(0, y0 - pad):y1 + pad, max(0, x0 - pad):x1 + pad] = True  # a later, overlapping extra box is not new
+    return list(primary) + added
+
+
 # ---------------------------------------------------------------- driver
 def reading_order(items, rtl=True):
     """Sort boxes into rows (top to bottom), each row right-to-left if rtl (manga) else left-to-right."""

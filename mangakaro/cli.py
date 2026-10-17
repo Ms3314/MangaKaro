@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 
 from . import __version__, llm
+from .pages import resolve_source
 from .pipeline import STAGES, SetupError, Settings, check_setup, run
 
 
@@ -23,18 +24,29 @@ def settings_from(a):
                     redo=getattr(a, "redo", None) or [])
 
 
+def default_output(inputs, kind, what):
+    """Where output goes when -o is not given: a PDF next to a PDF; a sibling folder for a folder; ./translated for files."""
+    if kind == "pdf":
+        return what.with_name(f"{what.stem}.translated.pdf")
+    first = Path(inputs[0]).expanduser()
+    if len(inputs) == 1 and first.is_dir():
+        return first.with_name(f"{first.name}_translated")
+    return Path("translated")
+
+
 def cmd_translate(a):
-    source = Path(a.input).expanduser()
-    if not source.exists():
-        print(f"error: {source} does not exist", file=sys.stderr)
+    try:
+        kind, what = resolve_source(a.input)
+    except (FileNotFoundError, ValueError) as e:
+        print(f"error: {e}", file=sys.stderr)
         return 1
-    if source.is_file() and source.suffix.lower() != ".pdf":
-        print("error: the input must be a .pdf file or a folder of images", file=sys.stderr)
-        return 1
-    output = Path(a.output).expanduser() if a.output else source.with_name(f"{source.stem}.translated.pdf")
-    work = Path(a.work_dir).expanduser() if a.work_dir else output.with_name(f"{output.stem}.work")
+    output = Path(a.output).expanduser() if a.output else default_output(a.input, kind, what)
+    work = Path(a.work_dir).expanduser() if a.work_dir else output.with_name(f"{output.stem if output.suffix else output.name}.work")
     s = settings_from(a)
-    print(f"input   {source}\noutput  {output}\nwork    {work}\nmodels  emotion {s.emotion_model}, translate {s.translate_model}, "
+    source = what  # a Path (pdf) or the sorted list of image files
+    shown = f"{what}" if kind == "pdf" else f"{len(what)} image(s), {what[0].name} to {what[-1].name}"
+    print(f"input   {shown}\noutput  {output}{'' if output.suffix.lower() == '.pdf' else '/  (translated page images)'}\nwork    {work}\n"
+          f"models  emotion {s.emotion_model}, translate {s.translate_model}, "
           f"reader {'manga-ocr' if s.reader == 'ocr' else s.read_model}\n")
     try:
         summary = run(source, output, work, s, log=lambda m: print(m, flush=True))
@@ -63,10 +75,11 @@ def main(argv=None):
     ap.add_argument("--version", action="version", version=f"mangakaro {__version__}")
     sub = ap.add_subparsers(dest="command", required=True)
 
-    t = sub.add_parser("translate", help="translate a PDF (or a folder of page images) into a new PDF")
-    t.add_argument("input", help="a .pdf file, or a folder of page images")
-    t.add_argument("-o", "--output", help="output PDF (default: <input>.translated.pdf next to the input)")
-    t.add_argument("--work-dir", help="where page images and cached model results go (default: <output>.work). Re-running resumes from it")
+    t = sub.add_parser("translate", help="translate a PDF, a folder of page images, or several image files")
+    t.add_argument("input", nargs="+", help="a .pdf file, a folder of page images, or several image files (e.g. pages/*.png)")
+    t.add_argument("-o", "--output", help="output: a .pdf path writes one PDF; any other path is a folder that receives the translated "
+                   "page images. Default: <input>.translated.pdf for a PDF, <folder>_translated/ for a folder, ./translated/ for files")
+    t.add_argument("--work-dir", help="where page images and cached model results go (default: next to the output, ending .work). Re-running resumes from it")
     t.add_argument("--pages", help="only these pages, 1-based, e.g. 1-5,8")
     t.add_argument("--max-side", type=int, default=Settings.max_side, help="longest side in pixels of the pages the models see and the output has (default: %(default)s)")
     t.add_argument("--no-split-spreads", action="store_true", help="do not split two-page spreads into right and left pages")

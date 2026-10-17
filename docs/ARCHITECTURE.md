@@ -5,7 +5,7 @@ How the pipeline works, what each module does, and why it is built this way.
 ## The pipeline
 
 ```
-PDF or folder of images
+PDF, folder of images, or a list of image files
         │
         ▼
   pages.py / pdfio.py     render PDF pages, split two-page spreads (right page first), shrink to max 1536 px
@@ -42,7 +42,7 @@ a single stage can be redone (`--redo translate`).
 | --- | --- |
 | `cli.py`, `__main__.py` | `mangakaro translate` and `mangakaro check` |
 | `pipeline.py` | Runs phases A to D, handles caching, per-page failures, setup checks, the summary |
-| `pages.py` | Loads pages from a PDF or folder, splits spreads, shrinks, builds the contact sheet used by the optional vision reader |
+| `pages.py` | Works out what the input is (PDF, folder, or list of image files), sorts images naturally, loads pages, splits spreads, shrinks, builds the contact sheet used by the optional vision reader |
 | `pdfio.py` | PDF reading (pypdfium2) and writing (Pillow) |
 | `detect.py` | The three detectors, reading order and ID assignment, the overlay drawing |
 | `ocr.py` | manga-ocr reading, ellipsis cleanup, duplicate-box removal |
