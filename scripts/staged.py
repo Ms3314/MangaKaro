@@ -25,6 +25,7 @@ from compare_detectors import PanelsText, assign_ids, draw
 from translate_pages import EMOTIONS, OLLAMA, b64_jpg, contact_sheet, load_pages, shrink
 
 ROOT = Path(__file__).resolve().parent.parent
+MAX_RETRIES = 2
 
 READ_SCHEMA = {"type": "object", "properties": {"regions": {"type": "array", "items": {
     "type": "object", "properties": {"id": {"type": "string"}, "source_text": {"type": "string"}},
@@ -72,7 +73,8 @@ Do NOT translate. For every id return:
 - intensity: 0.0 (calm) to 1.0 (extreme)
 - style: how the ORIGINAL lettering looks: weight (light/normal/bold), slant (upright/italic), size (small/medium/large relative to \
 the rest of the page), shape (normal/jagged for shouting/wavy for trembling or sarcasm/outlined for big sound effects)
-Also give "scene": one short English sentence on what is happening on this page. Return one entry per id, in the same order."""
+Also give "scene": one short English sentence on what is happening on this page. Describe only what you can see; do not guess \
+character or series names. Return one entry per id, in the same order."""
 
 TRANSLATE_PROMPT = """You are translating Japanese manga dialogue into natural English for speech bubbles.
 
@@ -123,6 +125,42 @@ def stage_read(model, annotated, sheet, texts):
     return {"model": model, "ids_ok": ok, "regions": regions, "raw": None if regions else raw}
 
 
+def drop_contained(regions, thresh=0.9):
+    """Drop text boxes that sit (almost) entirely inside a larger text box: the larger box already covers their text."""
+    def area(b):
+        return (b[2] - b[0]) * (b[3] - b[1])
+    texts = [g for g in regions if g["type"] == "text"]
+    drop = set()
+    for i, a in enumerate(texts):
+        for b in texts:
+            if a is b or area(a["bbox"]) >= area(b["bbox"]):
+                continue
+            ix = max(0, min(a["bbox"][2], b["bbox"][2]) - max(a["bbox"][0], b["bbox"][0]))
+            iy = max(0, min(a["bbox"][3], b["bbox"][3]) - max(a["bbox"][1], b["bbox"][1]))
+            if ix * iy / area(a["bbox"]) >= thresh:
+                drop.add(i)
+    dropped = {id(texts[i]) for i in drop}
+    return [g for g in regions if id(g) not in dropped]
+
+
+_MOCR = None
+
+
+def stage_read_ocr(page, texts, pad=4):
+    """OCR every box on the clean page with manga-ocr. It can only output what is in the crop, so no hallucinated text."""
+    global _MOCR
+    from manga_ocr import MangaOcr
+    from PIL import Image
+    _MOCR = _MOCR or MangaOcr()
+    H, W = page.shape[:2]
+    regions = []
+    for g in texts:
+        x0, y0, x1, y1 = g["bbox"]
+        crop = page[max(0, y0 - pad):min(H, y1 + pad), max(0, x0 - pad):min(W, x1 + pad)]
+        regions.append({"id": g["label"], "source_text": _MOCR(Image.fromarray(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)))})
+    return {"model": "manga-ocr", "ids_ok": True, "regions": regions, "raw": None}
+
+
 def stage_emotion(model, annotated, texts, read):
     by_id = {r["id"]: r["source_text"] for r in read["regions"]}
     listing = "\n".join(f"- {g['label']}: {by_id.get(g['label'], '')!r}" for g in texts)
@@ -142,9 +180,21 @@ def stage_translate(model, texts, read, emo):
         f"{g['label']} | {meta.get(g['label'], {}).get('speaker', '?')} | "
         f"{meta.get(g['label'], {}).get('emotion', '?')}, {meta.get(g['label'], {}).get('intensity', '?')} | "
         f"{text.get(g['label'], '')}" for g in texts)
-    raw = chat(model, TRANSLATE_PROMPT.format(scene=emo["scene"], lines=lines), TRANSLATE_SCHEMA)
-    regions, ok = parse(raw, [g["label"] for g in texts])
-    return {"model": model, "ids_ok": ok, "regions": regions, "raw": None if regions else raw}
+    prompt = TRANSLATE_PROMPT.format(scene=emo["scene"], lines=lines)
+    ids = [g["label"] for g in texts]
+    raw = chat(model, prompt, TRANSLATE_SCHEMA)
+    regions, ok = parse(raw, ids)
+    got = {r["id"]: r for r in regions or [] if r.get("id") in ids}
+    retries = 0
+    while len(got) < len(ids) and retries < MAX_RETRIES:  # model skipped some ids: ask again for just those
+        retries += 1
+        missing = [i for i in ids if i not in got]
+        raw = chat(model, prompt + f"\n\nYour previous answer skipped some lines. Translate ONLY these ids: {', '.join(missing)}. "
+                   "The other lines are context. Return exactly one entry per listed id.", TRANSLATE_SCHEMA)
+        more, _ = parse(raw, missing)
+        got.update({r["id"]: r for r in more or [] if r.get("id") in missing})
+    return {"model": model, "ids_ok": len(got) == len(ids), "retries": retries,
+            "regions": [got[i] for i in ids if i in got] or None, "raw": None if got else raw}
 
 
 def merge(name, texts, read, emo, tr):
@@ -168,6 +218,8 @@ def main():
     ap.add_argument("--pages", nargs="*", help="image numbers, e.g. 10 (matches the _00NN suffix)")
     ap.add_argument("--variant", required=True, help="label for the output folder, e.g. S1")
     ap.add_argument("--read-model", default="qwen3.5:4b")
+    ap.add_argument("--ocr", action="store_true",
+                    help="read with manga-ocr instead of the vision model (also drops text boxes contained in a larger one)")
     ap.add_argument("--emotion-model", default="qwen3.5:4b")
     ap.add_argument("--translate-model", default="qwen3.5:4b")
     ap.add_argument("--redo", nargs="*", default=[], choices=["read", "emotion", "translate"],
@@ -185,7 +237,8 @@ def main():
         for s in redo:
             (d / f"{s}.json").unlink(missing_ok=True)
         page = shrink(page)
-        regions = assign_ids(det(page))
+        found = det(page)
+        regions = assign_ids(drop_contained(found) if a.ocr else found)
         texts = [g for g in regions if g["type"] == "text"]
         if not texts:
             print(f"{name}: no text boxes")
@@ -194,7 +247,8 @@ def main():
         cv2.imwrite(str(d / "annotated.jpg"), annotated)
         cv2.imwrite(str(d / "sheet.jpg"), sheet)
         try:
-            read = run_stage(d / "read.json", lambda: stage_read(a.read_model, annotated, sheet, texts))
+            read = run_stage(d / "read.json", (lambda: stage_read_ocr(page, texts)) if a.ocr
+                             else (lambda: stage_read(a.read_model, annotated, sheet, texts)))
             emo = run_stage(d / "emotion.json", lambda: stage_emotion(a.emotion_model, annotated, texts, read))
             tr = run_stage(d / "translate.json", lambda: stage_translate(a.translate_model, texts, read, emo))
         except urllib.error.URLError as e:
