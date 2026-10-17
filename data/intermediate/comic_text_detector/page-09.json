@@ -1,0 +1,113 @@
+{
+ "page": "page-09.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text_jp",
+   "bbox": [
+    1044,
+    555,
+    1147,
+    648
+   ],
+   "conf": 0.898,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-09_T.1"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    156,
+    655,
+    309,
+    829
+   ],
+   "conf": 0.805,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-09_T.2"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    942,
+    957,
+    1055,
+    1139
+   ],
+   "conf": 0.888,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-09_T.3"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    789,
+    1074,
+    885,
+    1134
+   ],
+   "conf": 0.654,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-09_T.4"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    378,
+    978,
+    493,
+    1099
+   ],
+   "conf": 0.913,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-09_T.5"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    758,
+    1235,
+    867,
+    1418
+   ],
+   "conf": 0.862,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-09_T.6"
+  },
+  {
+   "type": "text_en",
+   "bbox": [
+    1036,
+    1611,
+    1214,
+    1682
+   ],
+   "conf": 0.678,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-09_T.7"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    147,
+    1511,
+    341,
+    1745
+   ],
+   "conf": 0.952,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-09_T.8"
+  }
+ ]
+}

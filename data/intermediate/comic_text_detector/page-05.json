@@ -1,0 +1,126 @@
+{
+ "page": "page-05.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text_jp",
+   "bbox": [
+    355,
+    62,
+    1287,
+    260
+   ],
+   "conf": 0.8,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-05_T.1"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    970,
+    513,
+    1162,
+    594
+   ],
+   "conf": 0.824,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-05_T.2"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    297,
+    763,
+    744,
+    810
+   ],
+   "conf": 0.765,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-05_T.3"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    496,
+    872,
+    946,
+    917
+   ],
+   "conf": 0.748,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-05_T.4"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    418,
+    1054,
+    783,
+    1100
+   ],
+   "conf": 0.855,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-05_T.5"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    745,
+    1165,
+    1123,
+    1213
+   ],
+   "conf": 0.817,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-05_T.6"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    250,
+    1341,
+    513,
+    1382
+   ],
+   "conf": 0.859,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-05_T.7"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    468,
+    1486,
+    919,
+    1528
+   ],
+   "conf": 0.796,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-05_T.8"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    290,
+    1674,
+    865,
+    1724
+   ],
+   "conf": 0.555,
+   "panel": null,
+   "label": "T.9",
+   "id": "page-05_T.9"
+  }
+ ]
+}

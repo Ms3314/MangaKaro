@@ -1,0 +1,81 @@
+{
+ "model": "qwen3.5:4b",
+ "ids_ok": true,
+ "scene": "A large water geyser erupts from a cave, causing chaos as characters react with surprise and relief.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "narration",
+   "emotion": "surprised",
+   "intensity": 0.3,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "narration",
+   "emotion": "neutral",
+   "intensity": 0.2,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.2",
+   "speaker": "character with spiky hair",
+   "emotion": "happy",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "narration",
+   "emotion": "surprised",
+   "intensity": 0.5,
+   "style": {
+    "weight": "bold",
+    "slant": "upright",
+    "size": "large",
+    "shape": "jagged"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "character with goggles",
+   "emotion": "fearful",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "character with spiky hair",
+   "emotion": "neutral",
+   "intensity": 0.2,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 29.4
+}

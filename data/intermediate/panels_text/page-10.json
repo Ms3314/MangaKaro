@@ -1,0 +1,191 @@
+{
+ "page": "page-10.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "panel",
+   "bbox": [
+    978,
+    193,
+    1269,
+    736
+   ],
+   "conf": 0.956,
+   "label": "P1",
+   "panel": 1,
+   "id": "page-10_P1"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    695,
+    193,
+    981,
+    733
+   ],
+   "conf": 0.96,
+   "label": "P2",
+   "panel": 2,
+   "id": "page-10_P2"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    408,
+    192,
+    698,
+    733
+   ],
+   "conf": 0.961,
+   "label": "P3",
+   "panel": 3,
+   "id": "page-10_P3"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    116,
+    192,
+    411,
+    734
+   ],
+   "conf": 0.959,
+   "label": "P4",
+   "panel": 4,
+   "id": "page-10_P4"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    114,
+    765,
+    1266,
+    1262
+   ],
+   "conf": 0.959,
+   "label": "P5",
+   "panel": 5,
+   "id": "page-10_P5"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    932,
+    781,
+    1259,
+    1010
+   ],
+   "conf": 0.973,
+   "panel": 5,
+   "label": "5.1",
+   "id": "page-10_5.1"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    125,
+    781,
+    354,
+    1059
+   ],
+   "conf": 0.879,
+   "panel": 5,
+   "label": "5.2",
+   "id": "page-10_5.2"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    803,
+    1289,
+    1270,
+    1913
+   ],
+   "conf": 0.963,
+   "label": "P6",
+   "panel": 6,
+   "id": "page-10_P6"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    1060,
+    1306,
+    1257,
+    1489
+   ],
+   "conf": 0.962,
+   "panel": 6,
+   "label": "6.1",
+   "id": "page-10_6.1"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    815,
+    1305,
+    978,
+    1490
+   ],
+   "conf": 0.964,
+   "panel": 6,
+   "label": "6.2",
+   "id": "page-10_6.2"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    119,
+    1288,
+    805,
+    1914
+   ],
+   "conf": 0.955,
+   "label": "P7",
+   "panel": 7,
+   "id": "page-10_P7"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    507,
+    1305,
+    798,
+    1591
+   ],
+   "conf": 0.968,
+   "panel": 7,
+   "label": "7.1",
+   "id": "page-10_7.1"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    125,
+    1304,
+    426,
+    1593
+   ],
+   "conf": 0.969,
+   "panel": 7,
+   "label": "7.2",
+   "id": "page-10_7.2"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    574,
+    1653,
+    696,
+    1727
+   ],
+   "conf": 0.426,
+   "panel": 7,
+   "label": "7.3",
+   "id": "page-10_7.3"
+  }
+ ]
+}

@@ -1,0 +1,178 @@
+{
+ "page": "page-16.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "bubble",
+   "bbox": [
+    1147,
+    120,
+    1316,
+    309
+   ],
+   "conf": 0.954,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-16_T.1"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    771,
+    145,
+    909,
+    317
+   ],
+   "conf": 0.943,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-16_T.2"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    531,
+    205,
+    716,
+    481
+   ],
+   "conf": 0.952,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-16_T.3"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1117,
+    502,
+    1250,
+    650
+   ],
+   "conf": 0.744,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-16_T.4"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    787,
+    504,
+    954,
+    619
+   ],
+   "conf": 0.423,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-16_T.5"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    745,
+    602,
+    878,
+    770
+   ],
+   "conf": 0.925,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-16_T.6"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1137,
+    885,
+    1261,
+    1088
+   ],
+   "conf": 0.929,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-16_T.7"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1019,
+    951,
+    1148,
+    1169
+   ],
+   "conf": 0.934,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-16_T.8"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    508,
+    910,
+    630,
+    1042
+   ],
+   "conf": 0.906,
+   "panel": null,
+   "label": "T.9",
+   "id": "page-16_T.9"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    227,
+    932,
+    357,
+    1085
+   ],
+   "conf": 0.918,
+   "panel": null,
+   "label": "T.10",
+   "id": "page-16_T.10"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1054,
+    1301,
+    1260,
+    1532
+   ],
+   "conf": 0.932,
+   "panel": null,
+   "label": "T.11",
+   "id": "page-16_T.11"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    710,
+    1312,
+    913,
+    1605
+   ],
+   "conf": 0.948,
+   "panel": null,
+   "label": "T.12",
+   "id": "page-16_T.12"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    963,
+    1624,
+    1129,
+    1845
+   ],
+   "conf": 0.938,
+   "panel": null,
+   "label": "T.13",
+   "id": "page-16_T.13"
+  }
+ ]
+}

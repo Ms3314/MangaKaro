@@ -1,0 +1,61 @@
+{
+ "page": "page-18.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "panel",
+   "bbox": [
+    139,
+    0,
+    1342,
+    1381
+   ],
+   "conf": 0.819,
+   "label": "P1",
+   "panel": 1,
+   "id": "page-18_P1"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    117,
+    1388,
+    1306,
+    1920
+   ],
+   "conf": 0.707,
+   "label": "P2",
+   "panel": 2,
+   "id": "page-18_P2"
+  },
+  {
+   "type": "panel",
+   "bbox": [
+    113,
+    1411,
+    828,
+    1922
+   ],
+   "conf": 0.898,
+   "label": "P3",
+   "panel": 3,
+   "id": "page-18_P3"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    365,
+    1435,
+    509,
+    1587
+   ],
+   "conf": 0.958,
+   "panel": 3,
+   "label": "3.1",
+   "id": "page-18_3.1"
+  }
+ ]
+}

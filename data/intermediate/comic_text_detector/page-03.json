@@ -1,0 +1,191 @@
+{
+ "page": "page-03.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text_jp",
+   "bbox": [
+    65,
+    152,
+    1074,
+    417
+   ],
+   "conf": 0.644,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-03_T.1"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    419,
+    476,
+    998,
+    571
+   ],
+   "conf": 0.84,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-03_T.2"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    444,
+    627,
+    980,
+    682
+   ],
+   "conf": 0.54,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-03_T.3"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    344,
+    735,
+    1093,
+    940
+   ],
+   "conf": 0.79,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-03_T.4"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    292,
+    995,
+    1123,
+    1150
+   ],
+   "conf": 0.947,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-03_T.5"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    378,
+    1183,
+    1048,
+    1262
+   ],
+   "conf": 0.891,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-03_T.6"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    362,
+    1298,
+    1063,
+    1414
+   ],
+   "conf": 0.939,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-03_T.7"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    563,
+    1447,
+    862,
+    1486
+   ],
+   "conf": 0.796,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-03_T.8"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    499,
+    1521,
+    924,
+    1639
+   ],
+   "conf": 0.909,
+   "panel": null,
+   "label": "T.9",
+   "id": "page-03_T.9"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    498,
+    1678,
+    922,
+    1759
+   ],
+   "conf": 0.888,
+   "panel": null,
+   "label": "T.10",
+   "id": "page-03_T.10"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    882,
+    1875,
+    1248,
+    1965
+   ],
+   "conf": 0.935,
+   "panel": null,
+   "label": "T.11",
+   "id": "page-03_T.11"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    504,
+    1953,
+    696,
+    1986
+   ],
+   "conf": 0.532,
+   "panel": null,
+   "label": "T.12",
+   "id": "page-03_T.12"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    477,
+    1849,
+    726,
+    1954
+   ],
+   "conf": 0.801,
+   "panel": null,
+   "label": "T.13",
+   "id": "page-03_T.13"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    160,
+    1893,
+    435,
+    1977
+   ],
+   "conf": 0.671,
+   "panel": null,
+   "label": "T.14",
+   "id": "page-03_T.14"
+  }
+ ]
+}

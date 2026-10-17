@@ -1,0 +1,126 @@
+{
+ "page": "page-05.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text",
+   "bbox": [
+    958,
+    501,
+    1166,
+    609
+   ],
+   "conf": 0.539,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-05_T.1"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    292,
+    597,
+    871,
+    817
+   ],
+   "conf": 0.27,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-05_T.2"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    288,
+    751,
+    877,
+    816
+   ],
+   "conf": 0.733,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-05_T.3"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    451,
+    862,
+    1105,
+    926
+   ],
+   "conf": 0.853,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-05_T.4"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    408,
+    1037,
+    930,
+    1115
+   ],
+   "conf": 0.817,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-05_T.5"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    728,
+    1156,
+    1285,
+    1222
+   ],
+   "conf": 0.867,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-05_T.6"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    232,
+    1327,
+    668,
+    1397
+   ],
+   "conf": 0.831,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-05_T.7"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    413,
+    1471,
+    1096,
+    1536
+   ],
+   "conf": 0.74,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-05_T.8"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    258,
+    1662,
+    1015,
+    1728
+   ],
+   "conf": 0.556,
+   "panel": null,
+   "label": "T.9",
+   "id": "page-05_T.9"
+  }
+ ]
+}

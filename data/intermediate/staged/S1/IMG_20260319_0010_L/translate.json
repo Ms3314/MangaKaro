@@ -1,0 +1,68 @@
+{
+ "model": "qwen3.5:4b",
+ "ids_ok": true,
+ "regions": [
+  {
+   "id": "T.1",
+   "translation": "Crash Bandicoot 2",
+   "flag": null
+  },
+  {
+   "id": "1.1",
+   "translation": "We're treasure hunters! We're still chasing down treasure right now.",
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "translation": "Don't you dare treat us like amateurs! We don't have time!",
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "translation": "Amateur?!",
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "translation": "Hey hey, who said that?",
+   "flag": null
+  },
+  {
+   "id": "4.1",
+   "translation": "I'm the one hunting for treasure.",
+   "flag": null
+  },
+  {
+   "id": "4.2",
+   "translation": "HUNTER!",
+   "flag": null
+  },
+  {
+   "id": "4.3",
+   "translation": "What?!",
+   "flag": null
+  },
+  {
+   "id": "5.1",
+   "translation": "What? Are you lying to me?",
+   "flag": null
+  },
+  {
+   "id": "5.2",
+   "translation": "Don't lie! It's the Power Stone, right? It's treasure!",
+   "flag": null
+  },
+  {
+   "id": "6.1",
+   "translation": "Your eyes look just like a pit.",
+   "flag": null
+  },
+  {
+   "id": "6.2",
+   "translation": "What?!?",
+   "flag": null
+  }
+ ],
+ "raw": null,
+ "seconds": 12.6
+}

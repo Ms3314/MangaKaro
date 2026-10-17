@@ -1,0 +1,35 @@
+{
+ "page": "page-18.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text_jp",
+   "bbox": [
+    794,
+    1402,
+    1276,
+    1651
+   ],
+   "conf": 0.698,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-18_T.1"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    386,
+    1465,
+    485,
+    1529
+   ],
+   "conf": 0.9,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-18_T.2"
+  }
+ ]
+}

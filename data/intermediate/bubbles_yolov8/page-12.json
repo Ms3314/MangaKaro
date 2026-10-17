@@ -1,0 +1,204 @@
+{
+ "page": "page-12.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "bubble",
+   "bbox": [
+    627,
+    102,
+    710,
+    246
+   ],
+   "conf": 0.402,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-12_T.1"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    541,
+    179,
+    621,
+    265
+   ],
+   "conf": 0.693,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-12_T.2"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1013,
+    119,
+    1242,
+    409
+   ],
+   "conf": 0.937,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-12_T.3"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    333,
+    203,
+    512,
+    469
+   ],
+   "conf": 0.94,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-12_T.4"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    571,
+    403,
+    807,
+    712
+   ],
+   "conf": 0.936,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-12_T.5"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    933,
+    892,
+    1250,
+    1159
+   ],
+   "conf": 0.955,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-12_T.6"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    588,
+    959,
+    1004,
+    1230
+   ],
+   "conf": 0.495,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-12_T.7"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    127,
+    928,
+    410,
+    1229
+   ],
+   "conf": 0.963,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-12_T.8"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1033,
+    1280,
+    1260,
+    1484
+   ],
+   "conf": 0.958,
+   "panel": null,
+   "label": "T.9",
+   "id": "page-12_T.9"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    690,
+    1284,
+    888,
+    1474
+   ],
+   "conf": 0.864,
+   "panel": null,
+   "label": "T.10",
+   "id": "page-12_T.10"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    583,
+    1319,
+    708,
+    1511
+   ],
+   "conf": 0.912,
+   "panel": null,
+   "label": "T.11",
+   "id": "page-12_T.11"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    401,
+    1279,
+    566,
+    1422
+   ],
+   "conf": 0.61,
+   "panel": null,
+   "label": "T.12",
+   "id": "page-12_T.12"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1082,
+    1564,
+    1259,
+    1765
+   ],
+   "conf": 0.935,
+   "panel": null,
+   "label": "T.13",
+   "id": "page-12_T.13"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    582,
+    1565,
+    759,
+    1778
+   ],
+   "conf": 0.936,
+   "panel": null,
+   "label": "T.14",
+   "id": "page-12_T.14"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    145,
+    1597,
+    222,
+    1763
+   ],
+   "conf": 0.932,
+   "panel": null,
+   "label": "T.15",
+   "id": "page-12_T.15"
+  }
+ ]
+}

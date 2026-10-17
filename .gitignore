@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+.venv/
+
+# model weights: keep local copies, don't commit (see plan: check each license before reuse)
+weights/
+
+# copyrighted manga scans / source PDFs
+daiboken-volume-2/
+data/input/
+*.pdf
+
+# generated images (overlays, annotated pages, contact sheets); JSON and summaries are kept
+output/**/*.png
+output/**/*.jpg
+data/intermediate/**/*.jpg
+data/intermediate/**/*.png

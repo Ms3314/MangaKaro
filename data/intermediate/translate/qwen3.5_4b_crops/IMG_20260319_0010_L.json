@@ -1,0 +1,252 @@
+{
+ "page": "IMG_20260319_0010_L",
+ "model": "qwen3.5:4b",
+ "seconds": 73.3,
+ "json_ok": true,
+ "ids_match_detector": true,
+ "boxes": {
+  "T.1": [
+   54,
+   78,
+   468,
+   132
+  ],
+  "1.1": [
+   729,
+   143,
+   913,
+   405
+  ],
+  "1.2": [
+   299,
+   143,
+   408,
+   407
+  ],
+  "2.1": [
+   63,
+   145,
+   131,
+   368
+  ],
+  "3.1": [
+   795,
+   652,
+   916,
+   875
+  ],
+  "4.1": [
+   506,
+   650,
+   644,
+   899
+  ],
+  "4.2": [
+   105,
+   723,
+   124,
+   819
+  ],
+  "4.3": [
+   67,
+   661,
+   155,
+   882
+  ],
+  "5.1": [
+   822,
+   1087,
+   917,
+   1310
+  ],
+  "5.2": [
+   425,
+   1085,
+   585,
+   1296
+  ],
+  "6.1": [
+   281,
+   1083,
+   411,
+   1287
+  ],
+  "6.2": [
+   55,
+   1082,
+   129,
+   1197
+  ]
+ },
+ "regions": [
+  {
+   "id": "T.1",
+   "source_text": "",
+   "emotion": "neutral",
+   "intensity": 0.0,
+   "translation": "",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "large",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.1",
+   "source_text": "おれたちは、お宝ハンター！いまも宝を追ってる最中だ。",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "translation": "We're treasure hunters! We're still chasing the treasure right now.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "source_text": "とうと、素人にかまってるひまはない！",
+   "emotion": "angry",
+   "intensity": 0.9,
+   "translation": "There's no time to mess with amateurs!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "jagged"
+   },
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "source_text": "シロート！？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "Rube?!?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "jagged"
+   },
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "source_text": "おいおい、だれがシロートだって？",
+   "emotion": "surprised",
+   "intensity": 0.6,
+   "translation": "Hey hey, who said you're a rube?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "4.1",
+   "source_text": "おいらだって、お宝探ししてんだ。",
+   "emotion": "neutral",
+   "intensity": 0.5,
+   "translation": "I'm just here to search for treasure.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "4.2",
+   "source_text": "ハンター",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "translation": "",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "4.3",
+   "source_text": "なんだぜ！",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "What's that?!?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "jagged"
+   },
+   "flag": null
+  },
+  {
+   "id": "5.1",
+   "source_text": "なに、うそ言つとるか！",
+   "emotion": "surprised",
+   "intensity": 0.9,
+   "translation": "What? You're lying!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "jagged"
+   },
+   "flag": null
+  },
+  {
+   "id": "5.2",
+   "source_text": "うそなんか、パワーストーンだって、お宝だろ！",
+   "emotion": "determined",
+   "intensity": 0.7,
+   "translation": "You're lying! It's a Power Stone, it's treasure!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "6.1",
+   "source_text": "きみの目は、ふし穴みたいだねえ...",
+   "emotion": "disgusted",
+   "intensity": 0.8,
+   "translation": "Your eyes look like a hole in the ground...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "6.2",
+   "source_text": "なに！？",
+   "emotion": "surprised",
+   "intensity": 0.9,
+   "translation": "What?!?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "jagged"
+   },
+   "flag": null
+  }
+ ],
+ "raw": null
+}

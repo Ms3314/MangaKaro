@@ -1,0 +1,113 @@
+{
+ "page": "page-09.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "bubble",
+   "bbox": [
+    434,
+    371,
+    552,
+    538
+   ],
+   "conf": 0.534,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-09_T.1"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    979,
+    471,
+    1198,
+    737
+   ],
+   "conf": 0.931,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-09_T.2"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    152,
+    627,
+    312,
+    864
+   ],
+   "conf": 0.624,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-09_T.3"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    928,
+    939,
+    1065,
+    1162
+   ],
+   "conf": 0.918,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-09_T.4"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    330,
+    931,
+    518,
+    1170
+   ],
+   "conf": 0.875,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-09_T.5"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    740,
+    1225,
+    878,
+    1428
+   ],
+   "conf": 0.834,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-09_T.6"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    983,
+    1493,
+    1244,
+    1813
+   ],
+   "conf": 0.956,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-09_T.7"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    108,
+    1494,
+    414,
+    1787
+   ],
+   "conf": 0.955,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-09_T.8"
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+{
+ "page": "page-03.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "bubble",
+   "bbox": [
+    325,
+    905,
+    1053,
+    1419
+   ],
+   "conf": 0.416,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-03_T.1"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    879,
+    1862,
+    1262,
+    1984
+   ],
+   "conf": 0.535,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-03_T.2"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    501,
+    1951,
+    691,
+    1987
+   ],
+   "conf": 0.413,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-03_T.3"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    301,
+    1906,
+    435,
+    1950
+   ],
+   "conf": 0.617,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-03_T.4"
+  }
+ ]
+}

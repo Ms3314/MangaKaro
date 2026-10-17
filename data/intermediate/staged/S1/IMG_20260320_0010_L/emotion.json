@@ -1,0 +1,105 @@
+{
+ "model": "qwen3.5:4b",
+ "ids_ok": true,
+ "scene": "A chaotic manga page featuring a large, distressed character (likely Sonic) interacting with smaller characters in various panels.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "large character",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.2",
+   "speaker": "narration",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.3",
+   "speaker": "narration",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.4",
+   "speaker": "large character",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "small character with goggles",
+   "emotion": "happy",
+   "intensity": 0.6,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.2",
+   "speaker": "narration",
+   "emotion": "neutral",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "small character with goggles",
+   "emotion": "happy",
+   "intensity": 0.5,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "wavy"
+   }
+  },
+  {
+   "id": "3.2",
+   "speaker": "large character",
+   "emotion": "fearful",
+   "intensity": 0.9,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 45.0
+}

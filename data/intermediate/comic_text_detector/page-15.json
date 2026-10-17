@@ -1,0 +1,48 @@
+{
+ "page": "page-15.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text_jp",
+   "bbox": [
+    958,
+    424,
+    1169,
+    619
+   ],
+   "conf": 0.941,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-15_T.1"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    975,
+    1529,
+    1140,
+    1696
+   ],
+   "conf": 0.903,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-15_T.2"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    160,
+    1602,
+    309,
+    1801
+   ],
+   "conf": 0.921,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-15_T.3"
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "page": "page-01.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text",
+   "bbox": [
+    747,
+    1844,
+    1315,
+    2008
+   ],
+   "conf": 0.679,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-01_T.1"
+  }
+ ]
+}

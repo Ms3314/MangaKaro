@@ -1,0 +1,179 @@
+{
+ "page": "IMG_20260320_0010_L",
+ "models": {
+  "read": "qwen3.5:4b",
+  "emotion": "qwen3.5:4b",
+  "translate": "qwen3.5:4b"
+ },
+ "seconds": {
+  "read": 29.9,
+  "emotion": 45.0,
+  "translate": 14.9
+ },
+ "ids_ok": true,
+ "scene": "A chaotic manga page featuring a large, distressed character (likely Sonic) interacting with smaller characters in various panels.",
+ "boxes": {
+  "1.1": [
+   761,
+   63,
+   902,
+   319
+  ],
+  "1.2": [
+   417,
+   63,
+   523,
+   351
+  ],
+  "1.3": [
+   338,
+   143,
+   440,
+   323
+  ],
+  "1.4": [
+   103,
+   114,
+   314,
+   329
+  ],
+  "2.1": [
+   779,
+   513,
+   913,
+   682
+  ],
+  "2.2": [
+   349,
+   520,
+   519,
+   676
+  ],
+  "3.1": [
+   770,
+   712,
+   919,
+   964
+  ],
+  "3.2": [
+   12,
+   928,
+   145,
+   1119
+  ]
+ },
+ "regions": [
+  {
+   "id": "1.1",
+   "source_text": "あれ？\nおいら、\nどーしたの？",
+   "emotion": "surprised",
+   "intensity": 0.7,
+   "translation": "Huh? What happened to me?",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.2",
+   "source_text": "ラッシュ！\nやっともとに\nもどったのか。",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "translation": "Rush! We finally made it back.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.3",
+   "source_text": "やつともとに\nもどったのか。",
+   "emotion": "neutral",
+   "intensity": 0.3,
+   "translation": "We finally made it back.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "1.4",
+   "source_text": "さんざん迷惑\nかけおって\nのう、コル\nテックス……。",
+   "emotion": "angry",
+   "intensity": 0.8,
+   "translation": "You've caused so much trouble, you know? Cortex...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "2.1",
+   "source_text": "そう\ndechuu!\nてちゅー！",
+   "emotion": "happy",
+   "intensity": 0.6,
+   "translation": "So, Techchu! Techchu!",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "2.2",
+   "source_text": "つかれ\nまいた。",
+   "emotion": "neutral",
+   "intensity": 0.4,
+   "translation": "We're exhausted.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   },
+   "flag": null
+  },
+  {
+   "id": "3.1",
+   "source_text": "ママ、\nうんま〜。",
+   "emotion": "happy",
+   "intensity": 0.5,
+   "translation": "Mom, I'm hungry~.",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "wavy"
+   },
+   "flag": null
+  },
+  {
+   "id": "3.2",
+   "source_text": "こんど\n今度は\nこいつか……。",
+   "emotion": "fearful",
+   "intensity": 0.9,
+   "translation": "This time... it's him...",
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   },
+   "flag": null
+  }
+ ]
+}

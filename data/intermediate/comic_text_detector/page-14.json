@@ -1,0 +1,217 @@
+{
+ "page": "page-14.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text_jp",
+   "bbox": [
+    1142,
+    201,
+    1310,
+    310
+   ],
+   "conf": 0.905,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-14_T.1"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    655,
+    185,
+    819,
+    428
+   ],
+   "conf": 0.862,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-14_T.2"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    459,
+    225,
+    615,
+    342
+   ],
+   "conf": 0.934,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-14_T.3"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    127,
+    182,
+    277,
+    328
+   ],
+   "conf": 0.936,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-14_T.4"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    781,
+    449,
+    1276,
+    564
+   ],
+   "conf": 0.651,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-14_T.5"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    532,
+    451,
+    621,
+    553
+   ],
+   "conf": 0.883,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-14_T.6"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    1160,
+    646,
+    1235,
+    747
+   ],
+   "conf": 0.909,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-14_T.7"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    812,
+    652,
+    948,
+    729
+   ],
+   "conf": 0.938,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-14_T.8"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    601,
+    666,
+    764,
+    780
+   ],
+   "conf": 0.934,
+   "panel": null,
+   "label": "T.9",
+   "id": "page-14_T.9"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    175,
+    717,
+    247,
+    754
+   ],
+   "conf": 0.83,
+   "panel": null,
+   "label": "T.10",
+   "id": "page-14_T.10"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    1097,
+    801,
+    1165,
+    893
+   ],
+   "conf": 0.881,
+   "panel": null,
+   "label": "T.11",
+   "id": "page-14_T.11"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    1092,
+    1129,
+    1245,
+    1252
+   ],
+   "conf": 0.936,
+   "panel": null,
+   "label": "T.12",
+   "id": "page-14_T.12"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    716,
+    1146,
+    845,
+    1240
+   ],
+   "conf": 0.885,
+   "panel": null,
+   "label": "T.13",
+   "id": "page-14_T.13"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    445,
+    1195,
+    616,
+    1340
+   ],
+   "conf": 0.902,
+   "panel": null,
+   "label": "T.14",
+   "id": "page-14_T.14"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    1105,
+    1560,
+    1231,
+    1652
+   ],
+   "conf": 0.924,
+   "panel": null,
+   "label": "T.15",
+   "id": "page-14_T.15"
+  },
+  {
+   "type": "text_jp",
+   "bbox": [
+    713,
+    1540,
+    888,
+    1674
+   ],
+   "conf": 0.918,
+   "panel": null,
+   "label": "T.16",
+   "id": "page-14_T.16"
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "page": "page-03.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "text",
+   "bbox": [
+    27,
+    10,
+    1327,
+    504
+   ],
+   "conf": 0.5,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-03_T.1"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    65,
+    639,
+    1277,
+    1789
+   ],
+   "conf": 0.301,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-03_T.2"
+  },
+  {
+   "type": "text",
+   "bbox": [
+    791,
+    1854,
+    1260,
+    1983
+   ],
+   "conf": 0.48,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-03_T.3"
+  }
+ ]
+}

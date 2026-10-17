@@ -1,0 +1,217 @@
+{
+ "page": "page-14.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "bubble",
+   "bbox": [
+    1126,
+    120,
+    1326,
+    390
+   ],
+   "conf": 0.933,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-14_T.1"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    718,
+    134,
+    836,
+    302
+   ],
+   "conf": 0.944,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-14_T.2"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    644,
+    245,
+    784,
+    479
+   ],
+   "conf": 0.931,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-14_T.3"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    442,
+    205,
+    625,
+    386
+   ],
+   "conf": 0.944,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-14_T.4"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    86,
+    143,
+    316,
+    371
+   ],
+   "conf": 0.938,
+   "panel": null,
+   "label": "T.5",
+   "id": "page-14_T.5"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    534,
+    458,
+    625,
+    572
+   ],
+   "conf": 0.589,
+   "panel": null,
+   "label": "T.6",
+   "id": "page-14_T.6"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1127,
+    623,
+    1259,
+    783
+   ],
+   "conf": 0.943,
+   "panel": null,
+   "label": "T.7",
+   "id": "page-14_T.7"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    804,
+    624,
+    962,
+    777
+   ],
+   "conf": 0.945,
+   "panel": null,
+   "label": "T.8",
+   "id": "page-14_T.8"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    565,
+    624,
+    785,
+    845
+   ],
+   "conf": 0.95,
+   "panel": null,
+   "label": "T.9",
+   "id": "page-14_T.9"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    149,
+    655,
+    278,
+    818
+   ],
+   "conf": 0.944,
+   "panel": null,
+   "label": "T.10",
+   "id": "page-14_T.10"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1068,
+    757,
+    1192,
+    943
+   ],
+   "conf": 0.917,
+   "panel": null,
+   "label": "T.11",
+   "id": "page-14_T.11"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1075,
+    1091,
+    1259,
+    1303
+   ],
+   "conf": 0.953,
+   "panel": null,
+   "label": "T.12",
+   "id": "page-14_T.12"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    706,
+    1092,
+    859,
+    1318
+   ],
+   "conf": 0.949,
+   "panel": null,
+   "label": "T.13",
+   "id": "page-14_T.13"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    389,
+    1113,
+    664,
+    1428
+   ],
+   "conf": 0.953,
+   "panel": null,
+   "label": "T.14",
+   "id": "page-14_T.14"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    1065,
+    1516,
+    1258,
+    1711
+   ],
+   "conf": 0.953,
+   "panel": null,
+   "label": "T.15",
+   "id": "page-14_T.15"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    705,
+    1516,
+    898,
+    1729
+   ],
+   "conf": 0.94,
+   "panel": null,
+   "label": "T.16",
+   "id": "page-14_T.16"
+  }
+ ]
+}

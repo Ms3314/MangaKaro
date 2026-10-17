@@ -1,0 +1,61 @@
+{
+ "page": "page-15.png",
+ "size": [
+  1371,
+  2048
+ ],
+ "regions": [
+  {
+   "type": "bubble",
+   "bbox": [
+    741,
+    136,
+    849,
+    324
+   ],
+   "conf": 0.702,
+   "panel": null,
+   "label": "T.1",
+   "id": "page-15_T.1"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    926,
+    374,
+    1203,
+    673
+   ],
+   "conf": 0.946,
+   "panel": null,
+   "label": "T.2",
+   "id": "page-15_T.2"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    932,
+    1449,
+    1172,
+    1774
+   ],
+   "conf": 0.955,
+   "panel": null,
+   "label": "T.3",
+   "id": "page-15_T.3"
+  },
+  {
+   "type": "bubble",
+   "bbox": [
+    129,
+    1551,
+    340,
+    1862
+   ],
+   "conf": 0.955,
+   "panel": null,
+   "label": "T.4",
+   "id": "page-15_T.4"
+  }
+ ]
+}

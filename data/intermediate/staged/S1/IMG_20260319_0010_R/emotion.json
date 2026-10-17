@@ -1,0 +1,93 @@
+{
+ "model": "qwen3.5:4b",
+ "ids_ok": true,
+ "scene": "A group of anthropomorphic animal characters are having a conversation about treasure hunting and collecting items.",
+ "regions": [
+  {
+   "id": "1.1",
+   "speaker": "tall reptilian character",
+   "emotion": "surprised",
+   "intensity": 0.3,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "1.2",
+   "speaker": "flying fox character",
+   "emotion": "neutral",
+   "intensity": 0.2,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "2.1",
+   "speaker": "fox character with goggles",
+   "emotion": "determined",
+   "intensity": 0.4,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "3.1",
+   "speaker": "fox character with goggles",
+   "emotion": "sarcastic",
+   "intensity": 0.7,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "4.1",
+   "speaker": "tall reptilian character",
+   "emotion": "neutral",
+   "intensity": 0.1,
+   "style": {
+    "weight": "light",
+    "slant": "upright",
+    "size": "small",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "5.1",
+   "speaker": "tall reptilian character",
+   "emotion": "excited",
+   "intensity": 0.8,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  },
+  {
+   "id": "6.1",
+   "speaker": "fox character with goggles",
+   "emotion": "excited",
+   "intensity": 0.9,
+   "style": {
+    "weight": "normal",
+    "slant": "upright",
+    "size": "medium",
+    "shape": "normal"
+   }
+  }
+ ],
+ "raw": null,
+ "seconds": 32.9
+}
