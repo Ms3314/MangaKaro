@@ -12,3 +12,8 @@ WEIGHT_FILES = {
     "bubbles_detect.pt": "https://huggingface.co/PSImera/manga_bubbles_detect (MIT)",
     "comictextdetector.pt.onnx": "https://github.com/zyddnys/manga-image-translator/releases (comic-text-detector, GPL-3.0)",
 }
+
+# Optional weights: used when present.
+OPTIONAL_WEIGHT_FILES = {
+    "big-lama.pt": "https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt (LaMa, TorchScript, about 196 MB)",
+}

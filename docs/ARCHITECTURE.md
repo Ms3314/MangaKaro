@@ -50,7 +50,9 @@ a single stage can be redone (`--redo translate`).
 | `prompts.py` | Every prompt and JSON schema sent to the models. Edit here to change what is asked |
 | `stages.py` | The read, emotion and translate stages, their retry logic, result merging, caching |
 | `fonts.py` | Candidate fonts, lettering-weight measurement, choosing the primary and secondary font |
-| `render.py` | Erasing, placing and fitting text |
+| `render.py` | Classifies each box (plain, inverse, overlay), erases, places and fits text |
+| `inpaint.py` | LaMa neural inpainting on small crops, used for text over screentone and art |
+| `verify.py` | After typesetting: finds Japanese still on the page and labels the cause |
 | `paths.py` | Where weights and extra fonts live (`MANGAKARO_WEIGHTS` overrides the weights folder) |
 
 `experiments/` holds the scripts used to decide the design (detector comparison, the one-shot S0 approach, review sheets).
@@ -64,6 +66,7 @@ They are not part of the installed package.
 | Speech bubbles | `manga_bubbles_detect`, YOLOv8 | CPU | MIT |
 | Lettering pixel mask | `comic-text-detector` (ONNX, from manga-image-translator) | CPU | GPL-3.0 |
 | Reading Japanese | `kha-white/manga-ocr-base` | Apple GPU (MPS) or CPU | Apache-2.0 |
+| Erasing over art | `big-lama` (LaMa, TorchScript) | CPU | Apache-2.0 per the LaMa repository (check before redistributing) |
 | Emotion and scene | `gemma4:e4b-mlx` through Ollama (default) | local | see Ollama |
 | Translation | `gemma4:e4b-mlx` through Ollama (default) | local | see Ollama |
 
@@ -129,6 +132,36 @@ bubbles next to the book's spine in photographed scans. Screentone and art are n
 Instead, stroke thickness divided by glyph size is measured on the manga's lettering and on each candidate font, and the
 closest weights are chosen. Only weight is matched, not letter shape.
 
+**Three kinds of text box.** Each box is classified from the pixels around its lettering (not counting the lettering itself):
+*plain* (mostly white paper, or light and flat shaded paper near the spine): black English inside the bubble; *inverse*
+(flat area darker than gray 70): the lettering is erased with a flat fill of the area's own colour and the English is white;
+*overlay* (anything else, such as screentone or art): erased with LaMa, English in black with a 3 px white outline so it reads
+on any background. Sound effects, as labelled by the emotion step, are left alone.
+
+**LaMa for overlay text only.** OpenCV's inpainting blurs a region, which leaves cloudy patches over screentone and hatching.
+LaMa continues the texture. It was tested against the OpenCV result on page 14 and 19 of the 20-page chapter: clearly better
+over screentone and hatching, better but not perfect on hair and face (a dark smudge can remain), and worse than a flat fill on
+solid black, so inverse boxes keep the flat fill. It runs on 48 px of context around each box, on the CPU (its FFT layers are not
+reliable on Apple's GPU backend), at about half a second per box.
+
+**Tall narrow text.** Vertical Japanese is a narrow column; English is not. For a tall narrow box whose English would be under 16 px,
+`widen()` grows the text rectangle sideways over free space (not other text, not a panel border) until it reaches 16 px or 2.6 times the
+original width. A plain box whose lettering touches drawn art (`has_art`: more than 6% of the non-lettering pixels are dark) is erased
+with LaMa, and its English is kept on the white part above the art (`paper_top`) and aligned to the top.
+
+**Check after typesetting.** `verify.py` runs the lettering detector at a lower threshold on the finished page (whole page plus
+two overlapping zoomed halves), drops anything inside the English we placed, reads what is left with manga-ocr, and keeps what
+contains Japanese. Cause: `skipped` (we left it on purpose), `erase_failed` (inside a box we translated), `not_detected`.
+It reports; it does not fix. It cannot see sound effects, because both detectors find only dialogue.
+
+**Two detectors for boxes.** `panels_text` gives the boxes and the panels. `comic_text_detector` often finds text it misses (a
+thought bubble, margin text). `detect.merge_text_boxes` adds its boxes where less than 40% is already covered. The box cache
+carries a version number, so cached pages are redone when the way boxes are found changes.
+
+**Stalled model calls.** One model call can loop on garbled OCR text. Calls have a 180 s limit and a length cap; a page whose
+translation fails is retried in chunks of 4 lines, then in rounds for missing lines, then one line at a time, so one bad line
+cannot take a page down. A page that still fails is left unchanged and listed at the end.
+
 ## Thresholds worth knowing (`render.py`)
 
 | Name | Value | Meaning |
@@ -141,6 +174,10 @@ closest weights are chosen. Only weight is matched, not letter shape.
 | `MIN_READABLE` | 14 px | smaller than this inside the bubble and the detector box is tried instead |
 | `MAX_SIZE`, `MIN_SIZE` | 40, 10 px | font size range |
 | `LOUD` | 0.75 | emotion intensity at or above this uses the secondary font |
+| `DARK_LEVEL`, `DARK_FLAT` | 70, 0.5 | median gray below this and flat = the "inverse" kind |
+| `OVERLAY_PAD`, `OUTLINE` | 8 px, 3 px | extra room and white outline width for text over art |
+| `WIDE_TARGET`, `TALL` | 16 px, 1.8 | widen a column whose English is under this size when height is more than this times width |
+| `ART_SHARE` | 0.06 | dark non-lettering share above which a plain box counts as touching art |
 
 ## Extending it
 

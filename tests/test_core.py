@@ -14,7 +14,7 @@ from mangakaro.ocr import drop_contained, normalize_ellipses
 from mangakaro.pages import load_pages, natural_key, parse_pages, resolve_source, shrink, split_spread
 from mangakaro.pdfio import images_to_pdf, pdf_page_count
 from mangakaro.pipeline import write_output
-from mangakaro.render import fit, wrap
+from mangakaro.render import classify, erase, fit, has_art, is_sound_effect, paper_top, widen, wrap
 from mangakaro import stages, verify
 from mangakaro.llm import OllamaTimeout
 
@@ -274,6 +274,101 @@ class StalledModel(unittest.TestCase):
         out, _ = self.run_stage(fake)
         self.assertFalse(out["ids_ok"])
         self.assertIsNone(out["regions"])
+
+
+class BoxKinds(unittest.TestCase):
+    """Synthetic pages: lettering is a block of strokes, `mask` marks it like the text detector would."""
+
+    def page(self, background, stroke):
+        img = np.full((300, 300), background, np.uint8)
+        mask = np.zeros((300, 300), bool)
+        for x in range(120, 180, 10):
+            img[100:200, x:x + 4] = stroke
+            mask[100:200, x:x + 4] = True
+        return img, mask
+
+    def kind(self, img, mask):
+        smooth = img.astype(np.float32)
+        import cv2
+        grad = np.hypot(cv2.Sobel(smooth, cv2.CV_32F, 1, 0), cv2.Sobel(smooth, cv2.CV_32F, 0, 1))
+        return classify(img, grad, mask, [100, 90, 200, 210])
+
+    def test_black_lettering_on_white_is_plain(self):
+        self.assertEqual(self.kind(*self.page(240, 10)), "plain")
+
+    def test_white_lettering_on_black_is_inverse(self):
+        self.assertEqual(self.kind(*self.page(8, 245)), "inverse")
+
+    def test_lettering_over_a_dotted_tone_is_overlay(self):
+        img, mask = self.page(170, 10)
+        img[::3, ::3] = 20  # a screentone dot grid: busy, not flat
+        img[~mask & (np.arange(300)[:, None] % 3 == 0) & (np.arange(300)[None, :] % 3 == 0)] = 20
+        self.assertEqual(self.kind(img, mask), "overlay")
+
+    def test_dark_areas_are_erased_flat(self):
+        img, mask = self.page(8, 245)
+        color = np.stack([img] * 3, axis=-1)
+        out = erase(color, mask, [[100, 90, 200, 210]], dark_boxes=[[100, 90, 200, 210]])
+        self.assertLess(out[100:200, 120:180].max(), 30)  # no grey left where the white lettering was
+
+    def test_sound_effect_label(self):
+        self.assertTrue(is_sound_effect({"speaker": "Sound effect"}))
+        self.assertFalse(is_sound_effect({"speaker": "girl in uniform"}))
+        self.assertFalse(is_sound_effect({}))
+
+    def test_text_that_cannot_fit_is_still_wrapped(self):
+        if not Path(DEFAULT_FONT["path"]).exists():
+            self.skipTest("default font not installed")
+        font, lines, lh, fits = fit("This line is far too long for a space this narrow and short", DEFAULT_FONT, 60, 20)
+        self.assertFalse(fits)
+        self.assertGreater(len(lines), 2)  # wrapped to the width, not one long line
+
+
+class NarrowColumns(unittest.TestCase):
+    def setUp(self):
+        if not Path(DEFAULT_FONT["path"]).exists():
+            self.skipTest("default font not installed")
+
+    def test_widening_gives_bigger_text_when_there_is_room(self):
+        text = "I'm feeling intense secondhand embarrassment..."
+        rect = (100, 50, 133, 310)  # a 33 x 260 column, like vertical Japanese
+        narrow = fit(text, DEFAULT_FONT, 33 - 12, 260 - 12)
+        free = np.ones((400, 400), bool)
+        wrect, wfit = widen(rect, free, text, DEFAULT_FONT, (0, 0, 400, 0))
+        self.assertGreater(wfit[0].size, narrow[0].size)
+        self.assertGreater(wrect[2] - wrect[0], 33)
+        self.assertEqual((wrect[1], wrect[3]), (50, 310))  # only sideways
+
+    def test_widening_stops_at_obstacles(self):
+        text = "I'm feeling intense secondhand embarrassment..."
+        free = np.ones((400, 400), bool)
+        free[:, 90:100] = False   # something to the left, touching the column
+        free[:, 133:140] = False  # and to the right
+        rect, f = widen((100, 50, 133, 310), free, text, DEFAULT_FONT, (0, 0, 400, 0))
+        self.assertEqual(rect, (100, 50, 133, 310))
+
+    def test_panel_borders_block_widening(self):
+        text = "Hello there my friend"
+        gray = np.full((400, 400), 200, np.uint8)
+        gray[:, 120:126] = 0      # a long dark line: a panel border
+        rect, _ = widen((100, 50, 118, 250), np.ones((400, 400), bool), text, DEFAULT_FONT, (0, 0, 400, 0), gray=gray)
+        self.assertLessEqual(rect[2], 120)  # did not grow into or past the border
+
+    def test_text_is_kept_on_the_paper_above_art(self):
+        paper = np.ones((300, 200), bool)
+        paper[150:, :] = False           # hair fills the lower half
+        rect = paper_top((50, 20, 150, 280), paper)
+        self.assertEqual(rect, (50, 20, 150, 150))
+        self.assertEqual(paper_top((50, 20, 150, 280), np.zeros((300, 200), bool)), (50, 20, 150, 280))  # no paper: unchanged
+
+    def test_art_in_a_box(self):
+        gray = np.full((200, 200), 245, np.uint8)
+        mask = np.zeros((200, 200), bool)
+        mask[40:160, 90:100] = True
+        gray[40:160, 90:100] = 10
+        self.assertFalse(has_art(gray, mask, [60, 30, 140, 170]))  # lettering on white paper
+        gray[120:170, 60:140] = 15                                   # hair under part of it
+        self.assertTrue(has_art(gray, mask, [60, 30, 140, 170]))
 
 
 class WeightMeasure(unittest.TestCase):

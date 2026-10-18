@@ -57,6 +57,8 @@ class Settings:
     fonts_file: Path | None = None
     redo: list = field(default_factory=list)   # stages whose cache to ignore, and every stage after them
     ollama_url: str = llm.DEFAULT_URL
+    overlay: bool = True                # also translate text on dark areas and over screentone/art, not only in plain bubbles
+    lama: bool = True                   # erase text over art with LaMa when weights/big-lama.pt exists
     check: bool = True                  # look for Japanese still on each finished page (no language model involved)
 
     def models(self):
@@ -96,6 +98,13 @@ class Models:
     panels = property(lambda self: self.get(PanelsText))
     text = property(lambda self: self.get(ComicTextDetector))
     bubbles = property(lambda self: self.get(BubblesYolo))
+
+    def lama(self):
+        """The LaMa inpainter, or None if its weights are not installed (the renderer then uses OpenCV's inpainting)."""
+        if "lama" not in self._m:
+            from .inpaint import Lama
+            self._m["lama"] = Lama() if (WEIGHTS / "big-lama.pt").exists() else None
+        return self._m["lama"]
 
 
 def _write(path, obj):
@@ -200,7 +209,7 @@ def run(source, output, work, s, log=print):
         note = "copied unchanged"
         if name in results:
             if state["renderer"] is None:
-                state["renderer"] = Renderer(state["fonts"], models.text, models.bubbles)
+                state["renderer"] = Renderer(state["fonts"], models.text, models.bubbles, overlay=s.overlay, lama=models.lama() if s.lama else None)
             image, rep = state["renderer"].page(image, results[name])
             report[name] = rep
             _write(work / "reports" / f"{name}.json", rep)

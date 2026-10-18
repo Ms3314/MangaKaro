@@ -112,7 +112,7 @@ def merge(name, texts, read, emo, tr):
     e = {x["id"]: x for x in emo["regions"] or []}
     t = {x["id"]: x for x in tr["regions"] or []}
     regions = [{"id": g["label"], "source_text": r.get(g["label"], {}).get("source_text", ""),
-                "emotion": e.get(g["label"], {}).get("emotion"), "intensity": e.get(g["label"], {}).get("intensity"),
+                "speaker": e.get(g["label"], {}).get("speaker"), "emotion": e.get(g["label"], {}).get("emotion"), "intensity": e.get(g["label"], {}).get("intensity"),
                 "translation": t.get(g["label"], {}).get("translation", ""),
                 "style": e.get(g["label"], {}).get("style"), "flag": t.get(g["label"], {}).get("flag")} for g in texts]
     return {"page": name, "models": {"read": read["model"], "emotion": emo["model"], "translate": tr["model"]},

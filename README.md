@@ -49,6 +49,11 @@ Put these files in `weights/` (or set `MANGAKARO_WEIGHTS` to another folder). Ch
 
 `bubbles_detect.pt` is a pickle file: only load it from the source above.
 
+**Optional, recommended:** `weights/big-lama.pt` (about 196 MB, TorchScript) from
+https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt. If it is present, text over screentone
+and line art is erased with LaMa; if not, OpenCV's basic inpainting is used. It is loaded with `torch` directly. Do not
+`pip install simple-lama-inpainting`: it pins old numpy, opencv and pillow and would downgrade them.
+
 ### Check the setup
 
 ```bash
@@ -91,6 +96,9 @@ pages and finished model calls are reused from the work directory.
 | `--emotion-model`, `--translate-model` | Ollama models for the emotion and translation steps |
 | `--reader ocr\|vlm` | read text with manga-ocr (default) or with a vision model; `--read-model` sets which |
 | `--max-side 1536` | longest side in pixels of the pages the models see and the output has |
+| `--plain-only` | only translate text in plain white bubbles; leave text on dark areas and over art alone |
+| `--no-lama` | erase text over art with OpenCV's basic inpainting instead of LaMa (a little faster, smears more) |
+| `--no-check` | skip the check for Japanese left on each finished page |
 | `--no-split-spreads` | keep two-page spreads as one page |
 | `--fonts picks.json` | use these fonts instead of choosing them automatically |
 | `--redo translate` | ignore cached results from this step onward (`read`, `emotion`, `translate`) |
@@ -118,14 +126,16 @@ The vision step is the slowest part. A 20-page chapter takes roughly 10 to 20 mi
 4. A vision model looks at the page and the text and tags each line with speaker, emotion and intensity.
 5. A text model translates the whole page at once, using the emotion tags, so voices stay consistent.
 6. Once per manga, the weight of its lettering is measured and a primary and a secondary English font are chosen.
-7. For each plain bubble, the Japanese letters are erased by their pixel mask, and the English is fitted inside the bubble.
+7. The Japanese letters are erased by their pixel mask. In plain bubbles the English is fitted inside the bubble; on flat black it is
+   drawn in white; over screentone or art the area is inpainted with LaMa and the English is drawn black with a white outline.
+8. A check looks for Japanese still on the finished page (`checks/<page>.json`).
 
 The full design, the data formats and the reasons behind each choice are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Known limitations
 
 - **Japanese to English only.**
-- **Only plain bubbles are typeset.** Sound effects, text over art and captions without a clean background stay in Japanese.
+- **Text over art is a first version.** Plain bubbles are the reliable case. White lettering on flat black panels works well. Lettering over screentone or drawn hair is erased with LaMa (neural inpainting), which continues the texture but can leave small marks, and its English is drawn black with a white outline. `--plain-only` turns this off and leaves such text in Japanese. Sound effects and background signs are not translated.
 - **OCR mistakes reach the translation.** Short vertical strings can be misread or given extra characters, and the translator
   tends to turn garbled text into a confident, wrong sentence. The same page can read slightly differently after a PDF
   round trip, because the page images are re-encoded.

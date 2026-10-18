@@ -21,7 +21,7 @@ def settings_from(a):
     return Settings(emotion_model=a.emotion_model, translate_model=a.translate_model, reader=a.reader, read_model=a.read_model,
                     ollama_url=a.ollama_url, pages=getattr(a, "pages", None), max_side=getattr(a, "max_side", Settings.max_side),
                     split_spreads=not getattr(a, "no_split_spreads", False), fonts_file=getattr(a, "fonts", None),
-                    redo=getattr(a, "redo", None) or [], check=not getattr(a, "no_check", False))
+                    redo=getattr(a, "redo", None) or [], check=not getattr(a, "no_check", False), overlay=not getattr(a, "plain_only", False), lama=not getattr(a, "no_lama", False))
 
 
 def default_output(inputs, kind, what):
@@ -87,6 +87,8 @@ def main(argv=None):
     t.add_argument("--pages", help="only these pages, 1-based, e.g. 1-5,8")
     t.add_argument("--max-side", type=int, default=Settings.max_side, help="longest side in pixels of the pages the models see and the output has (default: %(default)s)")
     t.add_argument("--no-split-spreads", action="store_true", help="do not split two-page spreads into right and left pages")
+    t.add_argument("--plain-only", action="store_true", help="only translate text in plain white bubbles; leave text over art and on dark areas alone")
+    t.add_argument("--no-lama", action="store_true", help="erase text over art with OpenCV's basic inpainting instead of LaMa (faster, smears more)")
     t.add_argument("--no-check", action="store_true", help="skip the check for Japanese left on each finished page")
     t.add_argument("--fonts", type=Path, help="font picks JSON to use instead of choosing fonts automatically")
     t.add_argument("--redo", nargs="+", choices=STAGES, metavar="STAGE", help=f"ignore the cache for these stages and every later one: {', '.join(STAGES)}")

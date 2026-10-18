@@ -8,7 +8,7 @@
 > | 0 Setup and test data | Mostly done (JJK, Daiboken and digital demo pages). No manhwa page, no sound-effect-heavy page, no reference translations yet |
 > | 1 Detection | Done. `panels_text` for boxes and panels; `comic_text_detector` (lettering mask) and `bubbles_yolov8` (bubble boxes) later added for rendering |
 > | 2 Read, emotion, translate | Working, not scored. **Changed from the plan:** OCR (manga-ocr) reads the text, because a 4B vision model invented text. A vision model tags emotion; a text model (`gemma4:e4b-mlx`) translates |
-> | 3 Erase and render | Working for plain white bubbles. Sound effects and text over art are left untouched |
+> | 3 Erase and render | Working for plain bubbles, white-on-black panels and text over art (LaMa inpainting). Sound effects and background signs are left alone |
 > | 4 Automation | Done in basic form: `mangakaro translate book.pdf`, resumable, per-page logging, cached results |
 > | 5 Evaluation | Not started; needs reference translations. Variants A to D were not run |
 > | 6 Improvements | Not started |
