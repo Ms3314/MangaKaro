@@ -15,7 +15,7 @@ from mangakaro.pages import load_pages, natural_key, parse_pages, resolve_source
 from mangakaro.pdfio import images_to_pdf, pdf_page_count
 from mangakaro.pipeline import write_output
 from mangakaro.render import fit, wrap
-from mangakaro import stages
+from mangakaro import stages, verify
 from mangakaro.llm import OllamaTimeout
 
 
@@ -146,6 +146,41 @@ class MergeDetectors(unittest.TestCase):
 
     def test_nothing_found_by_either(self):
         self.assertEqual(merge_text_boxes([], []), [])
+
+
+class LeftoverCheck(unittest.TestCase):
+    def test_is_japanese(self):
+        self.assertTrue(verify.is_japanese("ガラ"))
+        self.assertTrue(verify.is_japanese("いや、そんなこと"))
+        self.assertFalse(verify.is_japanese("Hello there!"))
+        self.assertFalse(verify.is_japanese("あ"))  # one character is not enough to call it Japanese text
+
+    def test_leftovers_are_labelled_by_cause(self):
+        page = np.zeros((600, 400, 3), np.uint8)
+        boxes = {"1.1": [10, 10, 100, 100], "1.2": [10, 200, 100, 300]}
+        results = {"boxes": boxes}
+        report = [{"ids": ["1.1"], "status": "rendered", "rect": [8, 8, 110, 110]},
+                  {"ids": ["1.2"], "status": "skipped: not a plain white bubble"}]
+
+        class FakeDetector:
+            def __call__(self, img):
+                found = {"ours": [10, 10, 100, 100], "skipped": [12, 202, 98, 298], "failed": [20, 30, 60, 90],
+                         "new": [200, 400, 260, 500], "english": [300, 400, 380, 450], "tiny": [5, 5, 10, 10]}
+                return [{"bbox": b} for b in found.values()]
+
+        texts = {(200, 400, 260, 500): "壁の看板です", (12, 202, 98, 298): "吹き出しの文字",
+                 (300, 400, 380, 450): "Hello there"}
+        original, verify.read_crop = verify.read_crop, lambda img, box, pad=4: texts.get(tuple(box), "")
+        try:
+            left = verify.Checker(detector=FakeDetector()).page(page, results, report)
+        finally:
+            verify.read_crop = original
+        causes = {tuple(x["bbox"]): x["cause"] for x in left}
+        self.assertEqual(causes[(12, 202, 98, 298)], "skipped")
+        self.assertEqual(causes[(200, 400, 260, 500)], "not_detected")
+        self.assertNotIn((300, 400, 380, 450), causes)  # English: not Japanese
+        self.assertNotIn((10, 10, 100, 100), causes)    # the English we typeset ourselves is ignored
+        self.assertNotIn((5, 5, 10, 10), causes)        # too small to bother
 
 
 class ReadingOrder(unittest.TestCase):

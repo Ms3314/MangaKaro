@@ -34,6 +34,7 @@ from .paths import WEIGHT_FILES, WEIGHTS
 from .pdfio import images_to_pdf
 from .render import Renderer
 from .stages import merge, run_stage, stage_emotion, stage_read, stage_translate
+from .verify import Checker
 
 STAGES = ["read", "emotion", "translate"]
 BOXES_VERSION = 2  # bump when the way boxes are found changes: cached boxes (and what was built on them) are then redone
@@ -56,6 +57,7 @@ class Settings:
     fonts_file: Path | None = None
     redo: list = field(default_factory=list)   # stages whose cache to ignore, and every stage after them
     ollama_url: str = llm.DEFAULT_URL
+    check: bool = True                  # look for Japanese still on each finished page (no language model involved)
 
     def models(self):
         return [self.emotion_model, self.translate_model] + ([self.read_model] if self.reader == "vlm" else [])
@@ -181,7 +183,7 @@ def run(source, output, work, s, log=print):
     if problems:
         raise SetupError("\n\n".join(problems))
     started = time.perf_counter()
-    for sub in ("pages", "cache", "results", "rendered"):
+    for sub in ("pages", "cache", "results", "rendered", "reports", "checks"):
         (work / sub).mkdir(parents=True, exist_ok=True)
     output = Path(output)
     to_folder = output.suffix.lower() != ".pdf"
@@ -189,8 +191,8 @@ def run(source, output, work, s, log=print):
         output.mkdir(parents=True, exist_ok=True)
     models = Models()
 
-    names, out_names, results, failures, report = [], {}, {}, {}, {}  # out_names: page name -> output file name
-    state = {"fonts": None, "renderer": None}
+    names, out_names, results, failures, report, leftovers = [], {}, {}, {}, {}, {}  # out_names: page name -> output file name
+    state = {"fonts": None, "renderer": None, "checker": None}
 
     def finish_page(name):
         """Typeset (or copy, if it has no text) one page, save it, and say where."""
@@ -201,8 +203,17 @@ def run(source, output, work, s, log=print):
                 state["renderer"] = Renderer(state["fonts"], models.text, models.bubbles)
             image, rep = state["renderer"].page(image, results[name])
             report[name] = rep
+            _write(work / "reports" / f"{name}.json", rep)
             note = (f"{sum(b['status'].startswith('rendered') for b in rep)} blocks typeset, "
                     f"{sum(b['status'].startswith('skipped') for b in rep)} skipped, {sum(b['status'].startswith('overflow') for b in rep)} overflow")
+            if s.check:
+                state["checker"] = state["checker"] or Checker()
+                left = state["checker"].page(image, results[name], rep)
+                leftovers[name] = left
+                _write(work / "checks" / f"{name}.json", left)
+                if left:
+                    causes = {c: sum(x["cause"] == c for x in left) for c in ("skipped", "erase_failed", "not_detected")}
+                    note += "; Japanese still on the page: " + ", ".join(f"{n} {c}" for c, n in causes.items() if n)
         cv2.imwrite(str(work / "rendered" / f"{name}.png"), image)
         where = work / "rendered" / f"{name}.png"
         if to_folder:
@@ -265,6 +276,8 @@ def run(source, output, work, s, log=print):
                "typeset": sum(b["status"].startswith("rendered") for b in blocks),
                "overflow": sum(b["status"].startswith("overflow") for b in blocks),
                "skipped": sum(b["status"].startswith("skipped") for b in blocks),
+               "leftover_japanese": {c: sum(x["cause"] == c for v in leftovers.values() for x in v) for c in ("skipped", "erase_failed", "not_detected")},
+               "pages_with_leftovers": sorted(n for n, v in leftovers.items() if v),
                "models": {"emotion": s.emotion_model, "translate": s.translate_model,
                           "read": "manga-ocr" if s.reader == "ocr" else s.read_model},
                "fonts": {k: v["name"] for k, v in fonts.items() if k in ("primary", "secondary")},

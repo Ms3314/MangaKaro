@@ -21,7 +21,7 @@ def settings_from(a):
     return Settings(emotion_model=a.emotion_model, translate_model=a.translate_model, reader=a.reader, read_model=a.read_model,
                     ollama_url=a.ollama_url, pages=getattr(a, "pages", None), max_side=getattr(a, "max_side", Settings.max_side),
                     split_spreads=not getattr(a, "no_split_spreads", False), fonts_file=getattr(a, "fonts", None),
-                    redo=getattr(a, "redo", None) or [])
+                    redo=getattr(a, "redo", None) or [], check=not getattr(a, "no_check", False))
 
 
 def default_output(inputs, kind, what):
@@ -55,6 +55,10 @@ def cmd_translate(a):
         return 1
     print(f"\nDone in {summary['seconds']}s: {summary['pages']} pages ({summary['pages_with_text']} with text), "
           f"{summary['typeset']} text blocks typeset, {summary['skipped']} skipped, {summary['overflow']} overflowing.")
+    left = summary["leftover_japanese"]
+    if sum(left.values()):
+        print(f"Japanese still on {len(summary['pages_with_leftovers'])} page(s): {left['skipped']} left on purpose (text over art, sound effects), "
+              f"{left['erase_failed']} not fully erased, {left['not_detected']} never detected. Details: <work>/checks/<page>.json")
     if summary["pages_failed"]:
         print(f"WARNING: {len(summary['pages_failed'])} page(s) failed and were left unchanged: {', '.join(summary['pages_failed'])}")
     print(f"Wrote {output}")
@@ -83,6 +87,7 @@ def main(argv=None):
     t.add_argument("--pages", help="only these pages, 1-based, e.g. 1-5,8")
     t.add_argument("--max-side", type=int, default=Settings.max_side, help="longest side in pixels of the pages the models see and the output has (default: %(default)s)")
     t.add_argument("--no-split-spreads", action="store_true", help="do not split two-page spreads into right and left pages")
+    t.add_argument("--no-check", action="store_true", help="skip the check for Japanese left on each finished page")
     t.add_argument("--fonts", type=Path, help="font picks JSON to use instead of choosing fonts automatically")
     t.add_argument("--redo", nargs="+", choices=STAGES, metavar="STAGE", help=f"ignore the cache for these stages and every later one: {', '.join(STAGES)}")
     add_model_options(t)

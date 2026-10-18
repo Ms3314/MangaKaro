@@ -29,17 +29,19 @@ def normalize_ellipses(text):
     return re.sub(r"[．.・]{2,}", lambda m: "…" * max(1, len(m.group()) // 3), text)
 
 
-def read_boxes(page, texts, pad=4):
-    """OCR every box on the clean page. It can only output what is in the crop, so it cannot invent text elsewhere."""
+def read_crop(page, bbox, pad=4):
+    """OCR one region of a BGR page. Returns the cleaned-up text."""
     global _MOCR
     from manga_ocr import MangaOcr
     from PIL import Image
     _MOCR = _MOCR or MangaOcr()
     H, W = page.shape[:2]
-    regions = []
-    for g in texts:
-        x0, y0, x1, y1 = g["bbox"]
-        crop = page[max(0, y0 - pad):min(H, y1 + pad), max(0, x0 - pad):min(W, x1 + pad)]
-        text = _MOCR(Image.fromarray(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)))
-        regions.append({"id": g["label"], "source_text": normalize_ellipses(text)})
+    x0, y0, x1, y1 = bbox
+    crop = page[max(0, y0 - pad):min(H, y1 + pad), max(0, x0 - pad):min(W, x1 + pad)]
+    return normalize_ellipses(_MOCR(Image.fromarray(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB))))
+
+
+def read_boxes(page, texts, pad=4):
+    """OCR every box on the clean page. It can only output what is in the crop, so it cannot invent text elsewhere."""
+    regions = [{"id": g["label"], "source_text": read_crop(page, g["bbox"], pad)} for g in texts]
     return {"model": "manga-ocr", "ids_ok": True, "regions": regions, "raw": None}
