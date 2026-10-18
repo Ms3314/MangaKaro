@@ -1,33 +1,115 @@
-# mangaKaro
+<p align="center">
+  <img src="docs/images/header.svg" alt="mangaKaro: Japanese manga to English, fully local" width="100%">
+</p>
 
-Translate manga from Japanese to English with local models. Give it a PDF or a set of page images, and get the translated
-pages back as a PDF or as images.
+<p align="center">
+  <b>Give it a PDF or a folder of page images. Get the translated pages back.</b><br>
+  No cloud, no API keys, no manual steps.
+</p>
 
+```bash
+mangakaro translate manga/input/my-volume          # a folder of images  →  manga/output/my-volume/pages/
+mangakaro translate manga/input/book.pdf           # a PDF               →  manga/output/book/book.translated.pdf
+mangakaro translate pages/*.png -o translated/     # a list of files     →  translated/
 ```
-mangakaro translate chapter.pdf          →  chapter.translated.pdf
-mangakaro translate pages/               →  pages_translated/   (one translated image per page)
-mangakaro translate pages/*.png -o out/  →  out/               (the same, from a list of files)
+
+> **Status: a working prototype, not a finished product.** Speech bubbles on white paper work well. Text over art works
+> less well, and sound effects, background signs and large display lettering are left in Japanese. Translation quality has
+> **not** been scored against reference translations: everything below was judged by eye, by someone who does not read
+> Japanese. See [What still goes wrong](#what-still-goes-wrong).
+
+## Before and after
+
+All pages below are from the [Manga109](http://www.manga109.org/) dataset (*Aisazu Niha Irarenai*), translated in one run with the
+default models. Left: the original. Right: the output. Nothing was touched by hand.
+
+**A good page.** Seven speech bubbles on white paper and over a dark panel, each erased and re-lettered in English.
+
+![Before and after, a page that works](docs/images/before-after-006_l.jpg)
+
+**A mixed page.** Bubbles are fine; the sound effects around the pot are left in Japanese on purpose, and one vertical caption was never detected (top right).
+
+![Before and after, a mixed page](docs/images/before-after-009_l.jpg)
+
+**Text over screentone and drawing.** The lettering that sits on tone is erased with LaMa and the English gets a white outline.
+One bubble in the lower middle is too narrow, so its English is small.
+
+![Before and after, text over art](docs/images/before-after-005_l.jpg)
+
+**A page that goes wrong.** The big "かんげき!!" lettering at the top is display lettering and is left in Japanese. In the bottom-right panel one sentence is
+split across two bubbles, and because English reads left to right it comes out backwards ("try a test run." sits left of "Well then, I guess I'll").
+The long line "I… finally bought it!!" also sits outside any bubble. Reading order and matching text to bubbles is the weak spot.
+
+![Before and after, a failure](docs/images/before-after-002_r.jpg)
+
+**A page it must not touch.** This is a block of prose. Before the safety check (middle) the pipeline erased it and wrote an invented
+sentence in its place, because the OCR can only read one line or bubble at a time. Now (right) such a box is left alone and
+listed for review.
+
+![Original, old output, new output](docs/images/guard-001_r.jpg)
+
+## How it works
+
+```mermaid
+flowchart TD
+    IN["PDF · folder of images · image files"] --> LOAD["<b>1 · Load</b><br/>render PDF pages · split two-page spreads<br/>(right page first) · shrink to 1536 px"]
+    LOAD --> DET["<b>2 · Find the text</b><br/>panels_text (YOLO26n-seg) + comic-text-detector<br/>merged, numbered in reading order 1.1 · 1.2 · 2.1 …"]
+    DET --> OCR["<b>3 · Read</b><br/>manga-ocr on each box crop"]
+    OCR --> TRI{"<b>4 · Triage</b><br/>any Japanese in it?<br/>box too big for what was read?"}
+    TRI -- "no: leave the box alone,<br/>list it for review" --> KEEP["box stays as it was"]
+    TRI -- yes --> EMO["<b>5 · Emotion and scene</b><br/>vision LLM sees the page + the text<br/>speaker · emotion · intensity · style"]
+    EMO --> TR["<b>6 · Translate</b><br/>text LLM translates the whole page at once<br/>with the emotion tags"]
+    TR --> FONT["<b>7 · Fonts</b> (once per manga)<br/>measure the lettering weight,<br/>pick a matching primary and loud font"]
+    FONT --> CLS{"<b>8 · Classify each box</b>"}
+    CLS -- "white paper" --> PLAIN["erase the lettering by its pixel mask<br/>English in the bubble"]
+    CLS -- "flat black" --> INV["flat fill<br/>white English"]
+    CLS -- "screentone or art" --> OVL["LaMa inpainting<br/>black English with white outline"]
+    PLAIN --> OUT
+    INV --> OUT
+    OVL --> OUT
+    KEEP --> OUT["<b>9 · Check and write</b><br/>find Japanese left on the page, say why<br/>write the PDF or the images"]
+    classDef model fill:#2a1f3d,stroke:#ff5d73,color:#fff;
+    class DET,OCR,EMO,TR,OVL model;
 ```
 
-Everything runs on your own machine: no cloud services, no API keys. It finds the text on each page, reads it with an OCR
-model built for manga, asks a vision model to judge the emotion of each line, translates the whole page with a text model,
-then erases the Japanese and typesets the English inside the speech bubbles.
+Boxes in purple use a model. Every stage is cached in the work directory, so an interrupted run resumes where it stopped and one stage can be redone
+(`--redo translate`). Pages are finished one at a time, so you can open the first translated page while the rest are still running.
 
-**Status: a working prototype.** It handles plain speech bubbles well. Sound effects and text over artwork are left in
-Japanese. Translation quality has not been scored against a reference. See [Known limitations](#known-limitations) and
-[docs/PROGRESS.md](docs/PROGRESS.md).
+### Models, by step
 
-## What you need
+| Step | Model | Runs on | License (from the model's page; check before redistributing) |
+| --- | --- | --- | --- |
+| Text boxes and panels | [`comic-panels-text-detect`](https://huggingface.co/Oliverdsfdsf/comic-panels-text-detect) (YOLO26n-seg) | CPU | Apache-2.0 |
+| Extra text boxes and the lettering pixel mask | `comic-text-detector` (ONNX, from [manga-image-translator](https://github.com/zyddnys/manga-image-translator)) | CPU | GPL-3.0 |
+| Speech bubble shapes | [`manga_bubbles_detect`](https://huggingface.co/PSImera/manga_bubbles_detect) (YOLOv8) | CPU | MIT |
+| Reading Japanese | [`kha-white/manga-ocr-base`](https://huggingface.co/kha-white/manga-ocr-base) | Apple GPU (MPS) or CPU | Apache-2.0 |
+| Emotion and scene | `gemma4:e4b-mlx` through [Ollama](https://ollama.com) | local | see Ollama |
+| Translation | `gemma4:e4b-mlx` through Ollama (any Ollama model works) | local | see Ollama |
+| Erasing over art | [`big-lama`](https://github.com/advimman/lama) (LaMa, TorchScript) | CPU | Apache-2.0 per the LaMa repository |
+| Fonts | system fonts, picked by stroke weight (no model) | – | each font's own license |
 
-- A Mac with Apple silicon was used for development. Other machines should work but are untested.
-- Python 3.11 or newer, and [uv](https://docs.astral.sh/uv/) (or pip).
-- [Ollama](https://ollama.com) running locally, with a vision-capable model. The default is `gemma4:e4b-mlx` (an Apple
-  silicon build). On other machines pick another vision model from Ollama's library and pass it with `--emotion-model` and
-  `--translate-model`.
-- Three model weight files in `weights/` (see below). They are not included in the repository.
-- Disk and memory for the models: the default Ollama model is about 9.5 GB.
+The YOLO weights are run with Ultralytics (AGPL-3.0). Models that were tried and not kept are in the next section.
+
+### Why it looks like this: what we tried
+
+Each choice was made from a test on real pages. The full record, with the mistakes, is in [docs/PROGRESS.md](docs/PROGRESS.md).
+
+| Question | What we found | Decision |
+| --- | --- | --- |
+| Can a 4B vision model read Japanese off the page? | No. It invented text and mixed romaji into Japanese. | Read with manga-ocr, which can only output what is in the crop |
+| Does splitting read / emotion / translate into stages help the small model? | Not by itself (slower than one call, no better at reading), but each stage can use a different model and be redone alone | Keep the stages |
+| Which model translates best? | Compared `qwen3.5:4b`, `qwen3:8b` and `gemma4:e4b-mlx` by eye: Gemma gave the most natural English | Gemma for emotion and translation |
+| Can the model skip lines? | Yes: it returned 1 of 11 lines on one page | Ask again for the missing lines, then line by line |
+| Can the model stall? | Yes: calls looped on garbled text | 180 s limit, length cap, chunks of 4 lines |
+| One detector or two? | `panels_text` misses thought bubbles and margin text | Merge in a second detector's extra boxes |
+| Erase by darkness or by mask? | Darkness also removed bubble outlines and black backgrounds | Erase by the lettering's pixel mask |
+| OpenCV inpainting or LaMa? | OpenCV leaves cloudy patches over screentone; LaMa continues the texture but can leave a smudge on hair; a flat fill beats LaMa on solid black | LaMa for overlays, flat fill for black |
+| Can the OCR be trusted on big boxes? | No: on a block of prose it returned a short invented sentence | Triage before erasing |
 
 ## Install
+
+You need a Mac with Apple silicon (what it was built on; other machines are untested), Python 3.11+, [uv](https://docs.astral.sh/uv/) and
+[Ollama](https://ollama.com) running locally. The default model is about 9.5 GB.
 
 ```bash
 uv venv .venv
@@ -35,140 +117,98 @@ uv pip install --python .venv/bin/python -e .
 ollama pull gemma4:e4b-mlx
 ```
 
-The first run also downloads the OCR model (`kha-white/manga-ocr-base`) from Hugging Face.
-
-### Weights
-
-Put these files in `weights/` (or set `MANGAKARO_WEIGHTS` to another folder). Check each model's license before reuse.
+The first run downloads the OCR model from Hugging Face. Put these weight files in `weights/` (or set `MANGAKARO_WEIGHTS`):
 
 | File | Source |
 | --- | --- |
 | `comic-panels-and-text-detect.safetensors` | https://huggingface.co/Oliverdsfdsf/comic-panels-text-detect |
-| `bubbles_detect.pt` | https://huggingface.co/PSImera/manga_bubbles_detect |
+| `bubbles_detect.pt` (a pickle: load only from this source) | https://huggingface.co/PSImera/manga_bubbles_detect |
 | `comictextdetector.pt.onnx` | the `comic-text-detector` release linked from https://github.com/zyddnys/manga-image-translator/releases |
+| `big-lama.pt` (optional, about 196 MB) | https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt |
 
-`bubbles_detect.pt` is a pickle file: only load it from the source above.
-
-**Optional, recommended:** `weights/big-lama.pt` (about 196 MB, TorchScript) from
-https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt. If it is present, text over screentone
-and line art is erased with LaMa; if not, OpenCV's basic inpainting is used. It is loaded with `torch` directly. Do not
-`pip install simple-lama-inpainting`: it pins old numpy, opencv and pillow and would downgrade them.
-
-### Check the setup
+Without `big-lama.pt`, text over art is erased with OpenCV's basic inpainting. Load LaMa this way; do not `pip install simple-lama-inpainting`,
+which pins old numpy, opencv and pillow and downgrades them. Then check everything:
 
 ```bash
 .venv/bin/mangakaro check
 ```
 
-This checks the weights, the Python packages, a usable English font, that Ollama is running, and that the models you asked
-for are installed. It prints exactly what is missing and how to fix it.
-
 ## Use it
 
-```bash
-# a PDF in, a PDF out (written next to the input as book.translated.pdf)
-.venv/bin/mangakaro translate book.pdf
+Put manga under `manga/input/`. Output goes to `manga/output/<name>/`, with `work/` beside it. The whole `manga/` folder is git-ignored.
 
-# a folder of page images in, a folder of translated images out (pages_translated/)
-.venv/bin/mangakaro translate pages/
-
-# several image files in (the shell expands the *), images out into a folder of your choice
-.venv/bin/mangakaro translate pages/*.png -o translated/
-
-# any input can produce a PDF instead: end the output name in .pdf
-.venv/bin/mangakaro translate pages/ -o book-en.pdf
-
-# try the first three pages first
-.venv/bin/mangakaro translate book.pdf --pages 1-3
 ```
-
-Image files are put in natural order (`page2` before `page10`). Supported image types: `.png`, `.jpg`, `.jpeg`, `.webp`.
-The page order is the order of the files, so name them so that they sort in reading order.
-
-Pages are processed one at a time with a progress line each. If a run is interrupted, run the same command again: finished
-pages and finished model calls are reused from the work directory.
+manga/
+├── input/
+│   ├── my-volume/            page images (natural order: page2 before page10)
+│   └── book.pdf
+└── output/
+    └── my-volume/
+        ├── pages/            translated pages, one image per page (_R and _L for split spreads)
+        └── work/             pages, cached model results, rendered/, reports/, checks/, fonts.json, summary.json
+```
 
 | Option | What it does |
 | --- | --- |
-| `-o, --output` | a path ending in `.pdf` writes one PDF; any other path is a folder that receives the translated page images. Default: `<input>.translated.pdf` for a PDF, `<folder>_translated/` for a folder, `./translated/` for a list of files |
-| `--work-dir` | where page images and cached results go (default `<output>.work`) |
-| `--pages 1-5,8` | only these pages (1-based position in the PDF, or in the sorted list of images) |
-| `--emotion-model`, `--translate-model` | Ollama models for the emotion and translation steps |
-| `--reader ocr\|vlm` | read text with manga-ocr (default) or with a vision model; `--read-model` sets which |
+| `-o, --output` | a path ending in `.pdf` writes one PDF; any other path is a folder of images |
+| `--work-dir` | where cached results go (default: beside the output). Re-running resumes from it |
+| `--pages 1-5,8` | only these pages (1-based position in the sorted input) |
+| `--emotion-model`, `--translate-model` | any Ollama models; the emotion model must see images |
+| `--reader ocr\|vlm` | read text with manga-ocr (default) or a vision model |
 | `--max-side 1536` | longest side in pixels of the pages the models see and the output has |
-| `--plain-only` | only translate text in plain white bubbles; leave text on dark areas and over art alone |
-| `--no-lama` | erase text over art with OpenCV's basic inpainting instead of LaMa (a little faster, smears more) |
+| `--plain-only` | translate only plain white bubbles; leave text on dark areas and over art alone |
+| `--no-lama` | use OpenCV instead of LaMa (faster, smears more) |
 | `--no-check` | skip the check for Japanese left on each finished page |
 | `--no-split-spreads` | keep two-page spreads as one page |
-| `--fonts picks.json` | use these fonts instead of choosing them automatically |
-| `--redo translate` | ignore cached results from this step onward (`read`, `emotion`, `translate`) |
-| `--ollama-url` | Ollama server address (default `http://localhost:11434`) |
+| `--fonts picks.json` | fixed fonts instead of automatic choice |
+| `--redo translate` | ignore the cache from this stage onward (`read`, `emotion`, `translate`) |
 
-### What you get
+Output pages are raster images, so text in an output PDF is not selectable.
 
-- One output page per input page, translated or not, as one PDF or as one PNG per page (named after the input file, with `_R`
-  and `_L` added for a split two-page spread). Spreads become two pages, right page first.
-- The work directory keeps everything: `pages/` (what the models saw), `rendered/` (translated pages as images),
-  `results/` (the Japanese text, emotion and English for every box), `fonts.json` and `fonts.png` (the fonts chosen and a
-  sample sheet), `report.json` (what happened to every text block) and `summary.json`.
-- Output pages are raster images, so the text in an output PDF is not selectable.
+## Numbers so far
 
-### How long it takes
+Measured on the development Mac with the default models. None of this is translation *quality*, which has not been scored.
 
-On the development Mac with the default models, about 20 to 60 seconds per page (a 5-page test took 176 seconds in total).
-The vision step is the slowest part. A 20-page chapter takes roughly 10 to 20 minutes.
+| Run | Pages | Text blocks | Typeset | Overflow | Skipped | Time |
+| --- | --- | --- | --- | --- | --- | --- |
+| 20-page chapter (mangahaha) | 20 | 187 | 176 | 10 | 1 | about 10 to 20 min |
+| Manga109 sample (11 spreads → 22 pages), before triage | 22 | 184 | 172 | 8 | 4 | 1,777 s (about 80 s per page; the two covers took 336 s of model time) |
 
-## How it works
+On the Manga109 sample the check found 15 pieces of Japanese still on the pages: 10 never detected, 3 skipped on purpose, 2 badly erased.
+The triage step was added after this run and has only been replayed on its cached readings, not re-run in full.
 
-1. Pages are loaded (rendered from the PDF, or read from the image files), two-page spreads are split, and each page is shrunk to at most 1,536 px.
-2. A detector finds text boxes and panels, and numbers the boxes in reading order (right to left, top to bottom).
-3. manga-ocr reads each box.
-4. A vision model looks at the page and the text and tags each line with speaker, emotion and intensity.
-5. A text model translates the whole page at once, using the emotion tags, so voices stay consistent.
-6. Once per manga, the weight of its lettering is measured and a primary and a secondary English font are chosen.
-7. The Japanese letters are erased by their pixel mask. In plain bubbles the English is fitted inside the bubble; on flat black it is
-   drawn in white; over screentone or art the area is inpainted with LaMa and the English is drawn black with a white outline.
-8. A check looks for Japanese still on the finished page (`checks/<page>.json`).
+## What still goes wrong
 
-The full design, the data formats and the reasons behind each choice are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-
-## Known limitations
-
-- **Japanese to English only.**
-- **Text over art is a first version.** Plain bubbles are the reliable case. White lettering on flat black panels works well. Lettering over screentone or drawn hair is erased with LaMa (neural inpainting), which continues the texture but can leave small marks, and its English is drawn black with a white outline. `--plain-only` turns this off and leaves such text in Japanese. Sound effects and background signs are not translated.
-- **OCR mistakes reach the translation.** Short vertical strings can be misread or given extra characters, and the translator
-  tends to turn garbled text into a confident, wrong sentence. The same page can read slightly differently after a PDF
-  round trip, because the page images are re-encoded.
-- **Narrow bubbles get small text,** and in a few bubbles the English still touches the outline.
-- **Not scored.** The quality notes in the docs come from looking at the output. There are no reference translations yet.
-- **Fonts:** only installed fonts are used (Comic Sans MS and a few others on a Mac) and they are matched on weight, not shape.
-  Add `.ttf` or `.otf` files to `fonts/` to widen the choice, after checking each font's license.
+- **Display lettering, titles and sound effects stay in Japanese.** The emotion model's "sound effect" label is also unreliable: 4 of 5 labels on one page were shouted dialogue.
+- **Reading order and bubble matching** can put a sentence in the wrong bubble (see the failing page above).
+- **OCR mistakes reach the translation.** Short vertical strings are sometimes misread, and the translator turns garbled text into a confident wrong sentence.
+- **Narrow bubbles get small text,** and in about 30% of typeset blocks the safe area in the bubble was too small and the detector's box was used, so English can touch or cross the outline.
+- **Small side notes and some vertical captions are never detected** by either detector.
+- **Text over art leaves marks** on hair and faces, and a few narrow columns stay at about 10 px.
+- **Not scored.** There are no reference translations; the quality notes come from looking at the output.
+- Japanese to English only. Fonts are matched on weight, not letter shape.
 
 ## Project layout
 
 ```
-mangakaro/        the package: cli, pipeline, detect, ocr, stages, prompts, fonts, render, pages, pdfio, llm
+mangakaro/        the package: cli, pipeline, pages, detect, ocr, stages, prompts, llm, fonts, render, inpaint, verify, pdfio, paths
 experiments/      scripts used to decide the design (detector comparison, one-shot translation, review sheets)
 tests/            unit tests for everything that needs no models
-docs/             ARCHITECTURE.md, PROGRESS.md
-data/             cached results from the experiments (JSON only)
-weights/          model weights (not in the repository)
+docs/             ARCHITECTURE.md (design and thresholds), PROGRESS.md (the full record), images/
+data/, output/    cached results and review sheets from the experiments
+manga/            your inputs, outputs and work directories (git-ignored)
+weights/          model weights (git-ignored)
 ```
-
-`Manga Translation Pipeline — Phase-wise MVP Plan.md` is the original plan, with the current status of each phase added at the top.
-
-## Tests
 
 ```bash
 .venv/bin/python -m unittest discover tests -v
 ```
 
-The tests cover page handling, the PDF round trip, OCR cleanup, reading order, text fitting and the font weight measure. They
-need no models. The full pipeline was checked by running the command on a 5-page PDF.
+The tests need no models. More: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) has every module, data format and threshold;
+[docs/PROGRESS.md](docs/PROGRESS.md) has the experiments, the mistakes and the lessons.
 
 ## Licenses
 
-This project's own code has no license file yet. It depends on models and libraries with different licenses: the
-text-box detector weights are Apache-2.0, the bubble detector is MIT, the lettering-mask detector is GPL-3.0, manga-ocr is
-Apache-2.0, and Ultralytics (used to run the YOLO models) is AGPL-3.0. Check these before distributing anything built on
-them. The manga pages used for testing are copyrighted and are not in the repository.
+This project's own code has no license file yet. It depends on models and libraries with different licenses (listed above); the lettering-mask
+detector is GPL-3.0 and Ultralytics is AGPL-3.0, so check them before distributing anything built on them. The sample pages are from Manga109,
+which has its own terms of use: check them before redistributing the images in `docs/images/`.

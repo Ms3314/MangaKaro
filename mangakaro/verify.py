@@ -16,10 +16,8 @@ import re
 import numpy as np
 
 from .detect import ComicTextDetector
-from .ocr import read_crop
+from .ocr import JAPANESE, read_crop
 
-# hiragana, katakana, CJK ideographs, half-width katakana
-JAPANESE = re.compile(r"[぀-ヿ㐀-䶿一-鿿ｦ-ﾟ]")
 
 
 def is_japanese(text, min_chars=2):

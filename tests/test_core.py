@@ -10,7 +10,7 @@ import numpy as np
 
 from mangakaro.detect import assign_ids, merge_text_boxes, reading_order
 from mangakaro.fonts import DEFAULT_FONT, font_of, weight_ratio
-from mangakaro.ocr import drop_contained, normalize_ellipses
+from mangakaro.ocr import drop_contained, normalize_ellipses, triage
 from mangakaro.pages import load_pages, natural_key, parse_pages, resolve_source, shrink, split_spread
 from mangakaro.pdfio import images_to_pdf, pdf_page_count
 from mangakaro.pipeline import write_output
@@ -385,3 +385,40 @@ class WeightMeasure(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Triage(unittest.TestCase):
+    def _run(self, bbox, text):
+        return triage([{"label": "1.1", "bbox": bbox}], {"regions": [{"id": "1.1", "source_text": text}]})
+
+    def test_normal_bubble_is_kept(self):
+        self.assertEqual(self._run([0, 0, 100, 200], "なっ…！"), {})
+
+    def test_no_japanese_is_skipped(self):
+        self.assertIn("1.1", self._run([0, 0, 100, 200], "MARGARET COMICS"))
+        self.assertIn("1.1", self._run([0, 0, 40, 40], "12"))
+        self.assertEqual(self._run([0, 0, 40, 40], "……"), {})  # a silent bubble is still a bubble
+        self.assertEqual(self._run([0, 0, 40, 40], "？"), {})
+
+    def test_big_box_with_few_characters_is_skipped(self):
+        self.assertIn("1.1", self._run([0, 0, 680, 350], "そういうことですから、ここまでは"))
+        self.assertIn("1.1", self._run([0, 0, 700, 500], "あ" * 300))  # huge whatever the length
+
+    def test_big_box_with_dense_text_is_kept(self):
+        self.assertEqual(self._run([0, 0, 400, 300], "あ" * 40), {})
+
+
+class DefaultPaths(unittest.TestCase):
+    def test_inputs_under_manga_get_output_beside_each_other(self):
+        from mangakaro.cli import default_output, default_work
+        from mangakaro.paths import MANGA
+        out = default_output([str(MANGA / "input" / "vol1")], "images", [])
+        self.assertEqual(out, MANGA / "output" / "vol1" / "pages")
+        self.assertEqual(default_work(out), MANGA / "output" / "vol1" / "work")
+        pdf = default_output([str(MANGA / "input" / "book.pdf")], "pdf", MANGA / "input" / "book.pdf")
+        self.assertEqual(pdf, MANGA / "output" / "book" / "book.translated.pdf")
+        self.assertEqual(default_work(pdf), MANGA / "output" / "book" / "work")
+
+    def test_elsewhere_keeps_the_old_defaults(self):
+        from mangakaro.cli import default_output
+        self.assertEqual(default_output(["/tmp/x/book.pdf"], "pdf", Path("/tmp/x/book.pdf")), Path("/tmp/x/book.translated.pdf"))

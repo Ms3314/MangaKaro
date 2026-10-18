@@ -28,7 +28,7 @@ import cv2
 from . import llm
 from .detect import BubblesYolo, ComicTextDetector, PanelsText, assign_ids, draw, merge_text_boxes
 from .fonts import DEFAULT_FONT, candidate_fonts, measure_manga, pick_fonts, write_specimen
-from .ocr import drop_contained, read_boxes
+from .ocr import drop_contained, read_boxes, triage
 from .pages import MAX_SIDE, contact_sheet, load_pages
 from .paths import WEIGHT_FILES, WEIGHTS
 from .pdfio import images_to_pdf
@@ -140,9 +140,15 @@ def understand_page(name, page, s, models, work):
         read = run_stage(d / "read.json", lambda: stage_read(s.read_model, annotated, sheet, texts))
     else:
         read = run_stage(d / "read.json", lambda: read_boxes(page, texts))
-    emo = run_stage(d / "emotion.json", lambda: stage_emotion(s.emotion_model, annotated, texts, read))
-    tr = run_stage(d / "translate.json", lambda: stage_translate(s.translate_model, texts, read, emo))
-    final = merge(name, texts, read, emo, tr)
+    skip = triage(texts, read)  # boxes with nothing to translate or an unreliable read stay untouched, flagged for review
+    live = [g for g in texts if g["label"] not in skip]
+    if live:
+        emo = run_stage(d / "emotion.json", lambda: stage_emotion(s.emotion_model, annotated, live, read))
+        tr = run_stage(d / "translate.json", lambda: stage_translate(s.translate_model, live, read, emo))
+    else:  # nothing to translate on this page: no model calls
+        emo = {"model": s.emotion_model, "ids_ok": True, "scene": "", "regions": [], "seconds": 0}
+        tr = {"model": s.translate_model, "ids_ok": True, "regions": [], "seconds": 0}
+    final = merge(name, texts, read, emo, tr, skip)
     _write(work / "results" / f"{name}.json", final)
     return final
 

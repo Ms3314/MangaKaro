@@ -231,7 +231,7 @@ class Renderer:
         items, others, report = [], [], []  # items: plain bubbles; others: (region, kind) for inverse and overlay
         for r in final["regions"]:
             if not (r["translation"] or "").strip():
-                report.append({"ids": [r["id"]], "status": "skipped: no translation"})
+                report.append({"ids": [r["id"]], "status": f"skipped: {r.get('skip') or 'no translation'}"})
                 continue
             kind = classify(gray, grad, mask, boxes[r["id"]])
             if kind == "plain":

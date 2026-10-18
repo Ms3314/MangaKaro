@@ -106,14 +106,15 @@ def stage_translate(model, texts, read, emo):
             "regions": [got[i] for i in ids if i in got] or None, "raw": None}
 
 
-def merge(name, texts, read, emo, tr):
+def merge(name, texts, read, emo, tr, skip=None):
+    skip = skip or {}
     """Final per-page JSON, same fields as the one-shot translate_pages.py output."""
     r = {x["id"]: x for x in read["regions"] or []}
     e = {x["id"]: x for x in emo["regions"] or []}
     t = {x["id"]: x for x in tr["regions"] or []}
     regions = [{"id": g["label"], "source_text": r.get(g["label"], {}).get("source_text", ""),
                 "speaker": e.get(g["label"], {}).get("speaker"), "emotion": e.get(g["label"], {}).get("emotion"), "intensity": e.get(g["label"], {}).get("intensity"),
-                "translation": t.get(g["label"], {}).get("translation", ""),
+                "translation": "" if g["label"] in skip else t.get(g["label"], {}).get("translation", ""), "skip": skip.get(g["label"]),
                 "style": e.get(g["label"], {}).get("style"), "flag": t.get(g["label"], {}).get("flag")} for g in texts]
     return {"page": name, "models": {"read": read["model"], "emotion": emo["model"], "translate": tr["model"]},
             "seconds": {"read": read["seconds"], "emotion": emo["seconds"], "translate": tr["seconds"]},

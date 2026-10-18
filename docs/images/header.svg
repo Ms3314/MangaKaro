@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360" role="img" aria-label="mangaKaro: Japanese manga page translated to English, locally">
+  <defs>
+    <pattern id="tone" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="5" cy="5" r="1.6" fill="#ffffff" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15151c"/><stop offset="1" stop-color="#2a1f3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="360" fill="url(#bg)"/>
+  <rect width="1200" height="360" fill="url(#tone)"/>
+  <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="3">
+    <line x1="0" y1="360" x2="420" y2="0"/><line x1="60" y1="360" x2="480" y2="0"/><line x1="900" y1="360" x2="1200" y2="40"/>
+  </g>
+  <text x="70" y="168" fill="#ffffff" font-family="'Hiragino Sans','Yu Gothic','Noto Sans CJK JP',sans-serif" font-size="30" opacity="0.7" letter-spacing="8">日本語 → ENGLISH</text>
+  <text x="66" y="250" fill="#ffffff" font-family="'Avenir Next','Helvetica Neue',Arial,sans-serif" font-size="96" font-weight="800" letter-spacing="-2">manga<tspan fill="#ff5d73">Karo</tspan></text>
+  <text x="70" y="298" fill="#c9c6d6" font-family="'Avenir Next','Helvetica Neue',Arial,sans-serif" font-size="22">Japanese manga to English, fully local.</text>
+  <!-- before bubble -->
+  <g transform="translate(700,60)">
+    <path d="M30 0 h150 a30 30 0 0 1 30 30 v120 a30 30 0 0 1 -30 30 h-60 l-20 36 l-8 -36 h-62 a30 30 0 0 1 -30 -30 v-120 a30 30 0 0 1 30 -30z" fill="#fff"/>
+    <g font-family="'Hiragino Sans','Yu Gothic','Noto Sans CJK JP',sans-serif" font-size="30" font-weight="700" fill="#15151c" text-anchor="middle">
+      <text x="105" y="62">おはよう</text>
+      <text x="105" y="108">今日も</text>
+      <text x="105" y="148">がんばろう！</text>
+    </g>
+  </g>
+  <g transform="translate(930,150)" fill="none" stroke="#ff5d73" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 0 h50 m-16 -16 l16 16 l-16 16"/>
+  </g>
+  <!-- after bubble -->
+  <g transform="translate(1000,70)">
+    <ellipse cx="92" cy="70" rx="92" ry="64" fill="#fff"/>
+    <path d="M60 120 l-14 40 l50 -36z" fill="#fff"/>
+    <g font-family="'Comic Sans MS','Marker Felt',Arial,sans-serif" font-size="21" font-weight="700" fill="#15151c" text-anchor="middle">
+      <text x="92" y="50">Good morning!</text><text x="92" y="76">Let's do our best</text><text x="92" y="102">today too!</text>
+    </g>
+  </g>
+</svg>

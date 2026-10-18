@@ -149,6 +149,10 @@ reliable on Apple's GPU backend), at about half a second per box.
 original width. A plain box whose lettering touches drawn art (`has_art`: more than 6% of the non-lettering pixels are dark) is erased
 with LaMa, and its English is kept on the white part above the art (`paper_top`) and aligned to the top.
 
+**Triage before the models.** `ocr.triage` leaves a box untouched (and reports it as `skipped: ...`) when the OCR found letters but
+no Japanese, or when the box is too big for the characters read from it (a block of prose or big title lettering, where manga-ocr
+returns a short invented sentence that would otherwise replace the real text). Such boxes skip the emotion and translation calls.
+
 **Check after typesetting.** `verify.py` runs the lettering detector at a lower threshold on the finished page (whole page plus
 two overlapping zoomed halves), drops anything inside the English we placed, reads what is left with manga-ocr, and keeps what
 contains Japanese. Cause: `skipped` (we left it on purpose), `erase_failed` (inside a box we translated), `not_detected`.

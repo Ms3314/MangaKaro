@@ -276,6 +276,31 @@ only; the other pages were not re-inspected, and no before/after count over the 
 | The "widen" step only ran when the text was small, so 24 px text over the hair was untouched | The trigger must match the problem: here it was position, not size |
 | The new "keep off the art" rule did not run because of an earlier condition on free-standing text | Print which branch ran before concluding the logic is wrong |
 
+### Part 4: the Manga109 test (`test-123`, 11 spreads, 22 half-pages)
+
+A first run on pages from the Manga109 dataset (cover, a prose synopsis, then story pages). 22 of 22 pages completed in 1,777 s
+(about 80 s per half-page; the two covers alone took 336 s of model time). 184 text blocks: 172 typeset, 8 overflowed, 4 skipped;
+15 pieces of Japanese were left (10 never detected, 3 skipped on purpose, 2 badly erased). 54 of the 172 typeset blocks used the
+detector box because the safe area in the bubble was too small. Judged by eye on pages 005_L and 009_L only; not scored.
+
+Failures found, worst first:
+
+| Failure | Cause |
+| --- | --- |
+| The prose synopsis page (001_R) was erased and replaced by an invented English paragraph; the essay block on 003_R had the same problem | One detector box held a whole block of text; manga-ocr reads one line or bubble and returned a short, invented sentence; nothing checked the read before erasing |
+| Cover pages: empty translations after about 170 s each, and a misread title | A Latin logo was sent to the translator; display lettering is where the OCR is weakest |
+| English crossing bubble borders, tiny text in narrow bubbles | The fallback to the detector box (54 blocks) and the lack of a shrink-to-fit step |
+| Shouted dialogue labelled "sound effect" (4 of 5 on 002_L) | The emotion model's label is unreliable; plain bubbles bypass it, but display lettering does not |
+| Japanese never detected (small side notes, a vertical caption) | Neither detector finds it; the check sees it but nothing acts on it |
+
+Fix 1 (done): `ocr.triage` runs after reading and before the model stages. A box is left untouched and listed in the report as
+`skipped: ...` when (a) the OCR found letters or digits but no Japanese (a Latin logo, a page number; punctuation-only bubbles such
+as "……" are kept), or (b) the box is far too big for the characters read from it (at least 300,000 px², or at least 100,000 px²
+with 8,000 px² or more per character). Skipped boxes are not sent to the emotion or translation models. Replayed on the cached
+test-123 reads, it flagged four big boxes (001_R, 003_R 4.1, 001_L, 000_R T.2) and three no-Japanese boxes (two logos and one sound effect), and no ordinary bubble that I
+noticed. I looked at only two of them: 003_R 4.1 is an essay block and 001_L is big title lettering; both are now left alone. The thresholds were set from this one run (a real bubble is 2,500 to 6,000 px² per character there), so they
+need checking on other volumes. Tests: 41 passing.
+
 ## Known limitations
 
 - Japanese to English only. The OCR is Japanese-specific.

@@ -5,8 +5,8 @@ close-ups) to an Ollama vision model, and save its per-ID JSON (text, emotion, t
 data/intermediate/translate/<model>/<page>.json. The staged pipeline in the mangakaro package replaced this approach.
 
 Usage:
-  .venv/bin/python -m experiments.translate_pages daiboken-volume-2 --pages 10-11 --model qwen3-vl:8b
-  .venv/bin/python -m experiments.translate_pages daiboken-volume-2 --pages 10 --dry-run   # detection only, no model call
+  .venv/bin/python -m experiments.translate_pages manga/input/daiboken-volume-2 --pages 10-11 --model qwen3-vl:8b
+  .venv/bin/python -m experiments.translate_pages manga/input/daiboken-volume-2 --pages 10 --dry-run   # detection only, no model call
 (--pages counts the files in the folder from 1; it no longer matches the number in the file name.)
 """
 import argparse

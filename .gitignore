@@ -1,26 +1,19 @@
 .DS_Store
 __pycache__/
 .venv/
+*.egg-info/
+*.swp
 
-# model weights: keep local copies, don't commit (see plan: check each license before reuse)
+# all manga scans, translated outputs and work directories live here (copyrighted or large; never committed)
+manga/
+
+# model weights: keep local copies, don't commit (check each license before reuse)
 weights/
 
-# copyrighted manga scans / source PDFs
-daiboken-volume-2/
-manga-demo/
-mangahaha/
-data/input/
-*.pdf
-
-# generated images (overlays, annotated pages, contact sheets); JSON and summaries are kept
+# generated experiment images; JSON and summaries are kept
 output/**/*.png
 output/**/*.jpg
+output/cli_test/
 data/intermediate/**/*.jpg
 data/intermediate/**/*.png
-
-# CLI runs: per-run work directories and test inputs/outputs
-*.work/
-output/cli_test/
-
-# build artifacts
-*.egg-info/
+*.pdf

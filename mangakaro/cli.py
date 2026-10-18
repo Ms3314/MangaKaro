@@ -5,6 +5,7 @@ from pathlib import Path
 
 from . import __version__, llm
 from .pages import resolve_source
+from .paths import MANGA
 from .pipeline import STAGES, SetupError, Settings, check_setup, run
 
 
@@ -24,14 +25,34 @@ def settings_from(a):
                     redo=getattr(a, "redo", None) or [], check=not getattr(a, "no_check", False), overlay=not getattr(a, "plain_only", False), lama=not getattr(a, "no_lama", False))
 
 
+def under(path, folder):
+    try:
+        return Path(path).expanduser().resolve().relative_to(folder.resolve())
+    except ValueError:
+        return None
+
+
 def default_output(inputs, kind, what):
-    """Where output goes when -o is not given: a PDF next to a PDF; a sibling folder for a folder; ./translated for files."""
+    """Where output goes when -o is not given.
+    Input inside manga/input/: manga/output/<name>/ (a PDF named <name>.translated.pdf, or a pages/ folder).
+    Otherwise: a PDF next to a PDF; a sibling folder for a folder; ./translated for files."""
+    first = Path(inputs[0]).expanduser()
+    if len(inputs) == 1 and under(first, MANGA / "input"):
+        name = first.stem if kind == "pdf" else first.name
+        out = MANGA / "output" / name
+        return out / f"{name}.translated.pdf" if kind == "pdf" else out / "pages"
     if kind == "pdf":
         return what.with_name(f"{what.stem}.translated.pdf")
-    first = Path(inputs[0]).expanduser()
     if len(inputs) == 1 and first.is_dir():
         return first.with_name(f"{first.name}_translated")
     return Path("translated")
+
+
+def default_work(output):
+    """The work directory sits beside the output: manga/output/<name>/work, else <output>.work."""
+    if under(output, MANGA / "output"):
+        return output.parent / "work"
+    return output.with_name(f"{output.stem if output.suffix else output.name}.work")
 
 
 def cmd_translate(a):
@@ -41,7 +62,7 @@ def cmd_translate(a):
         print(f"error: {e}", file=sys.stderr)
         return 1
     output = Path(a.output).expanduser() if a.output else default_output(a.input, kind, what)
-    work = Path(a.work_dir).expanduser() if a.work_dir else output.with_name(f"{output.stem if output.suffix else output.name}.work")
+    work = Path(a.work_dir).expanduser() if a.work_dir else default_work(output)
     s = settings_from(a)
     source = what  # a Path (pdf) or the sorted list of image files
     shown = f"{what}" if kind == "pdf" else f"{len(what)} image(s), {what[0].name} to {what[-1].name}"

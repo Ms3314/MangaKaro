@@ -17,3 +17,6 @@ WEIGHT_FILES = {
 OPTIONAL_WEIGHT_FILES = {
     "big-lama.pt": "https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt (LaMa, TorchScript, about 196 MB)",
 }
+
+# All manga (inputs) and everything made from them (outputs, work directories) live under one folder, which is git-ignored.
+MANGA = ROOT / "manga"

@@ -27,7 +27,7 @@ def peak_rss_mb():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("input_dir", nargs="?", default=str(ROOT / "data/input/jjk_demo"))
+    ap.add_argument("input_dir", nargs="?", default=str(ROOT / "manga/input/jjk_demo"))
     ap.add_argument("--limit", type=int)
     a = ap.parse_args()
     pages = sorted(Path(a.input_dir).glob("*.png"))[: a.limit]
