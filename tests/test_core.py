@@ -422,3 +422,49 @@ class DefaultPaths(unittest.TestCase):
     def test_elsewhere_keeps_the_old_defaults(self):
         from mangakaro.cli import default_output
         self.assertEqual(default_output(["/tmp/x/book.pdf"], "pdf", Path("/tmp/x/book.pdf")), Path("/tmp/x/book.translated.pdf"))
+
+
+class OpenAIBackend(unittest.TestCase):
+    """The cloud comparison backend, with a fake client: no network, no key."""
+    def setUp(self):
+        from types import SimpleNamespace as NS
+        from mangakaro import openai_backend as ob
+        self.ob = ob
+        self.old = ob._client
+        usage = NS(prompt_tokens=1000, completion_tokens=500)
+        reply = NS(usage=usage, choices=[NS(message=NS(content='{"regions": []}'))])
+        self.sent = []
+        ob._client = NS(chat=NS(completions=NS(create=lambda **kw: (self.sent.append(kw), reply)[1])))
+        ob.LEDGER = ob.Ledger(max_usd=0.01)
+
+    def tearDown(self):
+        self.ob._client = self.old
+
+    def test_routes_by_prefix_and_counts_cost(self):
+        from mangakaro import llm
+        out = llm.chat("openai:gpt-5.4-mini", "hi", {"type": "object"})
+        self.assertEqual(out, '{"regions": []}')
+        self.assertEqual(self.sent[0]["model"], "gpt-5.4-mini")  # prefix stripped
+        self.assertAlmostEqual(self.ob.LEDGER.spent, (1000 * 0.75 + 500 * 4.5) / 1e6, places=6)
+
+    def test_cap_stops_further_calls(self):
+        from mangakaro import llm
+        llm.chat("openai:gpt-5.4-mini", "hi", {"type": "object"})  # 0.003 USD
+        for _ in range(6):
+            try:
+                llm.chat("openai:gpt-5.4-mini", "hi", {"type": "object"})
+            except self.ob.BudgetExceeded:
+                break
+        else:
+            self.fail("the cap did not stop the calls")
+        self.assertLess(len(self.sent), 5)
+
+    def test_unknown_model_price_is_refused(self):
+        from mangakaro import llm
+        with self.assertRaises(llm.OllamaError):
+            llm.chat("openai:some-new-model", "hi", {"type": "object"})
+        self.assertEqual(self.sent, [])
+
+    def test_openai_models_are_not_looked_for_in_ollama(self):
+        from mangakaro import llm
+        llm.require_models(["openai:gpt-5.4-mini"])  # would raise if it tried to reach Ollama and Ollama were down
