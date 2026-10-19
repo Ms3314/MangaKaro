@@ -28,7 +28,11 @@ def b64_jpg(img):
 
 
 def chat(model, prompt, schema, images=(), think=False, timeout=180, max_tokens=2048):
-    """One structured-output call. `schema` is a JSON schema the reply must follow. Returns the reply text."""
+    """One structured-output call. `schema` is a JSON schema the reply must follow. Returns the reply text.
+    A model named `openai:<name>` goes to the OpenAI API instead (comparison experiments only, see openai_backend.py)."""
+    if model.startswith("openai:"):
+        from . import openai_backend
+        return openai_backend.chat(model, prompt, schema, images, max_tokens)
     body = {"model": model, "stream": False, "format": schema, "think": think, "keep_alive": "30m",
             "options": {"temperature": 0, "num_ctx": 8192, "num_predict": max_tokens},  # num_predict stops a looping generation
             "messages": [{"role": "user", "content": prompt, **({"images": [b64_jpg(i) for i in images]} if images else {})}]}
@@ -55,6 +59,9 @@ def installed_models():
 
 def require_models(models):
     """Raise OllamaError naming every model that is not installed, with the pull command for each."""
+    models = [m for m in models if not m.startswith("openai:")]
+    if not models:
+        return
     have = set(installed_models())
     have |= {n.removesuffix(":latest") for n in have}
     missing = [m for m in dict.fromkeys(models) if m not in have and f"{m}:latest" not in have]

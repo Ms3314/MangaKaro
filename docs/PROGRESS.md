@@ -301,6 +301,40 @@ test-123 reads, it flagged four big boxes (001_R, 003_R 4.1, 001_L, 000_R T.2) a
 noticed. I looked at only two of them: 003_R 4.1 is an essay block and 001_L is big title lettering; both are now left alone. The thresholds were set from this one run (a real bubble is 2,500 to 6,000 px² per character there), so they
 need checking on other volumes. Tests: 41 passing.
 
+### Part 5: cloud models vs the local pipeline
+
+`experiments/openai_compare.py` translates the same four test-123 pages four ways: an OpenAI image model alone (A), our pipeline with
+`gpt-6.1-sol` doing emotion and translation on manga-ocr readings (B), the same with `gpt-6.1-sol` also reading (C), and the local Gemma run (D).
+OpenAI calls go through `mangakaro/openai_backend.py` (a model named `openai:<id>` is routed there), with a ledger of tokens, seconds and dollars and a hard
+spending cap. Judged blind (random letters, key read afterwards) by one judge, no references.
+
+| Arm | Cost for 4 pages | Time per page |
+| --- | --- | --- |
+| A, gpt-image-2 | $0.197 | 34 s |
+| B, gpt-6.1-sol + manga-ocr | $0.085 | 40 s (detection and OCR reused, not timed) |
+| C, gpt-6.1-sol reads too | $0.134 | 52 s (detection reused, not timed) |
+| D, local Gemma | $0 | about 71 s (3 pages measured from file times, the fourth estimated) |
+
+Findings: B, C and D keep the art and stay close to the Japanese; the cloud English is slightly more idiomatic and read one name better; C was not clearly
+better than B and cost 60% more. The image model invented or changed lines on all four pages, redrew faces and bubbles, and mistranslated the title lettering
+on one page. Lessons: the timings of the arms did not cover the same work, so a fair end-to-end comparison needs every arm run from scratch in the same session;
+the first run of the script was started before its end-to-end fields were added, so they were reconstructed afterwards. 
+
+Mini tier, run later from scratch in one session (check off, models loaded each arm; the local run was not repeated): B-mini (`gpt-5.4-mini` + manga-ocr)
+$0.023 for 4 pages, 61 s (first page 47 s while models load, the others 2.6 to 5.5 s); C-mini (`gpt-5.4-mini` also reads) $0.037, 57 s; `gpt-image-1-mini`
+$0.061, 72 s. Findings: B-mini was about as good as local, at $0.006 a page. C-mini silently dropped two bubbles on 006_L (the reader returned nothing for them,
+and they stayed in Japanese); our manga-ocr never did that. `gpt-image-1-mini` redrew the page and wrote garbled lettering, worse than `gpt-image-2`.
+The local time (55 to 105 s a page) comes from the earlier run, which also ran the left-over-Japanese check, so that comparison is not exactly like for like.
+Lesson: the first-page time includes loading every model, so a per-page figure needs the first page reported separately.
+
+Local re-run and judging (2026-10-20): the local arm was re-run from scratch on the same four pages with `--arms D` (Gemma pre-warmed): 165 s for the four, about 41 s a page,
+read 1.6 to 7.9 s, emotion 11 to 34 s, translate 5 to 14 s per page. That replaces the "about 71 s" above, which was partly estimated and came from an earlier run that also did the left-over-Japanese check.
+The per-page times in that run's `cost.json` (145.6, 8.2, 6.7, 4.0 s) are an artifact: all models run on every page first and the pages are rendered at the end, so the gap between page finishes lands on the first page. Use the total.
+The arms were then judged against local by Claude Sonnet 5.5 (`experiments/judge_pack.py`, report in `JUDGE_REVIEW.md`, verdicts in `judge_verdicts.json`). The earlier line "judged blind" overstated it: the judge read the per-line tables, which show local's English, before the sheets.
+A second pass could not be blind in the same session, so the claims behind the verdicts were checked against the original page instead. That check found a mistake in the first draft: the review had called the speaker name 平井 (Hirai) unconfirmed and said `gpt-6.1-sol` with our OCR had no errors, but the page reads 平井 (ひらい) and the OCR's やが ("Yaga") reached the English of local, sol-B and mini-B. Fixed.
+Timing of the sol arms (checked against `compare-openai/cost.json`): 159 s and 208 s for 4 pages, of which 142 s and 192 s were API calls, and they left out detection and (for sol-B) OCR. Adding the same compute from the local run (about 5 s detection, 13.6 s OCR) gives about 44 and 53 s a page end to end; so local (41 s) is about as fast as sol, not slower.
+Lesson: check the facts a verdict rests on against the source, and do not call a review blind when the judge has seen the answer key's side of the data.
+
 ## Known limitations
 
 - Japanese to English only. The OCR is Japanese-specific.

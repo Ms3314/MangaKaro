@@ -15,6 +15,9 @@ dependencies = [
     "manga-ocr",
 ]
 
+[project.optional-dependencies]
+compare = ["openai"]  # only for experiments/openai_compare.py
+
 [project.scripts]
 mangakaro = "mangakaro.cli:main"
 

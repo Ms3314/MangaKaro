@@ -1,0 +1,220 @@
+{
+  "judge": "claude-sonnet-5-5 (acting as a human-style reviewer, one pass, 2026-10-20)",
+  "rubric": {
+    "fidelity": "1-5. Does the English say what the Japanese says? 5 = no meaning errors; 1 = mostly wrong.",
+    "no_invention": "1-5. 5 = nothing added that is not in the original; 1 = most lines invented.",
+    "naturalness": "1-5. Reads like English a reader would accept as dialogue.",
+    "art_preserved": "1-5. 5 = the original drawing, panels and bubbles are untouched; 1 = redrawn or re-laid-out.",
+    "lettering_fit": "1-5. English is legible, inside its bubble, no collisions, nothing left unerased."
+  },
+  "verdict_values": [
+    "cloud",
+    "local",
+    "tie"
+  ],
+  "scores_by_arm": {
+    "local (Gemma 4)": {
+      "fidelity": 3.0,
+      "no_invention": 5.0,
+      "naturalness": 3.5,
+      "art_preserved": 5.0,
+      "lettering_fit": 3.5
+    },
+    "sol-B (gpt-6.1-sol + our OCR)": {
+      "fidelity": 4.0,
+      "no_invention": 5.0,
+      "naturalness": 4.5,
+      "art_preserved": 5.0,
+      "lettering_fit": 3.5
+    },
+    "sol-C (gpt-6.1-sol also reads)": {
+      "fidelity": 4.5,
+      "no_invention": 5.0,
+      "naturalness": 4.5,
+      "art_preserved": 5.0,
+      "lettering_fit": 3.5
+    },
+    "mini-B (gpt-5.4-mini + our OCR)": {
+      "fidelity": 3.5,
+      "no_invention": 5.0,
+      "naturalness": 4.0,
+      "art_preserved": 5.0,
+      "lettering_fit": 3.5
+    },
+    "mini-C (gpt-5.4-mini also reads)": {
+      "fidelity": 2.5,
+      "no_invention": 4.5,
+      "naturalness": 4.0,
+      "art_preserved": 5.0,
+      "lettering_fit": 3.0
+    },
+    "image-2 (gpt-image-2)": {
+      "fidelity": 1.5,
+      "no_invention": 1.0,
+      "naturalness": 3.0,
+      "art_preserved": 3.0,
+      "lettering_fit": 4.0
+    },
+    "image-mini (gpt-image-1-mini)": {
+      "fidelity": 1.0,
+      "no_invention": 1.0,
+      "naturalness": 1.0,
+      "art_preserved": 2.0,
+      "lettering_fit": 1.0
+    }
+  },
+  "pairs": {
+    "sol-B": {
+      "006_L": {
+        "winner": "tie",
+        "why": "sol-B reads ムシのいい right ('cushy') and 兄貴 as 'big brother'; local says 'crappy' for ムシのいい. But sol-B's bottom-row bubbles (I-I mean..., It's just... you know?) cross the outline; local's fit cleanly."
+      },
+      "005_L": {
+        "winner": "cloud",
+        "why": "local has two real errors: へんぺい足 (flat feet) became 'a lot of standing around' and ノーパン became 'no-bra'. sol-B has both right. Both arms overflow the 'Huh? Part-time...' and 'Tutoring means...' bubbles (shared renderer)."
+      },
+      "009_L": {
+        "winner": "cloud",
+        "why": "local reverses the sukiyaki line ('go home if I can't see sukiyaki') and writes 'Neshima-san'; sol-B gets both right. Both leave 今のいい方 in Japanese."
+      },
+      "002_R": {
+        "winner": "tie",
+        "why": "Both are accurate. Both leave かんげき!! and しーん in Japanese. sol-B's POP / 'moves me' are slightly looser; local's text is smaller in the narrow column."
+      }
+    },
+    "sol-C": {
+      "006_L": {
+        "winner": "tie",
+        "why": "Same as sol-B. 'It's not good for you, for one thing' keeps だっ第一 that local drops."
+      },
+      "005_L": {
+        "winner": "cloud",
+        "why": "Corrects 荷が重そう ('a lot of responsibility', the OCR had misread it) and has flat feet and no-panties right."
+      },
+      "009_L": {
+        "winner": "cloud",
+        "why": "Same fixes as sol-B, and reads the name in the small bubble as 平井 (Hirai). Checked on the page: the bubble has 平井くん with ひらい above it, so this is right and local, sol-B and mini-B (all 'Yaga') are wrong."
+      },
+      "002_R": {
+        "winner": "tie",
+        "why": "Same as sol-B."
+      }
+    },
+    "image-2": {
+      "006_L": {
+        "winner": "local",
+        "why": "Every large bubble is invented ('messing around with Bami', 'Kimi is the one who will protect her'). Panels and bubbles redrawn, page shifted."
+      },
+      "005_L": {
+        "winner": "local",
+        "why": "Invents a calligraphy teacher, tamagoyaki, 'weightlifting gym'. Bubble shapes redrawn."
+      },
+      "009_L": {
+        "winner": "local",
+        "why": "Invents 'Asuka' and 'Narushima said he wanted to focus on his future'. Also adds a '(.bubble bubble bubble))' sound effect."
+      },
+      "002_R": {
+        "winner": "local",
+        "why": "Translates the display lettering but wrongly ('I'll do my best!!' for かんげき), and writes 'Cooked White Rice' on a box that has no such text."
+      }
+    },
+    "image-mini": {
+      "006_L": {
+        "winner": "local",
+        "why": "Garbled words ('ridisdloce', 'autfoszer'), panel layout changed, art redrawn."
+      },
+      "005_L": {
+        "winner": "local",
+        "why": "Garbled lettering in every bubble and a different drawing of the page."
+      },
+      "009_L": {
+        "winner": "local",
+        "why": "Different artwork, nonsense words, lines that are not in the original."
+      },
+      "002_R": {
+        "winner": "local",
+        "why": "Redraws the whole page, 'I'M SO EXCITED' for かんげき, text partly garbled."
+      }
+    },
+    "mini-B": {
+      "006_L": {
+        "winner": "tie",
+        "why": "Both fine. 'insanely easy' is better than local's 'crappy'. Fit is the same."
+      },
+      "005_L": {
+        "winner": "tie",
+        "why": "mini-B fixes the no-pants cafe, but 'N-no, nothing like that!' is wrong for コマゴマしたのダメ and 'ugly swollen legs' misses flat feet. Local has its own two errors."
+      },
+      "009_L": {
+        "winner": "cloud",
+        "why": "Gets the sukiyaki line and 'Narushima' right. Reads やが as 'Yaga-kun' like local."
+      },
+      "002_R": {
+        "winner": "tie",
+        "why": "Both accurate, both leave かんげき!!."
+      }
+    },
+    "mini-C": {
+      "006_L": {
+        "winner": "local",
+        "why": "The two top bubbles (1.1, 1.2) are left in Japanese because the reader returned nothing for them. Local translated both."
+      },
+      "005_L": {
+        "winner": "cloud",
+        "why": "Better than local: 'no-panty café', 'fussy jobs are a no', 'pays next to nothing'. No drops."
+      },
+      "009_L": {
+        "winner": "local",
+        "why": "Misreads: 'Hirai, that place is really great' (right name, but the bubble is about not drinking) and 'the likes of Suki' for スキヤキ. Local has its own errors (Yaga, reversed sukiyaki, Neshima) but not these."
+      },
+      "002_R": {
+        "winner": "tie",
+        "why": "Both fine. mini-C's 'This kind of season just makes me feel all excited' is a little nearer than local's 'thrilled'."
+      }
+    }
+  },
+  "groups": {
+    "all-images": {
+      "ranking_best_to_worst": [
+        "local",
+        "image-2",
+        "image-mini"
+      ],
+      "note": "Neither image model is usable for translation; image-2 is readable but invents most lines, image-mini is garbled."
+    },
+    "all-sol": {
+      "ranking_best_to_worst": [
+        "sol-C",
+        "sol-B",
+        "local"
+      ],
+      "note": "sol-C and sol-B are a near tie; sol-B costs 60% less. Both beat local on translation accuracy; render quality is the same."
+    },
+    "all-mini": {
+      "ranking_best_to_worst": [
+        "mini-B",
+        "local",
+        "mini-C"
+      ],
+      "note": "mini-B is a little better than local; mini-C is the worst of the pipeline arms (dropped bubbles, misreads) but close to local."
+    }
+  },
+  "overall_best_value": "mini-B (gpt-5.4-mini + our OCR)",
+  "overall_best_accuracy": "sol-C and sol-B (tie)",
+  "caveats": [
+    "One judge (Claude Sonnet 5.5), four pages, no reference translation. My reading of the Japanese is not a native reader's.",
+    "Not blind, and a second blind pass was not possible in the same session (memory of the first). Instead the key claims were checked against the original page at 3-4x. I read the per-line tables, which show local's English, before the sheets; image arms are obvious on sight; pipeline arms share a renderer so were told apart by their text.",
+    "The 平井/やが reading in 009_L was checked against the page (平井, ひらい). Other readings were not checked beyond my own.",
+    "Lettering fit is nearly the same across pipeline arms because they share one renderer; cloud translations are longer, which crowds the bottom rows of 005_L and 006_L slightly more."
+  ],
+  "corrections": [
+    "2026-10-20: first draft said sol-B had no errors and the Hirai reading was unconfirmed. Checked: Hirai is right, so sol-B, mini-B and local all have the 'Yaga' error. Fidelity scores lowered accordingly.",
+    "2026-10-20 second check: confirmed 平井 (ひらい), 成島 (なるしま), 荷が重そう (manga-ocr read 何). Confirmed のんでるよ (manga-ocr read のんでうるよ). No winner changed."
+  ],
+  "verified_against_original": {
+    "009_L speaker": "平井 (Hirai)",
+    "009_L name": "成島 = Narushima",
+    "005_L 3.3": "荷が重そう, OCR read 何",
+    "009_L 5.2": "のんでるよ, OCR read のんでうるよ"
+  }
+}
