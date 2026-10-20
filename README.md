@@ -348,7 +348,7 @@ mangakaro/        the package: cli, pipeline, pages, detect, ocr, stages, prompt
 experiments/      scripts used to decide the design (detector comparison, one-shot translation, review sheets, the cloud comparison and its judging sheets)
 tests/            unit tests for everything that needs no models
 docs/             ARCHITECTURE.md (design and thresholds), PROGRESS.md (the full record), JUDGE_REVIEW.md (cloud vs local, judged), images/
-data/, output/    cached results and review sheets from the experiments
+data/            detector results and font choices from the experiments
 manga/            your inputs, outputs and work directories (git-ignored)
 weights/          model weights (git-ignored)
 ```

@@ -46,7 +46,8 @@ a single stage can be redone (`--redo translate`).
 | `pdfio.py` | PDF reading (pypdfium2) and writing (Pillow) |
 | `detect.py` | The three detectors, reading order and ID assignment, the overlay drawing |
 | `ocr.py` | manga-ocr reading, ellipsis cleanup, duplicate-box removal |
-| `llm.py` | Ollama client, setup check for installed models |
+| `llm.py` | Ollama client, setup check for installed models. A model named `openai:<id>` is routed to `openai_backend.py` instead |
+| `openai_backend.py` | Optional, for the cloud comparison only: the OpenAI call with the same contract as the Ollama one, a price table, and a ledger of tokens, seconds and dollars with a hard spending cap. Needs the `compare` extra and `OPENAI_API_KEY` |
 | `prompts.py` | Every prompt and JSON schema sent to the models. Edit here to change what is asked |
 | `stages.py` | The read, emotion and translate stages, their retry logic, result merging, caching |
 | `fonts.py` | Candidate fonts, lettering-weight measurement, choosing the primary and secondary font |
@@ -55,8 +56,8 @@ a single stage can be redone (`--redo translate`).
 | `verify.py` | After typesetting: finds Japanese still on the page and labels the cause |
 | `paths.py` | Where weights and extra fonts live (`MANGAKARO_WEIGHTS` overrides the weights folder) |
 
-`experiments/` holds the scripts used to decide the design (detector comparison, the one-shot S0 approach, review sheets).
-They are not part of the installed package.
+`experiments/` holds the scripts used to decide the design: detector comparison, the one-shot S0 approach, review sheets, and the cloud comparison
+(`openai_compare.py` runs the arms, `judge_pack.py` and `judge_pack2.py` build blind sheets for judging them). They are not part of the installed package.
 
 ## Models
 
@@ -72,6 +73,25 @@ They are not part of the installed package.
 
 The YOLO weights are loaded with Ultralytics, which is AGPL-3.0. The PDF reader, pypdfium2, is permissively licensed.
 System fonts (Comic Sans MS and others) are used from the machine and are not redistributed.
+
+## The cloud comparison harness
+
+`experiments/openai_compare.py` runs the same pages through several *arms* and records cost and time. The pipeline arms are this same program with the model behind some steps swapped; the image arm skips the pipeline.
+
+| Arm | Read | Emotion and translation | Erase and typeset |
+| --- | --- | --- | --- |
+| D, local | manga-ocr | Gemma through Ollama | ours |
+| B-`<m>` | manga-ocr | OpenAI model `<m>` | ours |
+| C-`<m>` | OpenAI model `<m>` | OpenAI model `<m>` | ours |
+| A | none | none | one OpenAI image-edit call returns the page |
+
+- **From scratch.** Each pipeline arm deletes its work directory first, so detection, reading, the models and the typesetting all run and are timed. The first page of an arm pays for loading the models; the per-page time is the gap
+  between page finishes, which puts nearly all the time on the first page (all model calls for every page run before the rendering), so use the arm total. The left-over-Japanese check is off in every arm.
+- **Cost.** `openai_backend.py` counts tokens from the API's own usage numbers and multiplies by the prices in `PRICES` and `IMAGE_PRICES` (copied from OpenAI's page; check them). A call is refused once the cap is reached, and the image arm
+  stops if the projected cost of the remaining pages would pass it.
+- **Judging.** `judge_pack.py` writes, per page and per cloud arm, a sheet with the original and two candidates in random order (X and Y) and a key file, plus a table of the Japanese read and English written per box.
+  `judge_pack2.py` writes half-page sheets at 1.6x for checking small lettering. The key is never shown to the judge. Results of one judging round are in [JUDGE_REVIEW.md](JUDGE_REVIEW.md) and [judge_verdicts.json](judge_verdicts.json).
+- **Not blind in practice.** A judge that has read the per-line tables, or that judged an earlier pass, knows which side is local. A real second judgment needs a separate call with no such memory.
 
 ## Result formats
 
@@ -162,6 +182,10 @@ It reports; it does not fix. It cannot see sound effects, because both detectors
 thought bubble, margin text). `detect.merge_text_boxes` adds its boxes where less than 40% is already covered. The box cache
 carries a version number, so cached pages are redone when the way boxes are found changes.
 
+**A pipeline around the model, not a model that does it all.** On four test pages a one-shot image model (`gpt-image-2`) invented lines on all four and redrew the art, while the same pipeline with local Gemma kept the page faithful and landed close to the pipeline with `gpt-5.4-mini`.
+The faithfulness comes from the structure: boxes found by detectors, text read by an OCR that can only output what is in the crop, translation constrained to those boxes, and erasing and typesetting done by code that never touches the art outside them.
+The OCR is also the ceiling: its misreads reach every arm that uses it. See [JUDGE_REVIEW.md](JUDGE_REVIEW.md).
+
 **Stalled model calls.** One model call can loop on garbled OCR text. Calls have a 180 s limit and a length cap; a page whose
 translation fails is retried in chunks of 4 lines, then in rounds for missing lines, then one line at a time, so one bad line
 cannot take a page down. A page that still fails is left unchanged and listed at the end.
@@ -188,4 +212,6 @@ cannot take a page down. A page that still fails is left unchanged and listed at
 - **Different models:** `--emotion-model` and `--translate-model` take any Ollama model name. Vision is needed for emotion.
 - **Different prompts:** edit `prompts.py`. Delete `cache/<page>/emotion.json` or use `--redo emotion` to apply them.
 - **More fonts:** put `.ttf` or `.otf` files in `fonts/` (check each font's license). They are added to the candidates.
+- **A cloud model for comparison only:** `--emotion-model openai:gpt-5.4-mini` and `--translate-model openai:gpt-5.4-mini` work because `llm.chat` routes the prefix (needs `OPENAI_API_KEY`, the `compare` extra, and a price in `openai_backend.PRICES`).
+  Cost and the spending cap are only reported by `experiments/openai_compare.py`; the CLI does not print them.
 - **A fixed font pair:** pass `--fonts picks.json` with `{"primary": {...}, "secondary": {...}}` (see `fonts.json` in a work directory).

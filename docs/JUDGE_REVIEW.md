@@ -1,5 +1,7 @@
 # Cloud arms vs local: reviewed by Claude Sonnet 5.5
 
+<sub>[← README: Cloud vs local](../README.md#cloud-vs-local) · [Docs index](README.md)</sub>
+
 Reviewed 2026-10-20 by Claude Sonnet 5.5 acting as the judge. The four pages are Manga109 `006_L`, `005_L`, `009_L` and `002_R`.
 Each cloud arm was compared with the local run (Gemma 4 through Ollama) page by page, then in three groups.
 The structured version of every verdict is in `docs/judge_verdicts.json`. The sheets and per-line tables were built by

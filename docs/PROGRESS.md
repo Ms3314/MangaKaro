@@ -1,6 +1,6 @@
 # Progress log
 
-What was built, in what order, what each experiment showed, and what went wrong on the way. Last updated 2026-10-18.
+What was built, in what order, what each experiment showed, and what went wrong on the way. Last updated 2026-10-20.
 
 None of the quality results below are scored against a reference translation. Where this log says "better", it means a
 person (or I) looked at the output. The evaluation phase of the plan exists to replace that.
@@ -41,6 +41,10 @@ manga page. All models run locally.
    smears over screentone and hatching; LaMa continues the texture but is worse than a flat fill on solid black.
 7. Where the English goes matters as much as erasing: vertical Japanese is a narrow column and English is not, so fitting English into
    the column's rectangle gives tiny text (10 px). Letting it widen sideways into free space gave 17 px on the page where it was tried.
+8. Against OpenAI models on four pages (judged by a language model, not scored): the pipeline kept each page faithful where a one-shot image model invented text on all four;
+   with a local 8.1B Gemma (`gemma4:e4b`) it landed close to the same pipeline with `gpt-5.4-mini`, slightly behind. The OCR's misreads are a ceiling shared by every arm that uses it.
+9. A cloud LLM is a small gain, not a leap: `gpt-6.1-sol` made at most one clear translation error on the four pages where Gemma made six, for $0.021 a page, and end to end it takes about
+   as long as the local run (44 to 53 s against 41 s a page). `gpt-5.4-mini` costs $0.006 a page and takes about 15 s.
 
 **Main numbers.**
 
@@ -52,13 +56,15 @@ manga page. All models run locally.
 | 20-page chapter, first full run | 280 s, no page failed | mangahaha run |
 | Text blocks typeset, first version / with over-art handling | 152 of 187 / 176 of 187 | mangahaha run |
 | Pages with Japanese left after the check | 15 then 8 of 20 | check results |
+| Local run, 4 Manga109 pages from scratch | 165 s (about 41 s a page), 47 blocks typeset, 3 overflow | Part 5 |
+| Cost per page, 4 pages | `gpt-5.4-mini` $0.006, `gpt-6.1-sol` $0.021, `gpt-image-2` $0.049 | Part 5 |
 
 **Test data.** 18 Jujutsu Kaisen pages (English edition, so used only for detector tests), 99 Daiboken vol. 2 scans (photographed,
-spreads), 5 digital pages (`manga-demo`), and a 20-page digital chapter (`mangahaha`) with screentone. All are copyrighted and none
+spreads), 5 digital pages (`manga-demo`), a 20-page digital chapter (`mangahaha`) with screentone, and Manga109 `test-123` (11 spreads, 22 pages), of which 4 pages were used for the cloud comparison. All are copyrighted and none
 is in the repository.
 
 **Environment.** Apple-silicon Mac (the original plan names an M4 Air). Python 3.13.5, torch 2.14.1, ultralytics 8.4.177,
-manga-ocr 0.1.16, onnxruntime 1.31.0, opencv 5.0.0.93, Pillow 12.3.0, numpy 2.5.4, pypdfium2 5.14.0, transformers 5.20.1, Ollama
+manga-ocr 0.1.16, openai (optional, only for the cloud comparison), onnxruntime 1.31.0, opencv 5.0.0.93, Pillow 12.3.0, numpy 2.5.4, pypdfium2 5.14.0, transformers 5.20.1, Ollama
 with `gemma4:e4b-mlx`, `qwen3.5:4b` and `qwen3:8b`. Temperature 0 for all model calls. Commands: see the README. Weights and
 their sources: README.
 
@@ -73,15 +79,17 @@ their sources: README.
 | Ablations on the rendering steps | The claims about LaMa, widening and the two-detector merge are from a few pages | Run each change on and off over the whole chapter and report the counts |
 | Confidence intervals and repeats | All runs are single, at temperature 0 | Several chapters, report spread across them |
 | Sound effects | Not translated and not detected | A detector or classifier for them, and a decision on what to output |
+| Judge reliability | The cloud comparison was judged by one language model that had seen local's English before the pictures, on 4 pages | Two judge runs with the order swapped, and agreement against a human or a reference |
+| Like-for-like timing for the `gpt-6.1-sol` arms | Their measured times leave out detection and OCR (estimated back in) | Re-run both from scratch in one session (about $0.22) |
 
-**Threats to validity.** One reader judged all output. Test pages come from a handful of series and mostly one visual style
+**Threats to validity.** One reader judged all output (and the cloud comparison was judged by one language model, Claude Sonnet 5.5, which had read local's English before the pictures). Test pages come from a handful of series and mostly one visual style
 (digital, black-and-white, screentone). Thresholds (paper level 215, flat gradient 25, dark level 70, art share 6%) were tuned on
 the same pages they are reported on. The model that translates also writes the emotion tags it then uses. Page images are
 re-encoded when they pass through a PDF, which changes some OCR readings.
 
 ## Status against the plan
 
-The original plan is in `Manga Translation Pipeline — Phase-wise MVP Plan.md`.
+The phases follow the original phase-wise MVP plan, which was deleted from `main` (it is in the git history before commit `ca0d5f6`).
 
 | Phase | Status |
 | --- | --- |
@@ -90,7 +98,7 @@ The original plan is in `Manga Translation Pipeline — Phase-wise MVP Plan.md`.
 | 2 Read, emotion, translate | Working. OCR reads, a vision model tags emotion, a text model translates. Not scored |
 | 3 Erase and render | Working for plain bubbles, white-on-black panels and text over art (LaMa). Sound effects and background signs are left alone |
 | 4 Automation | Done in basic form: `mangakaro translate` takes a PDF, a folder of images or a list of image files, and writes a PDF or a folder of images; resumable, per-page logging and caching |
-| 5 Evaluation | Not started. Needs reference translations |
+| 5 Evaluation | Started in one place: a model-judged comparison of the local pipeline with OpenAI models on 4 pages ([JUDGE_REVIEW.md](JUDGE_REVIEW.md)). Still no reference translations, no human rating |
 | 6 Improvements | Not started |
 
 ## Phase 1: detector comparison
@@ -339,11 +347,11 @@ Lesson: check the facts a verdict rests on against the source, and do not call a
 
 - Japanese to English only. The OCR is Japanese-specific.
 - Text over art is a first version: LaMa leaves small marks on hair and faces; narrow vertical columns are widened only where free space exists (one 10 px column remains on page 14). Sound effects and background signs are not translated.
-- OCR can misread or add text on very short vertical strings (two boxes in 19 on the demo pages).
+- OCR can misread or add text on very short vertical strings (two boxes in 19 on the demo pages). On the Manga109 pages it read 平井 as やが, 荷が重そう as 何が重そう and のんでるよ as のんでうるよ; every arm that uses manga-ocr inherits these.
 - Very narrow bubbles get small English text (10 of 145 blocks at 12 px or smaller on the S7 pages).
 - The English can still touch an outline when the bubble is too small for readable text and the detector box is used.
 - Output pages are raster images, at most 1,536 px on the longest side, and two-page spreads become two pages.
-- Translation quality has not been scored. There are no reference translations yet.
+- Translation quality has not been scored. There are no reference translations yet. The only quality comparison is the model-judged one on 4 pages in [JUDGE_REVIEW.md](JUDGE_REVIEW.md).
 
 ## Next
 
@@ -354,3 +362,5 @@ Lesson: check the facts a verdict rests on against the source, and do not call a
 5. Sound effects: detect them first, then decide whether to translate, leave or label them.
 6. Try a bigger Gemma and Llama models as translators.
 7. Rendering ablations over the whole chapter (LaMa, widening, two-detector merge on and off).
+8. Run an independent judge (a separate call per pair, order swapped) against `judge_verdicts.json` and measure how often it agrees; that is the first step to an automated LLM judge.
+9. Re-run the `gpt-6.1-sol` arms from scratch for a like-for-like time, and repeat the cloud comparison on more pages and another genre.
